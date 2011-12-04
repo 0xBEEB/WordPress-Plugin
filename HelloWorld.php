@@ -10,7 +10,7 @@ Author URI: http://capstoneaa.cs.pdx.edu/khoapham/wordpress
 
 /*
 Copyright 2009. Do(ugh)nut Team
-License: GPL 2.0 
+License: GPLv2.0 compatible (TBA)
 */
 
 /*
