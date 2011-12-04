@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: Visitor Counter
-Plugin URI: http://penyourstory.com
+Plugin URI: http://capstoneaa.cs.pdx.edu/khoap/wp_plugin/
 Description: Print out the website visitors.
 Version: 1.0
 Author: Khoa Pham
-Author URI: http://penyourstory.com
+Author URI: http://capstoneaa.cs.pdx.edu/khoap/wordpress
 */
 
 /*
-Copyright 2009. Khoa Pham
+Copyright 2009. Do(ugh)nut Team
 License: GPL 2.0
 */
 
