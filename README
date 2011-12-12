@@ -1,15 +1,23 @@
 Supportland WordPress Plugin
-----------------------------
-
+--------------------------------------------------------------------------------
 Copyright © 2011 Team Do(ugh)nut
 
 Developed by Team Do(ugh)nut at Portland State University for Supportland
 under the guidance of Michael Scotto di Carlo and Bart Massey.
 
 Developers:
-* Lead: Thomas Schreiber
+* Thomas Schreiber (Project Lead)
 * Alexis Carlough
 * Casey Beach
 * David Liang
 * Khoa Pham
 * Lochlan McIntosh
+
+--------------------------------------------------------------------------------
+Release Notes:
+
+Version 0.1 12/12/2011
+First working version, supportland.php.  Grabs my own personal card info from
+the API as XML, parses it, and outputs it.  Also uses a teensy bit of jQuery
+which was just for the presentation.  Note that hooking into wp_head like this
+does is not a good idea, we should use shortcode.
