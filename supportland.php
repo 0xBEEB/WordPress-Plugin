@@ -25,35 +25,37 @@ function supportland() {
 //grab JSON data
 $cardinfo = file_get_contents('https://api.supportland.com/1.0/user.json?access_token=d742fa0409b17377d7c81055c0955f9ef8da2f07');
 
-//parse it
-//$p = xml_parser_create();
-//xml_parse_into_struct($p, $cardinfo, $vals, $index);
-//xml_parser_free($p);
+// Put JSON into an object
+$supportland_user = json_decode($cardinfo);
 
-$var = json_decode($cardinfo, true);
-
+// Make the date human readable
+$supportland_user->fmd_date = date('D M d, Y', 
+                                   strtotime($supportland_user->member_since));
 
 //print it
 echo '<a class="supportlandLink" style="cursor:pointer;font-size:12px;font-weight:bold;">Show/hide the data!</a><br />';
 echo '<div class="supportland" style="display:none;">';
-echo '<div style="margin:0 auto;width:500px;font-weight:bold;color:white;border:1px solid black;border-radius:10px;-moz-border-radius: 10px;-webkit-border-radius:10px;background-image:url(http://supportland.com/asset/image/woodbackground.png);">';
+echo '<div style="margin:0 auto;width:170px;font-weight:bold;color:white;border:1px solid black;border-radius:10px;-moz-border-radius: 10px;-webkit-border-radius:10px;background-image:url(http://supportland.com/asset/image/woodbackground.png);">';
 echo '<div style="margin:10px;">';
-echo '<h1 style="font-size:20px;font-weight:bolder;">Supportland Card!</h1>';
-echo 'Name: '.$var["public_name"]."\n<br/>";
-echo 'ID: '.$var["id"]."\n<br/>";
-echo 'Member Since: '.$var["member_since"]."\n<br/>";
-echo 'Points: '.$var["points"]."\n<br/>";
+echo '<h1 style="font-size:20px;font-weight:bolder;">My Card!</h1>';
+echo 'Name: '.$supportland_user->public_name."\n<br/>";
+echo 'ID: '.$supportland_user->id."\n<br/>";
+echo 'Joined: '.$supportland_user->fmd_date."\n<br/>";
+echo 'Points: '.$supportland_user->points."\n<br/>";
 echo '</div></div>';
 echo "</div>
 <script>
 $('.supportlandLink').click(function() {
-$('.supportland').toggle(500, function() {
+$('.supportland').slideToggle(500, function() {
 // Animation complete.
 });
 });
 </script>";
 }
+
 add_action( 'wp_head', headerStuff);
-add_action( 'wp_head', supportland);
+//add_action( 'wp_head', supportland);
+
 
 ?>
+
