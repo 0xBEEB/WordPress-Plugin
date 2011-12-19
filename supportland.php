@@ -53,6 +53,11 @@ $('.supportland').slideToggle(500, function() {
 </script>";
 }
 
+function init_supportland(){
+  register_sidebar_widget('Supportland', 'supportland');
+}
+
+add_action('plugins_loaded', 'init_supportland');
 add_action( 'wp_head', headerStuff);
 //add_action( 'wp_head', supportland);
 
