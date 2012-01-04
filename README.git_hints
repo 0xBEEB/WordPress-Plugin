@@ -2,33 +2,41 @@ Git Hints
 by Thomas Schreiber
 
 
-Git is a distribution version control system originally written by Linus Trovolds to track the Linux kernel. It has now grown in popularity and is used by a large number of open source software projects.
+Git is a distribution version control system originally written by Linus 
+Trovolds to track the Linux kernel. It has now grown in popularity and is used 
+by a large number of open source software projects.
 
-One of the most popular hosts of git repositories is github.com. Our repository is hosted there at: https://github.com/supportland/WordPress-Plugin
+One of the most popular hosts of git repositories is github.com. Our repository 
+is hosted there at: 
+        https://github.com/supportland/WordPress-Plugin
 
-Github also has a lot of useful help information for basic commands. Instead of repeating what they have there I will just add the URL for the instructions that correspond to these most basic steps.
+Github also has a lot of useful help information for basic commands. Instead of
+repeating what they have there I will just add the URL for the instructions
+that correspond to these most basic steps.
 
 
-Setup Git
----------
+Setup Git 
+--------- 
 http://help.github.com/set-up-git-redirect
 
-If you already have git installed you can just follow these few steps instead of reading the above guide:
-  1. Setup your git username
-        git config --global user.name "Bob Smith"
-  2. Setup your git email
-        git config --global user.email "bob@smith.com"
+If you already have git installed you can just follow these few steps instead
+of reading the above guide: 
+  1. Setup your git username 
+        git config --global user.name "Bob Smith" 
+  2. Setup your git email 
+        git config --global user.email "bob@smith.com" 
   3. Create a key pair and upload your public key to github
-        ssh-keygen -t rsa -C "bob@dmith.com"
-        gedit ~/.ssh/id_rsa.pub
-        copy and paste that text to “Account Settings” > “SSH 
-            Public Keys” > “Add another public key” on github
+        ssh-keygen -t rsa -C "bob@dmith.com" 
+        gedit ~/.ssh/id_rsa.pub 
+        copy and paste that text to “Account Settings” > “SSH Public Keys” > 
+                “Add another public key” on github 
   4. Make sure you are added the Supportland project by contacting Michael
 
 
-Clone the Repo
---------------
-Now that git is setup we need to clone the git repository from github to your local computer. To do this type:
+Clone the Repo 
+-------------- 
+Now that git is setup we need to clone the git repository from github to your 
+local computer. To do this type: 
         git clone git@github.com:supportland/WordPress-Plugin.git
 
 You will be prompted for a passphrase if you created one for your key pair.
@@ -36,54 +44,67 @@ You will be prompted for a passphrase if you created one for your key pair.
 You should now have a copy of the master branch of the git repo.
 
 
-Fetch Updates from the Repository
----------------------------------
-If you would like to make sure your clone is up to date you can fetch updates from the origin (in our case the github repo) by issuing a command like:
+Fetch Updates from the Repository 
+--------------------------------- 
+If you would like to make sure your clone is up to date you can fetch updates 
+from the origin (in our case the github repo) by issuing a command like: 
         git fetch origin master
 
-This says to fetch the master (master is the default branch in git) branch from the orign (github). This will download any updates. Now, if you want to fetch a different branch you can type:
+This says to fetch the master (master is the default branch in git) branch from
+the orign (github). This will download any updates. Now, if you want to fetch a
+different branch you can type: 
         git fetch origin other_branch
 
 
-Branches
---------
-If you want to create a branch you can type:
+Branches 
+-------- 
+If you want to create a branch you can type: 
         git branch new_branch
 
-If you would like to checkout an existing branch you can type:
+If you would like to checkout an existing branch you can type: 
         git checkout branch_name
 
-If you would like to merge the abranch to the current branch:
+If you would like to merge the a branch to the current branch: 
         git merge branch_to_merge
 
-This last one is a bit tricky. Lets say I currently have the "master" branch checkedout. I would like to merge "test" into "master". So, I type:
+This last one is a bit tricky. Lets say I currently have the "master" branch
+checkedout. I would like to merge "test" into "master". So, I type: 
         git merge test
 
 
-Commiting Changes to Git
-------------------------
-Git has three states it can be in. By default it is in the up-to-date state (this is probably not the real name) where all changes are commited. If files are created or changed the state changes to "working". After changes are made you can issue the command:
+Commiting Changes to Git 
+------------------------ 
+Git has three states it can be in. By default it is in the up-to-date state 
+(this is probably not the real name) where all changes are commited. If files 
+are created or changed the state changes to "working". After changes are made 
+you can issue the command: 
         git add new_or_changed_file.txt
 
-Once a file is added the state changes to "staged". You can type a command like:
-        git status
-to see the status of what is staged and what is working. Finally, you commit these changes to return to the up-to-date state by:
-        git commit
-or
+Once a file is added the state changes to "staged". You can type a command
+like: 
+        git status 
+to see the status of what is staged and what is working.
+
+Finally, you commit these changes to return to the up-to-date state by: 
+        git commit 
+or 
         git commit -m "Short message"
 
 
-Pushing Commits to Github
--------------------------
-When you would like to update the Github repo with the changes you have made you can push these commits with the command:
+Pushing Commits to Github 
+------------------------- 
+When you would like to update the Github repo with the changes you have made 
+you can push these commits with the command: 
         git push origin master
 
-This example pushes the master branch to the orign (origin is github, because that is where we initally cloned the repo from). If we wanted to push our test branch to github we would type:
+This example pushes the master branch to the orign (origin is github, because
+that is where we initally cloned the repo from). If we wanted to push our test
+branch to github we would type: 
         git push origin test
 
 
-More Information
-----------------
+More Information 
+---------------- 
 Please see the help section on github at:
-        http://help.github.com/
+http://help.github.com/
 
