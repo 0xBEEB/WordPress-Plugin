@@ -1,57 +1,122 @@
 <?php
-/*
-Plugin Name: Supportland 'Hello World'
-Plugin URI: http://capstoneaa.cs.pdx.edu/lochlan/
-Description: Print out some API stuff at the Top Header
-Versiont: 1.0
-Author: Lochlan McIntosh
-Author URI: http://capstoneaa.cs.pdx.edu/lochlan/
-*/
+require '/home/mcsmash/supportland/lib/sp_login.php';
 
 /*
-Copyright 2009. Do(ugh)nut Team
-License: GPLv2.0 compatible (TBA)
+Plugin Name: HelloWorld
+
 */
 
-/*
-------- Program starts here -------
-*/
 
-function headerStuff() {
-	echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>';
+function display_widget() {
+    // print some HTML for the widget to display here
+	
+	?>
+	<p class="flip">
+		ZOMG HELLO WORLD!
+	</p>
+	<div class="panel">
+		<br>
+		User: <input id="user_name" size="15">
+		<br>
+		Pass Word: <input id="user_password" type="password" size="15">
+		<p id="holder">oh!</p>
+		<button id="gogogo" type"button">Go!</button>
+	</div>
+	<?php
+	
 }
 
-function supportland() {
-	//grab xml data
-	$cardinfo = file_get_contents('https://api.supportland.com/1.0/user.xml?access_token=f0aef45711da1564d7a4b23b9939c6601414cc61');
+function helloworld_setup(){
+	echo 'Um, hello?';
 
-	//parse it
-	$p = xml_parser_create();
-	xml_parse_into_struct($p, $cardinfo, $vals, $index);
-	xml_parser_free($p);
-	
-	
-	//print it
-	echo '<a class="supportlandLink" style="cursor:pointer;font-size:12px;font-weight:bold;">Show/hide the data!</a><br />';
-	echo '<div class="supportland" style="display:none;">';
-	echo '<div style="margin:0 auto;width:500px;font-weight:bold;color:white;border:1px solid black;border-radius:10px;-moz-border-radius: 10px;-webkit-border-radius:10px;background-image:url(http://supportland.com/asset/image/woodbackground.png);">';
-	echo '<div style="margin:10px;">';
-	echo '<h1 style="font-size:20px;font-weight:bolder;">Supportland Card!</h1>';
-	echo 'Name: '.$vals[7]['value']."\n<br/>";
-	echo 'ID: '.$vals[5]['value']."\n<br/>";	
-	echo 'Member Since: '.$vals[9]['value']."\n<br/>";
-	echo 'Points: '.$vals[11]['value']."\n<br/>";	
-	echo '</div></div>';
-	echo "</div>
-	<script>
-	$('.supportlandLink').click(function() {
-	  $('.supportland').toggle(500, function() {
-		// Animation complete.
-	  });
+}
+
+function I_got_style(){
+	?>
+
+	<style type="text/css"> 
+	div.panel,p.flip
+	{
+	font-size:75%%;
+	margin:0px;
+	padding:5px;
+	text-align:center;
+	background:#e5eecc;
+	border:solid 1px #c3c3c3;
+	}
+	div.panel
+	{
+	height:120px;
+	display:none;
+	}
+	</style>
+	<?php
+}
+
+function I_got_jQuery(){
+//	$wallet = json_decode($user_info);
+//	echo .$wallet->metro;
+
+	?>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script type="text/javascript"> 
+/*	function get_wallet(user_token) {
+		var base_url = "https://api.supportland.com/1.0/user/wallet/?access_token=";
+		var wallet;
+		
+		$.ajax({ 
+			type:		'GET',	
+			url:		base_url + user_token,
+			dateType:	'json',
+			async:		false,
+			success:	function(json){
+					
+			}
+		});
+	}
+*/	
+	$(document).ready(function(){
+		$(".flip").click(function(){
+	    		$(".panel").slideToggle("slow");
+	  	});
+		$("#gogogo").click(function(){
+			var base_url = "https://api.supportland.com/1.0/user"
+			var access_url = base_url + ".xml?app_token=teamdoughnut2740&login_email=" + $("#user_name").val() +"&login_password=" + $("#user_password").val();
+			$.ajax({
+				type: 		"GET",
+				url:		access_url,
+				dataType:	"xml",
+				success: function(xml){
+						$("#holder").append($(xml).find("public_name").text());
+						
+				},
+				error: function(xml,text,error){
+						console.log(text);
+					}
+				});
+				
+
+		});
+
 	});
-	</script>";
+	</script>	
+	
+	
+	<?php
 }
-add_action( 'wp_head', headerStuff);
-add_action( 'wp_head', supportland);
 
+add_action('wp_head','I_got_jQuery');
+add_action('wp_head','I_got_style');
+add_action('sidebar_admin_setup', 'helloworld_setup');
+//add_action('sidebar_admin_setup', 'hellowallet_setup');
+//add_action('widgets_init','your_widget_display');
+
+wp_register_sidebar_widget(
+    'helloWorld',        // your unique widget id
+    'HelloWorld',          // widget name
+    'display_widget',  // callback function
+    array(                  // options
+        'description' => 'Display the mine widget'
+    )
+);
 ?>
