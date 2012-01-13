@@ -52,8 +52,8 @@ class SP_User
 
     // Returns True if user is logged in
     function logged_in() {
-        if (isset($_COOKIE['access_token'])) {
-            if (sp_good_token($_COOKIE['access_token'])) {
+        if (isset($_COOKIE['sp_access_token'])) {
+            if (sp_good_token($_COOKIE['sp_access_token'])) {
                 return true;
             } 
         }
@@ -84,6 +84,20 @@ class SP_User
     // Sets the access_token
     function set_access_token($token) {
         this->access_token = $token;
+    }
+
+    // in order for this to work you must add
+    // add_action('init', 'writecookies')
+    // to your widget
+    function set_sp_cookie($token) {
+        setcookie("sp_access_token", $token, time()+3600, COOKIEPATH, COOKIE_DOMAIN, false);
+    }
+    
+    // in order for this to work you must add
+    // add_action('init', 'writecookies')
+    // to your widget
+    function set_sp_cookie($token) {
+        setcookie("sp_access_token", $token, time()-3600, COOKIEPATH, COOKIE_DOMAIN, false);
     }
 }
 
