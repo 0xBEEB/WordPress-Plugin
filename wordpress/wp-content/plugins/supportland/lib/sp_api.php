@@ -100,7 +100,7 @@ class SP_User
     // in order for this to work you must add
     // add_action('init', 'writecookies')
     // to your widget
-    function set_sp_cookie($token) {
+    function un_set_sp_cookie($token) {
         setcookie("sp_access_token", $token, time()-3600, COOKIEPATH, COOKIE_DOMAIN, false);
     }
 }
