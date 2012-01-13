@@ -11,6 +11,7 @@
 define("SP_API_BASE_URI", "https://api.supportland.com/");
 define("SP_API_VERSION", "1.0");
 
+
 class SP_Transaction
 {
     // User that is interacting with the API
@@ -24,18 +25,13 @@ class SP_Transaction
         $this->sp_user = $sp_user;
     }
 
-    // Returns uri for current version
-    function get_uri() {
-        $uri = SP_API_BASE_URI . SP_API_VERSION . "/";
-        return $uri;
-    }
 
     // Returns Business object
     function get_business($bid) {
         if ($this->sp_user->logged_in()) {
-          $url = this->get_uri() . "business/" . $bid . ".json?access_token=" . $this->sp_user->access_token;
+          $url = sp_get_uri() . "business/" . $bid . ".json?access_token=" . $this->sp_user->access_token;
 
-          return fetch($url);
+          return json_decode(sp_fetch($url));
         } else {
             $this->sp_user->authenticate();
             return $this->get_business($bid);
@@ -47,17 +43,6 @@ class SP_Transaction
     function get_wallet() {
     }
 
-    function fetch($url) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/CAcerts/BuiltinObjectToken:GoDaddyClass2CA.crt");
-        $resoponse = curl_exec($ch);
-        curl_close($ch);
-        return $response;
-    }
 }
 
 class SP_User
@@ -67,7 +52,12 @@ class SP_User
 
     // Returns True if user is logged in
     function logged_in() {
-        return True;
+        if (isset($_COOKIE['access_token'])) {
+            if (sp_good_token($_COOKIE['access_token'])) {
+                return true;
+            } 
+        }
+        return false;
     }
 
     // Authenticate User
@@ -83,4 +73,31 @@ class SP_User
     function set_access_token($token) {
         this->access_token = $token;
     }
+}
+
+// Returns uri for current version
+function sp_get_uri() {
+    $uri = SP_API_BASE_URI . SP_API_VERSION . "/";
+    return $uri;
+}
+
+function sp_fetch($url) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+    curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/CAcerts/BuiltinObjectToken:GoDaddyClass2CA.crt");
+    $resoponse = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
+
+function sp_good_token($sp_token) {
+    $url = sp_get_uri() . "user.json?access_token=" . $sp_token;
+    $result = json_decode(sp_fetch($url));
+    if (isset($result->id)) 
+        return true;
+    else
+        return false;
 }
