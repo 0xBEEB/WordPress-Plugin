@@ -10,6 +10,7 @@
 
 define("SP_API_BASE_URI", "https://api.supportland.com/");
 define("SP_API_VERSION", "1.0");
+define("SP_APP_TOKEN", "teamdoughnut2740");
 
 
 class SP_Transaction
@@ -33,8 +34,7 @@ class SP_Transaction
 
           return json_decode(sp_fetch($url));
         } else {
-            $this->sp_user->authenticate();
-            return $this->get_business($bid);
+            throw new Exception('Not logged in');
         }
 
     }
@@ -56,8 +56,8 @@ class SP_User
 
     // Returns True if user is logged in
     function logged_in() {
-        if (isset($_COOKIE['access_token'])) {
-            if (sp_good_token($_COOKIE['access_token'])) {
+        if (isset($_COOKIE['sp_access_token'])) {
+            if (sp_good_token($_COOKIE['sp_access_token'])) {
                 return true;
             } 
         }
@@ -65,17 +65,43 @@ class SP_User
     }
 
     // Authenticate User
-    function authenticate() {
+    function authenticate($email, $password) {
+        $url = sp_get_uri() . "user.json?app_token=" . SP_APP_TOKEN . "&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
+        $result = json_decode(sp_fetch($url));
+        if (isset($result->access_token)) {
+            set_access_token($result->access_token);
+            set_sp_cookie($result->access_token);
+        else {
+            throw new Exception($result->error['message']);
+        }
+
     }
 
     // Returns the users access_token
     function get_access_token() {
-        return this->access_token;
+        if ( isset($this->access_token))
+            return $this->access_token;
+        else
+            return null;
     }
 
     // Sets the access_token
     function set_access_token($token) {
         this->access_token = $token;
+    }
+
+    // in order for this to work you must add
+    // add_action('init', 'writecookies')
+    // to your widget
+    function set_sp_cookie($token) {
+        setcookie("sp_access_token", $token, time()+3600, COOKIEPATH, COOKIE_DOMAIN, false);
+    }
+    
+    // in order for this to work you must add
+    // add_action('init', 'writecookies')
+    // to your widget
+    function set_sp_cookie($token) {
+        setcookie("sp_access_token", $token, time()-3600, COOKIEPATH, COOKIE_DOMAIN, false);
     }
 }
 
