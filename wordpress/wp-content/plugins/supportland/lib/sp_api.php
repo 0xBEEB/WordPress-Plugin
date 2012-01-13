@@ -32,10 +32,31 @@ class SP_Transaction
 
     // Returns Business object
     function get_business($bid) {
+        if ($this->sp_user->logged_in()) {
+          $url = this->get_uri() . "business/" . $bid . ".json?access_token=" . $this->sp_user->access_token;
+
+          return fetch($url);
+        } else {
+            $this->sp_user->authenticate();
+            return $this->get_business($bid);
+        }
+
     }
 
     // Returns User's Wallet
     function get_wallet() {
+    }
+
+    function fetch($url) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/CAcerts/BuiltinObjectToken:GoDaddyClass2CA.crt");
+        $resoponse = curl_exec($ch);
+        curl_close($ch);
+        return $response;
     }
 }
 
