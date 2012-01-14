@@ -1,5 +1,5 @@
 <?php
-require '/home/mcsmash/supportland/lib/sp_login.php';
+require 'lib/sp_user_auth.php';
 
 /*
 Plugin Name: HelloWorld
@@ -11,18 +11,21 @@ function display_widget() {
     // print some HTML for the widget to display here
 	
 	?>
-	<p class="flip">
-		ZOMG HELLO WORLD!
-	</p>
-	<div class="panel">
-		<br>
-		User: <input id="user_name" size="15">
-		<br>
-		Pass Word: <input id="user_password" type="password" size="15">
-		<p id="holder">oh!</p>
-		<button id="gogogo" type"button">Go!</button>
-	</div>
-	<?php
+	<div>
+        <form action='wp-content/plugins/supportland/lib/sp_user_auth.php'>
+            <label for="login_email">Email</label>
+            <input type="text" name="login_email" id="login_email"/>
+
+            <label for="login_password">Password</label>
+            <input type="password" name="login_password" id="login_password"/>
+
+            <input type="submit" value="Log in"/>
+        </form>
+
+
+    </div>
+    
+    <?php
 	
 }
 
