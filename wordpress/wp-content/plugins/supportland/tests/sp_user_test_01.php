@@ -49,10 +49,14 @@ class SP_User_Test extends PHPUnit_TestCase
     function test_user_auth_success($app_token, $user_email, $user_password) {
         $ret_val = array();
         for($i = 0; i < count($token); $i++) {
+            
             $result = file_get_contents(SP_API_BASE_URI . SP_API_VERSION . "/user.json/?app_token=" . $app_token . 
             "&login_email=" . $user_email . "&login_password=". $user_password);
+
             $result = decode_json($result);
+            
             assertObjectsHasAttribute("access_token",$result);
+            
             $this->$access_token[i][0] = $result->access_token;
             $this->$access_token[i][1] = true;
 
