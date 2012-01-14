@@ -41,10 +41,12 @@ class SP_Transaction
 
     // Returns User's Wallet
     function get_wallet() {
-	if($this->$sp_user->logged_in()) {
-		$url = get_uri() . "/user/wallet.json?access_token=" . sp_user->get_access_token();
-		return sp_fetch($url);
-	}
+        if($this->sp_user->logged_in()) {
+            $url = get_uri() . "user/wallet.json?access_token=" . $sp_user->get_access_token();
+            return sp_fetch($url);
+        } else {
+            throw new Exception('Not logged in');
+        }
     }
 
 }
