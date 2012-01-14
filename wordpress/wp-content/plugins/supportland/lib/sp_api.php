@@ -43,7 +43,7 @@ class SP_Transaction
     function get_wallet() {
 	if($this->$sp_user->logged_in()) {
 		$url = get_uri() . "/user/wallet.json?access_token=" . sp_user->get_access_token();
-		return fetch(url);
+		return sp_fetch($url);
 	}
     }
 
