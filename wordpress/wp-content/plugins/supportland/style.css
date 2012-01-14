@@ -1,0 +1,27 @@
+/* 
+    Document   : style
+    Created on : Dec 18, 2011, 7:54:09 PM
+    Author     : David
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#member_info{
+    border: 1px solid black;
+    padding: 1em;
+    font-size: 0.9em;
+}
+
+#member_info legend {
+    font-size: 12px;
+}
+
+#member_info label{
+    font-weight: bold;
+}
+

@@ -1,0 +1,21 @@
+/* 
+    Document   : style
+    Created on : Dec 18, 2011, 7:54:09 PM
+    Author     : David
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#mini-supportland-widget{
+    float: right;
+    margin-bottom: 1.2ex;
+    margin-right: 0.8ex;
+    font-family: "Helvetica Neue", "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+    font-size: 0.9em;
+}
+
