@@ -196,7 +196,7 @@ function sp_fetch($url) {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
     // set curl https settings
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);  // SSL, Y U NO WORK?
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
     curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/CAcerts/BuiltinObjectToken_GoDaddyClass2CA.crt");
 
