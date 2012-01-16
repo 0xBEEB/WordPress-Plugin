@@ -68,8 +68,7 @@ class SP_Transaction
     public function get_wallet() {
         if($this->sp_user->logged_in()) {
             $url = sp_get_uri() . "user/wallet/?access_token=" . $this->sp_user->get_access_token();
-            //TODO: fix sp_fetch
-            return sp_temp_fetch($url);
+            return sp_fetch($url);
         } else {
             throw new Exception('Not logged in');
         }
@@ -126,6 +125,7 @@ class SP_User
 
     /*! @function get_access_token
         @author Thomas Schreiber <ubiquill@gmail.com>
+        @author Casey Beach <cbeach@gmail.com>
         @abstract gets the access token
         @result access_token string - Returns the users access_token
      */
@@ -137,9 +137,7 @@ class SP_User
                 $this->set_access_token($_COOKIE["sp_access_token"]);
                 return $this->access_token;
             }
-            else return null;
-        else
-            return null;
+        return null;
     }
 
     /*! @function set_access_token
@@ -151,10 +149,20 @@ class SP_User
         $this->access_token = $token;
     }
 
+    /*! @function reset_access_token
+        @author Casey Beach <cbeach@gmail.com>
+        @abstract resets the access token
+        @result 
+     */
     public function reset_access_token() {
-        sp_temp_fetch(sp_get_uri() . "user?access_token=" . $this->get_access_token() . "&reset_access_token=1");
+        sp_fetch(sp_get_uri() . "user?access_token=" . $this->get_access_token() . "&reset_access_token=1");
     }
 
+    /*! @function logout
+        @author Casey Beach <cbeach@gmail.com>
+        @abstract logs a user out
+        @result 
+     */
     public function logout() {
         sp_unset_cookie();
         $this->reset_access_token();
@@ -190,7 +198,7 @@ function sp_fetch($url) {
     // set curl https settings
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-    curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/CAcerts/BuiltinObjectToken:GoDaddyClass2CA.crt");
+    curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/CAcerts/BuiltinObjectToken_GoDaddyClass2CA.crt");
 
     // make the request
     $response = curl_exec($ch);
@@ -201,9 +209,6 @@ function sp_fetch($url) {
     return $response;
 }
 
-function sp_temp_fetch($url) {
-    return file_get_contents($url);
-}
 /*! @function sp_set_cookie
 @author Thomas Schreiber <ubiquill@gmail.com>
 @abstract sets the client side cookie containing the access_token
@@ -241,8 +246,7 @@ function sp_unset_cookie() {
 */
 function sp_good_token($sp_token) {
     $url = sp_get_uri() . "user.json?access_token=" . $sp_token;
-    //TODO: fix sp_fetch
-    $result = json_decode(sp_temp_fetch($url));
+    $result = json_decode(sp_fetch($url));
     if (isset($result->id)) 
         return true;
     else
