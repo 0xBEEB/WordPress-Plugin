@@ -12,6 +12,7 @@
 define("SP_API_BASE_URI", "https://api.supportland.com/");
 define("SP_API_VERSION", "1.0");
 define("SP_APP_TOKEN", "teamdoughnut2740");
+define("COOKIEPATH", "/");
 
 
 /*! @class SP_Transaction
@@ -29,16 +30,13 @@ class SP_Transaction
     // User that is interacting with the API
     var $sp_user;
 
-    // Uri for the call
-    var $sp_uri;
-
     /*! @function SP_Transaction
         @abstract Constructor
         @author Thomas Schreiber <ubiquill@gmail.com>
         @param sp_user SP_User - The user that is interacting with the api
         @result Object - The SP_Transaction object
      */
-    function SP_Transaction($sp_user) {
+    public function SP_Transaction($sp_user) {
         $this->sp_user = $sp_user;
     }
 
@@ -50,7 +48,7 @@ class SP_Transaction
         @result Object - A bussiness object containing info or an exception
             if the user is not logged in.
      */
-    function get_business($bid) {
+    public function get_business($bid) {
         if ($this->sp_user->logged_in()) {
           $url = sp_get_uri() . "business/" . $bid . ".json?access_token=" . $this->sp_user->access_token;
 
@@ -67,9 +65,9 @@ class SP_Transaction
         @result Object - A wallet object containing info or an exception if
             the user is not logged in.
      */
-    function get_wallet() {
+    public function get_wallet() {
         if($this->sp_user->logged_in()) {
-            $url = get_uri() . "user/wallet.json?access_token=" . $sp_user->get_access_token();
+            $url = sp_get_uri() . "user/wallet.json?access_token=" . $sp_user->get_access_token();
             return sp_fetch($url);
         } else {
             throw new Exception('Not logged in');
@@ -88,7 +86,7 @@ class SP_User
 {
     // Access token used by Supportland API
     var $access_token;
-    function __construct() {}
+
     /*! @function logged_in
         @author Thomas Schreiber <ubiquill@gmail.com>
         @abstract Checks if a user is logged in
@@ -112,16 +110,14 @@ class SP_User
         @result bool - returns true if successful otherwise and exception
             is trown.
      */
-    function authenticate($email, $password) {
+    public function authenticate($email, $password) {
         $url = sp_get_uri() . "user.json?app_token=" . SP_APP_TOKEN . "&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
-        //TODO: change sp_temp_fetch back to sp_fetch when it's debugged
-        $result = json_decode(sp_temp_fetch($url));
+        $result = json_decode(file_get_contents($url));
         if (isset($result->access_token)) {
-            set_access_token($result->access_token);
-            set_sp_cookie($result->access_token);
+            $this->set_access_token($result->access_token);
+            sp_set_cookie($result->access_token);
             return true;
-        }
-        else {
+        }else {
             throw new Exception($result->error['message']);
         }
 
@@ -132,16 +128,11 @@ class SP_User
         @abstract gets the access token
         @result access_token string - Returns the users access_token
      */
-    function get_access_token() {
+    public function get_access_token() {
         if ( isset($this->access_token))
             return $this->access_token;
-        else if( logged_in == true)
-        {
-            $this->access_token = $_COOKIE[2];
-            return $this->access_token;
-        }
-        else return null;
-            
+        else
+            return null;
     }
 
     /*! @function set_access_token
@@ -149,38 +140,10 @@ class SP_User
         @abstract sets the access token
         @result 
      */
-    function set_access_token($token) {
+    public function set_access_token($token) {
         $this->access_token = $token;
     }
 
-    /*! @function set_sp_cookie
-        @author Thomas Schreiber <ubiquill@gmail.com>
-        @abstract sets the client side cookie containing the access_token
-        @param token string - The token to be stored
-        @result 
-     */
-    function set_sp_cookie($token) {
-        //One month
-        $length_of_time = time()+3600*24*30;
-
-        // in order for this to work you must add
-        // add_action('init', 'writecookies')
-        // to your widget
-        setcookie("sp_access_token", $token, $length_of_time, COOKIEPATH, COOKIE_DOMAIN, false);
-    }
-    
-    /*! @function unset_sp_cookie
-        @author Thomas Schreiber <ubiquill@gmail.com>
-        @abstract Deletes the client side cookie by making a new cookie that
-            has already expired
-        @result 
-     */
-    function unset_sp_cookie() {
-        // in order for this to work you must add
-        // add_action('init', 'writecookies')
-        // to your widget
-        setcookie("sp_access_token", "", time()-3600, COOKIEPATH, COOKIE_DOMAIN, false);
-    }
 }
 
 /*! @function sp_get_uri
@@ -213,7 +176,7 @@ function sp_fetch($url) {
     curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/CAcerts/BuiltinObjectToken:GoDaddyClass2CA.crt");
 
     // make the request
-    $resoponse = curl_exec($ch);
+    $response = curl_exec($ch);
 
     // close the call
     curl_close($ch);
@@ -221,15 +184,35 @@ function sp_fetch($url) {
     return $response;
 }
 
-function sp_temp_fetch($url) {
-    $responce = file_get_contents($url);
-    $responce = json_decode($responce);
+/*! @function sp_set_cookie
+@author Thomas Schreiber <ubiquill@gmail.com>
+@abstract sets the client side cookie containing the access_token
+@param token string - The token to be stored
+@result 
+*/
+function sp_set_cookie($token) {
+    //One month
+    $length_of_time = time()+3600*24*30;
 
-    return $responce;
-
-
-
+    // in order for this to work you must add
+    // add_action('init', 'sp_set_cookie')
+    // to your widget
+    setcookie("sp_access_token", $token, $length_of_time, COOKIEPATH);
 }
+
+/*! @function sp_unset_cookie
+@author Thomas Schreiber <ubiquill@gmail.com>
+@abstract Deletes the client side cookie by making a new cookie that
+    has already expired
+@result 
+*/
+function sp_unset_cookie() {
+    // in order for this to work you must add
+    // add_action('init', 'sp_unset_cookie')
+    // to your widget
+    setcookie("sp_access_token", "", time()-3600, COOKIEPATH);
+}
+
 /*! @function sp_good_token
     @author Thomas Schreiber <ubiquill@gmail.com>
     @abstract Checks to see if a given access_token is valid
@@ -238,8 +221,7 @@ function sp_temp_fetch($url) {
 */
 function sp_good_token($sp_token) {
     $url = sp_get_uri() . "user.json?access_token=" . $sp_token;
-    //TODO: change back to sp_fetch
-    $result = json_decode(sp_temp_fetch($url));
+    $result = json_decode(sp_fetch($url));
     if (isset($result->id)) 
         return true;
     else

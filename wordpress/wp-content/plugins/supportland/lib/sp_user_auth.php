@@ -1,17 +1,20 @@
 <?php
-    require_once 'sp_api.php';
-    $sp_user = new SP_User();
-    
-    try {
+    require 'sp_api.php';
 
-        $sp_user->authenticate($_GET['login_email'], $_GET['login_password']);
 
-    }
-    catch(Exception $e)
+    $login_email = $_GET["login_email"];
+    $login_password = $_GET["login_password"];
+
+    $user = new SP_User();
+    try
     {
-        echo var_dump($e->getMessage());
-
+        $user->authenticate($login_email, $login_password);
+        header("Location: http://capstoneaa.cs.pdx.edu/mcsmash/wordpress/");
+    }catch(Exception $e)
+    {
+        echo 'Caught exception: ' , $e->getMessage();
     }
+
 
     
 
