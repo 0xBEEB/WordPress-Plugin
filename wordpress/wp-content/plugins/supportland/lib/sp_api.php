@@ -111,9 +111,10 @@ class SP_User
      */
     public function authenticate($email, $password) {
         $url = sp_get_uri() . "user.json?app_token=" . SP_APP_TOKEN . "&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
-        $result = json_decode(sp_fetch($url));
+        $result = json_decode(file_get_contents($url));
+        echo "OMG RESULTS!!!" . $result->access_token;
         if (isset($result->access_token)) {
-            set_access_token($result->access_token);
+            this->set_access_token($result->access_token);
             sp_set_cookie($result->access_token);
             return true;
         }else {
