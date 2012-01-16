@@ -4,12 +4,13 @@ require_once "lib/sp_api.php";
 Plugin Name: HelloWorld
 
 */
-define("MCSMASH","http://capstoneaa.cs.pdx.edu/mcsmash/wordpress/wp-content/plugins/supportland/");
+define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
 
 function sp_print_login_form() {
 
 	echo "<div>";
     echo    "<form action='wp-content/plugins/supportland/lib/sp_user_auth.php'>";
+    echo        "<input type='hidden' name='sp_loc' value='Location: '" . home_url() . "'>";
     echo        "<label for='login_email'>Email</label>";
     echo        "<input type='text' name='login_email' id='login_email'/>";
     echo        "<label for='login_password'>Password</label>";
@@ -36,7 +37,7 @@ function sp_print_mini_widget() {
     
     echo "<div>";
     echo    "you have " . $wallet->points . " points <br>";
-    echo    "<a href='" . MCSMASH . "/lib/sp_logout.php'>logout</a>"; 
+    echo    "<a href='" . SP_PLUGIN_URL . "/lib/sp_logout.php?sp_loc=Location: " . home_url() . "'>logout</a>"; 
     
     echo "</div>";
 
