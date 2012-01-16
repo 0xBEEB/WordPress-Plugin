@@ -12,6 +12,7 @@
 define("SP_API_BASE_URI", "https://api.supportland.com/");
 define("SP_API_VERSION", "1.0");
 define("SP_APP_TOKEN", "teamdoughnut2740");
+define("COOKIEPATH", "/");
 
 
 /*! @class SP_Transaction
@@ -196,7 +197,7 @@ function sp_set_cookie($token) {
     // in order for this to work you must add
     // add_action('init', 'sp_set_cookie')
     // to your widget
-    setcookie("sp_access_token", $token, $length_of_time, COOKIEPATH, COOKIE_DOMAIN, false);
+    setcookie("sp_access_token", $token, $length_of_time, COOKIEPATH);
 }
 
 /*! @function sp_unset_cookie
@@ -209,7 +210,7 @@ function sp_unset_cookie() {
     // in order for this to work you must add
     // add_action('init', 'sp_unset_cookie')
     // to your widget
-    setcookie("sp_access_token", "", time()-3600, COOKIEPATH, COOKIE_DOMAIN, false);
+    setcookie("sp_access_token", "", time()-3600, COOKIEPATH);
 }
 
 /*! @function sp_good_token
