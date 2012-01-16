@@ -24,18 +24,20 @@ function sp_print_login_form() {
 function sp_print_mini_widget() {
     $sp_user = new SP_User();
     $sp_trans = new SP_Transaction($sp_user);
-    
     try {
         $wallet = $sp_trans->get_wallet();
         $wallet = json_decode($wallet);
     }
     catch(Exception $e) {
+        echo "Exception!!! " . $e->get_message(); 
         sp_print_login_form();
         return;
     }
     
     echo "<div>";
-    echo    "you have " . $wallet->points . "points";
+    echo    "you have " . $wallet->points . " points <br>";
+    echo    "<a href='" . MCSMASH . "/lib/sp_logout.php'>logout</a>"; 
+    
     echo "<div>";
 
 
@@ -49,14 +51,11 @@ function display_widget() {
     $sp_user = new SP_User();
 
     if($sp_user->logged_in() == true) {
-        echo "true";
         sp_print_mini_widget();
-
     }
-    else
-        echo "false";
+    else {
         sp_print_login_form();
-
+    }
 }
 
 function helloworld_setup(){

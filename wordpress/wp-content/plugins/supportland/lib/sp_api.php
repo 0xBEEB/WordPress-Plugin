@@ -36,7 +36,7 @@ class SP_Transaction
         @param sp_user SP_User - The user that is interacting with the api
         @result Object - The SP_Transaction object
      */
-    public function SP_Transaction($sp_user) {
+    function __construct($sp_user) {
         $this->sp_user = $sp_user;
     }
 
@@ -67,8 +67,9 @@ class SP_Transaction
      */
     public function get_wallet() {
         if($this->sp_user->logged_in()) {
-            $url = sp_get_uri() . "user/wallet.json?access_token=" . $sp_user->get_access_token();
-            return sp_fetch($url);
+            $url = sp_get_uri() . "user/wallet/?access_token=" . $this->sp_user->get_access_token();
+            //TODO: fix sp_fetch
+            return sp_temp_fetch($url);
         } else {
             throw new Exception('Not logged in');
         }
@@ -93,7 +94,7 @@ class SP_User
         @result bool - Returns true if the access token is stored in a
             cookie. Otherwise, false.
      */
-    function logged_in() {
+    public function logged_in() {
         if (isset($_COOKIE['sp_access_token'])) {
             if (sp_good_token($_COOKIE['sp_access_token'])) {
                 return true;
@@ -131,6 +132,12 @@ class SP_User
     public function get_access_token() {
         if ( isset($this->access_token))
             return $this->access_token;
+        else if(isset($_COOKIE["sp_access_token"]))
+            if(sp_good_token($_COOKIE["sp_access_token"])) {
+                $this->set_access_token($_COOKIE["sp_access_token"]);
+                return $this->access_token;
+            }
+            else return null;
         else
             return null;
     }
@@ -143,6 +150,16 @@ class SP_User
     public function set_access_token($token) {
         $this->access_token = $token;
     }
+
+    public function reset_access_token() {
+        sp_temp_fetch(sp_get_uri() . "user?access_token=" . $this->get_access_token() . "&reset_access_token=1");
+    }
+
+    public function logout() {
+        sp_unset_cookie();
+        $this->reset_access_token();
+    }
+
 
 }
 
@@ -184,6 +201,9 @@ function sp_fetch($url) {
     return $response;
 }
 
+function sp_temp_fetch($url) {
+    return file_get_contents($url);
+}
 /*! @function sp_set_cookie
 @author Thomas Schreiber <ubiquill@gmail.com>
 @abstract sets the client side cookie containing the access_token
@@ -221,7 +241,8 @@ function sp_unset_cookie() {
 */
 function sp_good_token($sp_token) {
     $url = sp_get_uri() . "user.json?access_token=" . $sp_token;
-    $result = json_decode(sp_fetch($url));
+    //TODO: fix sp_fetch
+    $result = json_decode(sp_temp_fetch($url));
     if (isset($result->id)) 
         return true;
     else
