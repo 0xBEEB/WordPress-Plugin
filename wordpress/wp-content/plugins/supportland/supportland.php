@@ -1,5 +1,6 @@
 <?php
 require 'lib/sp_user_auth.php';
+//require 'lib/sp_api.php';
 
 /*
 Plugin Name: Supportland Login wiget
@@ -112,7 +113,8 @@ function I_got_jQuery(){
 add_action('wp_head','I_got_jQuery');
 add_action('wp_head','I_got_style');
 add_action('sidebar_admin_setup', 'helloworld_setup');
-add_action('init', 'writecookies');
+add_action('init', 'sp_set_coookie');
+add_action('init', 'sp_unset_cookie');
 //add_action('sidebar_admin_setup', 'hellowallet_setup');
 //add_action('widgets_init','your_widget_display');
 
