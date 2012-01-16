@@ -88,7 +88,7 @@ class SP_User
 {
     // Access token used by Supportland API
     var $access_token;
-
+    function __construct() {}
     /*! @function logged_in
         @author Thomas Schreiber <ubiquill@gmail.com>
         @abstract Checks if a user is logged in
@@ -114,11 +114,13 @@ class SP_User
      */
     function authenticate($email, $password) {
         $url = sp_get_uri() . "user.json?app_token=" . SP_APP_TOKEN . "&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
-        $result = json_decode(sp_fetch($url));
+        //TODO: change sp_temp_fetch back to sp_fetch when it's debugged
+        $result = json_decode(sp_temp_fetch($url));
         if (isset($result->access_token)) {
             set_access_token($result->access_token);
             set_sp_cookie($result->access_token);
             return true;
+        }
         else {
             throw new Exception($result->error['message']);
         }
@@ -133,8 +135,13 @@ class SP_User
     function get_access_token() {
         if ( isset($this->access_token))
             return $this->access_token;
-        else
-            return null;
+        else if( logged_in == true)
+        {
+            $this->access_token = $_COOKIE[2];
+            return $this->access_token;
+        }
+        else return null;
+            
     }
 
     /*! @function set_access_token
@@ -143,7 +150,7 @@ class SP_User
         @result 
      */
     function set_access_token($token) {
-        this->access_token = $token;
+        $this->access_token = $token;
     }
 
     /*! @function set_sp_cookie
@@ -214,6 +221,15 @@ function sp_fetch($url) {
     return $response;
 }
 
+function sp_temp_fetch($url) {
+    $responce = file_get_contents($url);
+    $responce = json_decode($responce);
+
+    return $responce;
+
+
+
+}
 /*! @function sp_good_token
     @author Thomas Schreiber <ubiquill@gmail.com>
     @abstract Checks to see if a given access_token is valid
@@ -222,7 +238,8 @@ function sp_fetch($url) {
 */
 function sp_good_token($sp_token) {
     $url = sp_get_uri() . "user.json?access_token=" . $sp_token;
-    $result = json_decode(sp_fetch($url));
+    //TODO: change back to sp_fetch
+    $result = json_decode(sp_temp_fetch($url));
     if (isset($result->id)) 
         return true;
     else
