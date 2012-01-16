@@ -38,7 +38,7 @@ function sp_print_mini_widget() {
     echo    "you have " . $wallet->points . " points <br>";
     echo    "<a href='" . MCSMASH . "/lib/sp_logout.php'>logout</a>"; 
     
-    echo "<div>";
+    echo "</div>";
 
 
 }
