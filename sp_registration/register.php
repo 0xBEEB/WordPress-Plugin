@@ -2,8 +2,10 @@
 //Should get the app token from somewhere
 $apptoken = "teamdoughnut2740";
 
-//Check to see if user entered all data in fields
-if(empty($_POST["fname"]) || empty($_POST["lname"]) || empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["password2"])) {
+//Check to see if all data fields have user input -- this is the one type of
+//error checking we have to do, other errors come from the API.
+if( empty($_POST["fname"]) || empty($_POST["lname"]) || empty($_POST["email"])
+        || empty($_POST["password"]) || empty($_POST["password2"]) ) {
     echo "Please enter data in all fields.";
     exit;
 }
@@ -15,10 +17,11 @@ $email = $_POST["email"];
 $password =  $_POST["password"];
 $password2 = $_POST["password2"];
 
-//Sanitize POST data
+//Should sanitize POST data
 
 //Get SP API data from endpoint using cURL
-$url = 'https://api.supportland.com/1.0/user/registration/'.$email.'/'.$password.'/'.$password2.'/'.$fname.'/'.$lname.'?app_token='.$apptoken;
+$url = 'https://api.supportland.com/1.0/user/registration/'.$email.'/'.$password
+        .'/'.$password2.'/'.$fname.'/'.$lname.'?app_token='.$apptoken;
 $curl_handle=curl_init();
 curl_setopt($curl_handle,CURLOPT_URL,$url);
 curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,2);
@@ -36,16 +39,17 @@ $success = "Registration was successful, you will receive a confirmation e-mail 
 if (empty($buffer)) {
     echo $error;
 } else {
-    //parse json
+    //Parse json
     $json = json_decode($buffer, true);
     if($json) {
         if(is_array($json)) { //if it's an array then registration did not work
-            if($json["error"]["message"] == "Not Found") { //It shouldn't actually ever get here
+            if($json["error"]["message"] == "Not Found") {
+                //If we're here it's a 404, shouldn't actually get here
                 echo $error;
                 exit;
             }
-            echo $json["error"]["message"];
-        } else { //if it's not an array then it just says "true" and registration worked
+            echo $json["error"]["message"]; //Output the error
+        } else { //if it's not an array  it says "true" and registration worked
             echo $success;
         }
     } else {

@@ -9,17 +9,14 @@
         .req{color:#e8b154;}
 
         #formdiv{width:500px;}
-        
         #fname,#lname,#email,#password,#password2{width:200px;}
         /* #fname:focus,#lname:focus,#email:focus,#password:focus,#password2:focus{background-color:#eee;} */
         #submit:hover{cursor:pointer;}
-
         #formout{display:none;}
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     </head>
     <body>
-        <!-- https://api.supportland.com/1.0/user/registration/scotto@supportland.com/mypassword/mypassword/myfristname/mylastname.xml?app_token=1234 -->
         <h1>Account Registration</h1>
         <div id="formdiv">
         First Name: <input type="text" name="fname" value="" id="fname" /><br />
@@ -30,9 +27,7 @@
         <input type="submit" value="Submit" id="submit" />
         <div id="formout" style="width:100%;text-align:right;"></div>
         </div>
-        
-        
-        
+
         <script type="text/JavaScript">  
             $(document).ready(function(){  
                 $("#submit").click(function(){		
@@ -43,9 +38,10 @@
                     }
 
                     $("#formout").queue(function () {
-                        $(this).load("register.php", { fname: $('#fname').val(), lname: $('#lname').val(), email: $('#email').val(),
-                                                        password: $('#password').val(), password2: $('#password2').val()
-                                                        });
+                        $(this).load("register.php", { fname: $('#fname').val(),
+                            lname: $('#lname').val(), email: $('#email').val(),
+                            password: $('#password').val(),
+                            password2: $('#password2').val() });
                         $(this).dequeue();
                     });
                     $("#formout").queue(function () {
