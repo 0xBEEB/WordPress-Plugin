@@ -1,0 +1,56 @@
+<?php
+//Should get the app token from somewhere
+$apptoken = "teamdoughnut2740";
+
+//Check to see if user entered all data in fields
+if(empty($_POST["fname"]) || empty($_POST["lname"]) || empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["password2"])) {
+    echo "Please enter data in all fields.";
+    exit;
+}
+
+//Get POST data
+$fname = $_POST["fname"];
+$lname = $_POST["lname"];
+$email = $_POST["email"];
+$password =  $_POST["password"];
+$password2 = $_POST["password2"];
+
+//Sanitize POST data
+
+//Get SP API data from endpoint using cURL
+$url = 'https://api.supportland.com/1.0/user/registration/'.$email.'/'.$password.'/'.$password2.'/'.$fname.'/'.$lname.'?app_token='.$apptoken;
+$curl_handle=curl_init();
+curl_setopt($curl_handle,CURLOPT_URL,$url);
+curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,2);
+curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,1);
+curl_setopt($curl_handle, CURLOPT_SSLVERSION,3);
+curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, FALSE);
+curl_setopt($curl_handle, CURLOPT_SSL_VERIFYHOST, 2);
+$buffer = curl_exec($curl_handle);
+curl_close($curl_handle);
+
+//success and error messages
+$error = "Sorry, registration doesn't seem to be working!  Please try again later or contact an administrator.";
+$success = "Registration was successful, you will receive a confirmation e-mail at $email within 24 hours.<br />";
+
+if (empty($buffer)) {
+    echo $error;
+} else {
+    //parse json
+    $json = json_decode($buffer, true);
+    if($json) {
+        if(is_array($json)) { //if it's an array then registration did not work
+            if($json["error"]["message"] == "Not Found") { //It shouldn't actually ever get here
+                echo $error;
+                exit;
+            }
+            echo $json["error"]["message"];
+        } else { //if it's not an array then it just says "true" and registration worked
+            echo $success;
+        }
+    } else {
+        echo $error;
+    }
+}
+
+?>
