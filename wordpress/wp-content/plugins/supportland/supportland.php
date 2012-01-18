@@ -10,7 +10,7 @@ function sp_print_login_form() {
 
 	echo "<div>";
     echo    "<form action='wp-content/plugins/supportland/lib/sp_user_auth.php'>";
-    echo        "<input type='hidden' name='sp_loc' value='Location: '" . home_url() . "'>";
+    echo        "<input type='hidden' name='sp_loc' value='Location: " . home_url() . "'>";
     echo        "<label for='login_email'>Email</label>";
     echo        "<input type='text' name='login_email' id='login_email'/>";
     echo        "<label for='login_password'>Password</label>";
