@@ -9,6 +9,8 @@ define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
 function sp_print_login_form() {
 
 	echo "<div>";
+    if (isset($_GET['sp_bad_auth']) && $_GET['sp_bad_auth'] == 1)
+	echo "<b><font color=red>Bad email or password</font></b></br>";
     echo    "<form action='wp-content/plugins/supportland/lib/sp_user_auth.php'>";
     echo        "<input type='hidden' name='sp_loc' value='Location: " . home_url() . "'>";
     echo        "<label for='login_email'>Email</label>";
