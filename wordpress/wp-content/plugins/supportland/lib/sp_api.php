@@ -86,7 +86,8 @@ class SP_User
 {
     // Access token used by Supportland API
     var $access_token;
-
+    var $user_info;
+    
     /*! @function logged_in
         @author Thomas Schreiber <ubiquill@gmail.com>
         @abstract Checks if a user is logged in
@@ -167,8 +168,16 @@ class SP_User
         sp_unset_cookie();
         $this->reset_access_token();
     }
-
-
+    
+    /*! @function fetch_user_info
+        @author David Liang <davidliang2008@hotmail.com>
+        @abstract get user information and store it as json to user_info variable in user object
+        @result 
+     */
+    public function fetch_user_info() {
+        $url = sp_get_uri() . "user.json?access_token=" . $this->access_token;
+        $this->user_info = sp_fetch($url);
+    }
 }
 
 /*! @function sp_get_uri
@@ -236,6 +245,7 @@ function sp_unset_cookie() {
     // add_action('init', 'sp_unset_cookie')
     // to your widget
     setcookie("sp_access_token", "", time()-3600, COOKIEPATH);
+    
 }
 
 /*! @function sp_good_token
