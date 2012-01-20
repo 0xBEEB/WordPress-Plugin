@@ -19,7 +19,7 @@ function sp_print_login_form() {
     echo        "<input type='password' name='login_password' id='login_password'/>";
     echo        "<input type='submit' value='Log in'/>";
     echo    "</form>";
-    echo    "<a href='" . SP_PLUGIN_URL . "lig/register.php'>Sign Up</a>";
+    echo    "<a href='" . SP_PLUGIN_URL . "sp_registration/'>Sign Up</a>";
     echo "</div>";
 
 
