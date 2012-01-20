@@ -34,13 +34,20 @@ function sp_add_settings_page() {
 
 //Section text, output before the settings
 function  sp_section_text() {
-	echo '<p>Email <a href="mailto:help@supportland.com">help@supportland.com</a> to obtain an App Token.</p>';
-}
+	$plugin_options = get_option('plugin_options');
+	$app_token = $plugin_options['app_token_text_string'];
+
+	//If the app token field is empty, display a message about the app token being required
+	if($app_token=="") {?>
+	<p style="background-color:#fcc;padding:5px;font-size:1.1em;"><strong>Important:</strong> using this plugin requires an App Token.</p>
+<?	}
+?>	<p>To obtain an App Token, please e-mail <a href="mailto:help@supportland.com">help@supportland.com</a> with the subject "App Token Request (your name)" and we will respond as soon as we can.  For more information, visit <a href="http://www.supportland.com">supportland.com</a>.</p>
+<?}
 
 //Text box callback
 function sp_setting_string() {
 	$options = get_option('plugin_options');
-	echo "<input id='plugin_text_string' name='plugin_options[app_token_text_string]' size='40' type='text' value='{$options['app_token_text_string']}' />";
+	echo "<input id='plugin_text_string' name='plugin_options[app_token_text_string]' size='40' type='text' value='{$options['app_token_text_string']}' /> (required)";
 }
 
 //Display the settings page
