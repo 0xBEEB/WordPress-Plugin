@@ -11,7 +11,7 @@ function sp_print_login_form() {
 	echo "<div>";
     if (isset($_GET['sp_bad_auth']) && $_GET['sp_bad_auth'] == 1)
 	echo "<b><font color=red>Bad email or password</font></b></br>";
-    echo    "<form action='wp-content/plugins/supportland/lib/sp_user_auth.php'>";
+    echo    "<form action='" . SP_PLUGIN_URL . "lib/sp_user_auth.php'>";
     echo        "<input type='hidden' name='sp_loc' value='Location: " . home_url() . "'>";
     echo        "<label for='login_email'>Email</label>";
     echo        "<input type='text' name='login_email' id='login_email'/>";
@@ -19,6 +19,7 @@ function sp_print_login_form() {
     echo        "<input type='password' name='login_password' id='login_password'/>";
     echo        "<input type='submit' value='Log in'/>";
     echo    "</form>";
+    echo    "<a href='" . SP_PLUGIN_URL . "lig/register.php'>Sign Up</a>";
     echo "</div>";
 
 
