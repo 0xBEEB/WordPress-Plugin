@@ -40,12 +40,13 @@ include 'supportland-settings.php';
 function sp_headerStuff() {?>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 	<style type="text/css">
-		.spMenuLink{padding:3px;cursor:pointer;line-height:1.5em;}
+		.spMenuLink{padding:2px 3px 3px 3px;cursor:pointer;line-height:1.5em;}
 		.spMenuLink:hover{background-color:#eee;}
 		#spResult1,#spResult2,#spResult3,#spResult4{display:none;}
 		.sp_plusMinusCircle{bottom:-3px;background-color:#a21;height:16px;width:16px;border-radius: 8px;-moz-border-radius:8px;position:relative;display:inline-block;}
 		.sp_plusMinusHBar{background-color:#fff;height:2px;width:8px;position:absolute;top:7px;left:4px;}
 		.sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
+		.sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
 	</style>
 <?}
 
@@ -70,26 +71,26 @@ function supportland() {
 		<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus1"></span></span>
 		<a>Card</a>
 	</div>
-	<div id="spResult1"><? echo $spCard; ?>
+	<div class="sp_Result" id="spResult1"><? echo $spCard; ?>
 	<br /></div>
 
 	<div id="spMenuLink2" class="spMenuLink">
 		<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus2"></span></span>
 		<a>Wallet</a>
 	</div>
-	<div id="spResult2"><? echo $spWallet; ?></div>
+	<div class="sp_Result" id="spResult2"><? echo $spWallet; ?></div>
 
 	<div id="spMenuLink3" class="spMenuLink">
 		<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus3"></span></span>
 		<a>Business</a>
 	</div>
-	<div id="spResult3"><? echo $spBusiness; ?></div>
+	<div class="sp_Result" id="spResult3"><? echo $spBusiness; ?></div>
 	
 	<div id="spMenuLink4" class="spMenuLink">
 		<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus4"></span></span>
 		<a>Search</a>
 	</div>
-	<div id="spResult4"><? echo $spSearch; ?></div>
+	<div class="sp_Result" id="spResult4"><? echo $spSearch; ?></div>
 
 	
 	
