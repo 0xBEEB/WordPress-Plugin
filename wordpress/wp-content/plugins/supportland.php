@@ -40,11 +40,12 @@ include 'supportland-settings.php';
 function sp_headerStuff() {?>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 	<style type="text/css">
-		.spMenuLink{cursor:pointer;}
+		.spMenuLink{padding:3px;cursor:pointer;line-height:1.5em;}
+		.spMenuLink:hover{background-color:#eee;}
 		#spResult1,#spResult2,#spResult3,#spResult4{display:none;}
-		.spPlusMinusWrap{display:inline-block;height:15px;width:16px;padding:0;margin:0 6px 0 0;}
-		.spMinus{display:inline-block;background:url(http://www.pasadenaplayhouse.org/images/minus_icon.png) top left no-repeat;height:15px;width:16px;}
-		.spPlus{display:inline-block;background:url(http://www.pasadenaplayhouse.org/images/plus_icon.png) top left no-repeat;height:15px;width:16px;}
+		.sp_plusMinusCircle{bottom:-3px;background-color:#a21;height:16px;width:16px;border-radius: 8px;-moz-border-radius:8px;position:relative;display:inline-block;}
+		.sp_plusMinusHBar{background-color:#fff;height:2px;width:8px;position:absolute;top:7px;left:4px;}
+		.sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
 	</style>
 <?}
 
@@ -66,42 +67,33 @@ function supportland() {
 
 ?>
 	<div id="spMenuLink1" class="spMenuLink">
-		<span class="spPlusMinusWrap">
-			<span class="spMinus">
-				<span class="spPlus" id="spPlus1"></span>
-			</span>
-		</span><a>Card</a>
+		<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus1"></span></span>
+		<a>Card</a>
 	</div>
 	<div id="spResult1"><? echo $spCard; ?>
 	<br /></div>
 
 	<div id="spMenuLink2" class="spMenuLink">
-		<span class="spPlusMinusWrap">
-			<span class="spMinus">
-				<span class="spPlus" id="spPlus2"></span>
-			</span>
-		</span><a>Wallet</a>
+		<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus2"></span></span>
+		<a>Wallet</a>
 	</div>
 	<div id="spResult2"><? echo $spWallet; ?></div>
 
 	<div id="spMenuLink3" class="spMenuLink">
-		<span class="spPlusMinusWrap">
-			<span class="spMinus">
-				<span class="spPlus" id="spPlus3"></span>
-			</span>
-		</span><a>Business</a>
+		<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus3"></span></span>
+		<a>Business</a>
 	</div>
 	<div id="spResult3"><? echo $spBusiness; ?></div>
 	
 	<div id="spMenuLink4" class="spMenuLink">
-		<span class="spPlusMinusWrap">
-			<span class="spMinus">
-				<span class="spPlus" id="spPlus4"></span>
-			</span>
-		</span><a>Search</a>
+		<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus4"></span></span>
+		<a>Search</a>
 	</div>
 	<div id="spResult4"><? echo $spSearch; ?></div>
 
+	
+	
+	
 <?	//jQuery animations for the four sections
 	for($i=1;$i<=4;$i++) { ?>
 		<script>
