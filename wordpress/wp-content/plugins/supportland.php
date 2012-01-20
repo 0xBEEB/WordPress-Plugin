@@ -37,16 +37,16 @@ add_action( 'wp_head', sp_headerStuff);
 include 'supportland-settings.php';
 
 //Output Google-hosted jQuery and some CSS (used with jQuery) into the <head> tag
-function sp_headerStuff() {
-echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>';
-echo '<style type="text/css">
-	.spMenuLink{cursor:pointer;}
-	#spResult1,#spResult2,#spResult3,#spResult4{display:none;}
-	.spPlusMinusWrap{display:inline-block;height:15px;width:16px;padding:0;margin:0 6px 0 0;}
-	.spMinus {display:inline-block;background:url(http://www.pasadenaplayhouse.org/images/minus_icon.png) top left no-repeat;height:15px;width:16px;}
-	.spPlus {display:inline-block;background:url(http://www.pasadenaplayhouse.org/images/plus_icon.png) top left no-repeat;height:15px;width:16px;}
-</style>';
-}
+function sp_headerStuff() {?>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<style type="text/css">
+		.spMenuLink{cursor:pointer;}
+		#spResult1,#spResult2,#spResult3,#spResult4{display:none;}
+		.spPlusMinusWrap{display:inline-block;height:15px;width:16px;padding:0;margin:0 6px 0 0;}
+		.spMinus{display:inline-block;background:url(http://www.pasadenaplayhouse.org/images/minus_icon.png) top left no-repeat;height:15px;width:16px;}
+		.spPlus{display:inline-block;background:url(http://www.pasadenaplayhouse.org/images/plus_icon.png) top left no-repeat;height:15px;width:16px;}
+	</style>
+<?}
 
 function init_supportland(){
   register_sidebar_widget('Supportland', 'supportland');
@@ -58,12 +58,12 @@ function supportland() {
 	$app_token = $plugin_options['app_token_text_string'];
 	
 	//The content for the four sections will at some point come from queries to the API, but for now is hard coded as these dummy strings.
-	$spCard = "Card info goes here.  The app token is ".$app_token; //stuffed the app key in here just to show that it works
+	$spCard = "Card info goes here.  The app token is ".$app_token; //stuffed the app token in here just to show that it works
 	//Casey: store all the wallet stuff in a string called $spWallet and delete the following line
 	$spWallet = "Rewards<br />Points Earned<br />Punch Cards<br />Coupons<br />Supportland Card";
 	$spBusiness = "Business section.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quam ante, mattis interdum semper non, bibendum quis metus. Vestibulum sem risus, eleifend ac adipiscing nec, hendrerit a sem. Curabitur nec augue id lectus feugiat posuere. Phasellus in magna ante, non sagittis ligula.";
 	$spSearch = "Search content goes here.  There will be fields for querying the Supportland search API.";
-	
+
 ?>
 	<div id="spMenuLink1" class="spMenuLink">
 		<span class="spPlusMinusWrap">
