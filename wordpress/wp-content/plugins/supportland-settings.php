@@ -39,7 +39,7 @@ function  sp_section_text() {
 
 	//If the app token field is empty, display a message about the app token being required
 	if($app_token=="") {?>
-	<p style="background-color:#fcc;padding:5px;font-size:1.1em;"><strong>Important:</strong> using this plugin requires an App Token.</p>
+	<p style="background-color:#fcc;border:1px solid #f99;padding:8px 9px 9px 9px;"><strong>Important:</strong> using this plugin requires an App Token.</p>
 <?	}
 ?>	<p>To obtain an App Token, please e-mail <a href="mailto:help@supportland.com">help@supportland.com</a> with the subject "App Token Request (your name)" and we will respond as soon as we can.  For more information, visit <a href="http://www.supportland.com">supportland.com</a>.</p>
 <?}
