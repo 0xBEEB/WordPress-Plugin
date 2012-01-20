@@ -16,6 +16,8 @@ Developers:
 --------------------------------------------------------------------------------
 Release Notes:
 
+lochlan-dev
+
 Version 0.1 12/12/2011
 First working version, supportland.php.  Grabs my own personal card info from
 the API as XML, parses it, and outputs it.  Also uses a teensy bit of jQuery
