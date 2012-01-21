@@ -34,7 +34,7 @@ add_action('plugins_loaded', 'init_supportland');
 add_action( 'wp_head', sp_headerStuff);
 
 //Includes
-include 'supportland-settings.php';
+require_once 'supportland-settings.php';
 
 //Output Google-hosted jQuery and some CSS (used with jQuery) into the <head> tag
 function sp_headerStuff() {?>

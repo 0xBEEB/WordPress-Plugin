@@ -1,10 +1,15 @@
 <?php
-require_once "lib/sp_api.php";
+
+require_once "supportland-settings.php";  // This must be added before defines
+
 /*
 Plugin Name: HelloWorld
 
 */
 define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
+define("SP_APP_TOKEN", $plugin_options['app_token_text_string']);
+
+require_once "lib/sp_api.php";
 
 function sp_print_login_form() {
 

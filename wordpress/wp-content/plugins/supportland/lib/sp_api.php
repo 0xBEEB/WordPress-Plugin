@@ -11,7 +11,6 @@
 // Values that should not be changing
 define("SP_API_BASE_URI", "https://api.supportland.com/");
 define("SP_API_VERSION", "1.0");
-define("SP_APP_TOKEN", "teamdoughnut2740");
 define("COOKIEPATH", "/");
 
 
