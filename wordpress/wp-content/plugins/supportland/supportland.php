@@ -1,13 +1,15 @@
 <?php
 
 require_once "supportland-settings.php";  // This must be added before defines
+$sp_plugin_options = get_option('plugin_options');
+$sp_app_token = $sp_plugin_options['app_token_text_string'];
 
 /*
 Plugin Name: HelloWorld
 
 */
 define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
-define("SP_APP_TOKEN", $plugin_options['app_token_text_string']);
+define("SP_APP_TOKEN", $sp_app_token);
 
 require_once "lib/sp_api.php";
 
