@@ -13,6 +13,11 @@ define("SP_API_BASE_URI", "https://api.supportland.com/");
 define("SP_API_VERSION", "1.0");
 define("COOKIEPATH", "/");
 
+// This will need to be changed if you have a non-standard
+// plugin directory
+require_once(dirname(__FILE__) . '/../../../wp-load.php');
+require_once(dirname(__FILE__) . '/../supportland-settings.php');
+
 
 /*! @class SP_Transaction
  *
@@ -110,8 +115,8 @@ class SP_User
             is trown.
      */
     public function authenticate($email, $password) {
-        $url = sp_get_uri() . "user.json?app_token=" . SP_APP_TOKEN . "&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
-        $result = json_decode(file_get_contents($url));
+        $url = sp_get_uri() . "user.json?app_token=" . sp_get_app_token() . "&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
+        $result = json_decode(sp_fetch($url));
         if (isset($result->access_token)) {
             $this->set_access_token($result->access_token);
             sp_set_cookie($result->access_token);
@@ -250,4 +255,15 @@ function sp_good_token($sp_token) {
         return true;
     else
         return false;
+}
+
+/*! @function sp_get_app_token
+ * @author Thomas Schreiber <ubiquill@gmail.com>
+ * @abstract Returns the app token set in the plugin settings
+ * @result string - the app's token
+ */
+function sp_get_app_token() {
+    $plugin_options = get_option('plugin_options');
+    $sp_app_token = $plugin_options['app_token_text_string'];
+    return $sp_app_token;
 }

@@ -1,5 +1,5 @@
 <?php
-    require 'sp_api.php';
+    require_once 'sp_api.php';
 
 
     $login_email = $_GET["login_email"];
