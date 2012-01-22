@@ -1,5 +1,7 @@
 <?php
     require_once 'sp_api.php';
+    add_action('init', 'sp_set_cookies');
+    add_action('init', 'sp_unset_cookies');
 
 
     $login_email = $_GET["login_email"];

@@ -18,9 +18,6 @@ define("COOKIEPATH", "/");
 require_once(dirname(__FILE__) . '/../../../../wp-load.php');
 require_once(dirname(__FILE__) . '/../supportland-settings.php');
 
-add_action('init', 'sp_set_cookies');
-add_action('init', 'sp_unset_cookies');
-
 /*! @class SP_Transaction
  *
     @author Thomas Schreiber <ubiquill@gmail.com>
