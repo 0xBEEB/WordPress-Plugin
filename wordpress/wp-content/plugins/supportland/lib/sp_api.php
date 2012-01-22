@@ -15,7 +15,7 @@ define("COOKIEPATH", "/");
 
 // This will need to be changed if you have a non-standard
 // plugin directory
-require_once(dirname(__FILE__) . '/../../../wp-load.php');
+require_once(dirname(__FILE__) . '/../../../../wp-load.php');
 require_once(dirname(__FILE__) . '/../supportland-settings.php');
 
 
