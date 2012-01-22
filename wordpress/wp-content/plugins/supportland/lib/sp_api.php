@@ -18,6 +18,8 @@ define("COOKIEPATH", "/");
 require_once(dirname(__FILE__) . '/../../../../wp-load.php');
 require_once(dirname(__FILE__) . '/../supportland-settings.php');
 
+add_action('init', 'sp_set_cookies');
+add_action('init', 'sp_unset_cookies');
 
 /*! @class SP_Transaction
  *
@@ -80,7 +82,7 @@ class SP_Transaction
 
     /*! @function get_user_info
         @abstract returns info about the current user
-        @author Casey Beach <cbeach@gmail.com>
+        @author Thomas Schreiber <ubiquill@gmail.com>
         @result Object - A user object
      */
     public function get_user_info() {
@@ -240,7 +242,7 @@ function sp_set_cookie($token) {
     // in order for this to work you must add
     // add_action('init', 'sp_set_cookie')
     // to your widget
-    setcookie("sp_access_token", $token, $length_of_time, COOKIEPATH);
+    setcookie("sp_access_token", $token, $length_of_time, COOKIEPATH, COOKIE_DOMAIN);
 }
 
 /*! @function sp_unset_cookie
@@ -253,7 +255,7 @@ function sp_unset_cookie() {
     // in order for this to work you must add
     // add_action('init', 'sp_unset_cookie')
     // to your widget
-    setcookie("sp_access_token", "", time()-3600, COOKIEPATH);
+    setcookie("sp_access_token", "", time()-3600, COOKIEPATH, COOKIE_DOMAIN);
 }
 
 /*! @function sp_good_token
