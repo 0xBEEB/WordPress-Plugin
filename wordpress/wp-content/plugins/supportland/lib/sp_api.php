@@ -74,6 +74,20 @@ class SP_Transaction
         }
     }
 
+    /*! @function get_user_info
+        @abstract returns info about the current user
+        @author Casey Beach <cbeach@gmail.com>
+        @result Object - A user object
+     */
+    public function get_user_info() {
+        if($this->sp_user->logged_in()) {
+            $url = sp_get_uri() . "user.json?access_token=" . $this->sp_user->get_access_token();
+            return json_decode(sp_fetch($url));
+        } else {
+            throw new Exception('Not logged in');
+        }
+    }
+
 }
 
 /*! @class SP_User
