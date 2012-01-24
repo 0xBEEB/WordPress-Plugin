@@ -1,34 +1,61 @@
 <?php
-require 'lib/sp_user_auth.php';
-//require 'lib/sp_api.php';
-
+require_once "lib/sp_api.php";
 /*
-Plugin Name: Supportland Login wiget
-Author: Alexis Carlough, Casey Beach, Thomas Schreiber
+Plugin Name: HelloWorld
 
 */
+define("MCSMASH","http://capstoneaa.cs.pdx.edu/mcsmash/wordpress/wp-content/plugins/supportland/");
 
+function sp_print_login_form() {
+
+	echo "<div>";
+    echo    "<form action='wp-content/plugins/supportland/lib/sp_user_auth.php'>";
+    echo        "<label for='login_email'>Email</label>";
+    echo        "<input type='text' name='login_email' id='login_email'/>";
+    echo        "<label for='login_password'>Password</label>";
+    echo        "<input type='password' name='login_password' id='login_password'/>";
+    echo        "<input type='submit' value='Log in'/>";
+    echo    "</form>";
+    echo "</div>";
+
+
+
+}
+function sp_print_mini_widget() {
+    $sp_user = new SP_User();
+    $sp_trans = new SP_Transaction($sp_user);
+    try {
+        $wallet = $sp_trans->get_wallet();
+        $wallet = json_decode($wallet);
+    }
+    catch(Exception $e) {
+        echo "Exception!!! " . $e->get_message(); 
+        sp_print_login_form();
+        return;
+    }
+    
+    echo "<div>";
+    echo    "you have " . $wallet->points . " points <br>";
+    echo    "<a href='" . MCSMASH . "/lib/sp_logout.php'>logout</a>"; 
+    
+    echo "</div>";
+
+
+}
 
 function display_widget() {
     // print some HTML for the widget to display here
-	
-	?>
-	<div>
-        <form action='wp-content/plugins/supportland/lib/sp_user_auth.php'>
-            <label for="login_email">Email</label>
-            <input type="text" name="login_email" id="login_email"/>
-
-            <label for="login_password">Password</label>
-            <input type="password" name="login_password" id="login_password"/>
-
-            <input type="submit" value="Log in"/>
-        </form>
-
-
-    </div>
     
-    <?php
-	
+  //  $responce = file_get_contents(MCSMASH . "lib/sp_get_wallet.php");
+  //  echo $responce;
+    $sp_user = new SP_User();
+
+    if($sp_user->logged_in() == true) {
+        sp_print_mini_widget();
+    }
+    else {
+        sp_print_login_form();
+    }
 }
 
 function helloworld_setup(){
@@ -113,8 +140,6 @@ function I_got_jQuery(){
 add_action('wp_head','I_got_jQuery');
 add_action('wp_head','I_got_style');
 add_action('sidebar_admin_setup', 'helloworld_setup');
-add_action('init', 'sp_set_cookie');
-add_action('init', 'sp_unset_cookie');
 //add_action('sidebar_admin_setup', 'hellowallet_setup');
 //add_action('widgets_init','your_widget_display');
 
