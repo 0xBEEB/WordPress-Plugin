@@ -6,8 +6,6 @@ Plugin Name: HelloWorld
 require_once "lib/sp_api.php";
 define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
 
-require_once "lib/sp_api.php";
-
 function sp_print_login_form() {
 
 	echo "<div>";
