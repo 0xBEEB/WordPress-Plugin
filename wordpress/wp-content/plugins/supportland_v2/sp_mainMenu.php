@@ -14,6 +14,7 @@
         .sp_plusMinusHBar{background-color:#fff;height:2px;width:8px;position:absolute;top:7px;left:4px;}
         .sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
         .sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
+        .sp_sub_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
         </style>";
     }
     
@@ -30,13 +31,21 @@
         			"ID: "."$sp_user_info->id"."<br />".
         			"Member since: "."$member_since"."<br />".
         			"Points: $sp_user_info->points";
-        //Casey: store all the wallet stuff in a string called $spWallet and delete the following line
-        $spWallet = "Rewards: "."$sp_wallet_test->rewards"."<br />".
-        			"Points Earned: "."$sp_wallet_test->points"." points"."<br />".
-        			"Punch Cards"."$sp_wallet_test->punch_cards"."<br />".
-        			"Coupons"."<br />".
-        			"Supportland Card";
-        $spBusiness = "Business section.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quam ante, mattis interdum semper non, bibendum quis metus. Vestibulum sem risus, eleifend ac adipiscing nec, hendrerit a sem. Curabitur nec augue id lectus feugiat posuere. Phasellus in magna ante, non sagittis ligula.";
+        //Casey: store all the wallet stuff in a string called $sp_wallet and delete the following line
+        $sp_wallet_object = sp_wallet_item();
+        $sp_wallet = "Rewards: " . $sp_wallet_object->rewards . "<br />" .
+                     "Points Earned: " . $sp_wallet_object->points . "<br />" .
+                     "Punch Cards: " . $sp_wallet_object->punch . "<br />" .
+                     "<div id='sp_punch_cards' class='sp_sub_result'>" .
+                     "punchcards go here" .
+                     "</div>" .
+                     "Coupons: " . $sp_wallet_object->coupons .
+                     "Supportland Card";
+        
+        $spBusiness = "Business section.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                       Morbi quam ante, mattis interdum semper non, bibendum quis metus. Vestibulum 
+                       sem risus, eleifend ac adipiscing nec, hendrerit a sem. Curabitur nec augue 
+                       id lectus feugiat posuere. Phasellus in magna ante, non sagittis ligula.";
         $spSearch = "Search content goes here.  There will be fields for querying the Supportland search API.";
     ?>
 
@@ -72,7 +81,7 @@
         	<a>Wallet</a>
     	</div>
     	<div class="sp_Result" id="spResult2">
-    	<? echo $spWallet; ?>
+    	<? echo $sp_wallet; ?>
     	</div>
 
     <!--// ------ End of Wallet -----//-->
