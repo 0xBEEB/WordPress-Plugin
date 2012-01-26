@@ -3,7 +3,7 @@
     /*
      Plugin Name: Supportland 'Wallet'
      Plugin URI: http://capstonaa.cs.pdx.edu/
-     Description: Print the wallet plugin of Supportland - underdevelopemnt v2.
+     Description: Print the wallet plugin of Supportland - underdevelopemnt v3.
      Version: 0.01
      Author: Khoa Pham
      Author URI: http://capstoneaa.cs.pdx.edu
