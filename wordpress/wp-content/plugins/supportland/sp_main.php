@@ -19,7 +19,7 @@
 Plugin Name: Supportland Widget
 Plugin URI: http://www.github.com/supportland/
 Description: A widget that deploys the functionality of supportland.com on a WordPress website.
-Version: 0.1
+Version: 0.2
 Author: Do(ugh)nut Team
 Author URI: http://www.github.com/supportland/
 License: GPLv2 or later
@@ -77,13 +77,6 @@ License: GPLv2 or later
         }
     }
     
-    // initialize the widget
-    function sp_widget_init()
-    {
-        register_widget('SP_Widget');
-    }
-    add_action('widgets_init', 'sp_widget_init');
-            
     // include JavaScript files
     function sp_widget_js_init()
     {
