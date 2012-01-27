@@ -136,7 +136,7 @@ class SP_User
             sp_set_cookie($result->access_token);
             return true;
         }else {
-            throw new Exception($result->error['message']);
+            throw new Exception($result->error->message);
         }
 
     }
