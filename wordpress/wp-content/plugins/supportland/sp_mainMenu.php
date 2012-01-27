@@ -1,0 +1,180 @@
+<?php
+    $sp_empty_punch = "wp-content/plugins/supportland_v3/images/empty_punch.png";
+    $punched_punch = "http://capstoneaa.cs.pdx.edu/mcsmash/wordpress/wp-content/plugins/supportland_v3/images/punched_punch.png";
+	require_once 'sp_login.php';
+    define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
+   
+    
+    function sp_headerStuff() {
+        echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>';
+        echo "<style type='text/css'>
+		.spMenuLink{padding:2px 3px 3px 3px;cursor:pointer;line-height:1.5em;}
+        .spMenuLink:hover{background-color:#eee;}
+		#spResult1,#spResult2,#spResult3,#spResult4{display:none;}
+		.sp_plusMinusCircle{bottom:-3px;background-color:#a21;height:16px;width:16px;border-radius: 8px;-moz-border-radius:8px;position:relative;display:inline-block;}
+		.sp_empty_punch{bottom:-3px;background:url(" . $sp_empty_punch . ";height:16px;width:16px;border-radius: 8px;-moz-border-radius:8px;position:relative;display:inline-block;}
+        #sp_punch_card_title{font-size=12px;}
+        .sp_punched_punch{display:inline-block;background:url(". $punched_punch . ") top left no-repeat;height:16px;width:16px;}
+        .sp_plusMinusHBar{background-color:#fff;height:2px;width:8px;position:absolute;top:7px;left:4px;}
+        .sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
+        .sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
+        .sp_punch_card_display{margin-left:11px;padding-left:11px;}
+        </style>";
+
+    }
+    
+    function sp_mainMenu() {
+        //Get App Token
+        $plugin_options = get_option('plugin_options');
+        $app_token = $plugin_options['app_token_text_string'];
+       	$sp_user_info= sp_user_info();
+       	$member_since = date('D m/d/Y',strtotime($sp_user_info->member_since));
+        
+        //The content for the four sections will at some point come from queries to the API, but for now is hard coded as these dummy strings.
+        $spCard = 	"Name: "."$sp_user_info->public_name"."<br />".
+        			"ID: "."$sp_user_info->id"."<br />".
+        			"Member since: "."$member_since"."<br />".
+        			"Points: $sp_user_info->points";
+        //Casey: store all the wallet stuff in a string called $spWallet and delete the following line
+        $sp_wallet_info = sp_get_wallet_item();
+        $spWallet = "Rewards: ". $sp_wallet_info->rewards ."<br />".
+        			"Points Earned: ". $sp_wallet_info->points ." points"."<br />".
+        			"Punch Cards: ". "<br />".
+                    "<div class='sp_punch_card_display'>".
+                        sp_print_punches($sp_wallet_info) .
+                    "</div>".
+        			"Coupons"."<br />".
+        			"Supportland Card";
+        $spBusiness = "Business section.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quam ante, mattis interdum semper non, bibendum quis metus. Vestibulum sem risus, eleifend ac adipiscing nec, hendrerit a sem. Curabitur nec augue id lectus feugiat posuere. Phasellus in magna ante, non sagittis ligula.";
+        $spSearch = "Search content goes here.  There will be fields for querying the Supportland search API.";
+    ?>
+
+    <!-- // Mixed of HTML and PHP -->
+	<!-- // Define a box to contain main menu // -->
+	<div style="margin:10 auto; width:200px;font-weight:normal;color:black;
+         border:1px solid black;border-radius:10px;-moz-border-radius: 10px;
+         webkit-border-radius:10px;">
+         
+    <!-- // Define top Home-Logout // -->
+    	<div id='top' style='margin:10px' >
+    		<? echo "<a href='" . home_url() . "'
+     			class='a_home' style='cursor:pointer;font-size:14px;font-weight:bold'> Supportland</a>"; ?>
+     		<? echo "<a href='" . SP_PLUGIN_URL . "sp_logout.php?sp_loc=Location: " . home_url() . "' 
+     			class='a_logout' style='cursor:pointer;font-size:14px;font-weight:bold; float:right'> Logout </a><br />"; ?>
+     	</div>
+     	<hr width = 100% >
+	<!-- // End of define top Home-Logout // -->
+    
+    <!-- Define Card Info -->
+    	<div id="spMenuLink1" class="spMenuLink">
+        	<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus1"></span></span>
+        	<a>Card</a>
+    	</div>
+    	<div class="sp_Result" id="spResult1">
+    		<? echo $spCard; ?> <br />
+    	</div>
+    <!--//------ End of Card -------//-->
+
+    <!--// ----- Define Wallet -----//-->
+    	<div id="spMenuLink2" class="spMenuLink">
+        	<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus2"></span></span>
+        	<a>Wallet</a>
+    	</div>
+    	<div class="sp_Result" id="spResult2">
+    	<? echo $spWallet; ?>
+    	</div>
+
+    <!--// ------ End of Wallet -----//-->
+
+    <!--// ------ Define Business ----//-->
+    	<div id="spMenuLink3" class="spMenuLink">
+      	  	<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus3"></span></span>
+    		<a>Business</a>
+    	</div>
+   		 <div class="sp_Result" id="spResult3">
+   		 	<? echo $spBusiness; ?>
+   		 </div>
+
+    <!--// ------ End of Business ------//-->
+    	<div id="spMenuLink4" class="spMenuLink">
+        	<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus4"></span></span>
+    	<a>Search</a>
+    	</div>
+        <span class="sp_empty_punch"></span>	
+    	<div class="sp_Result" id="spResult4">
+    		<? echo $spSearch; ?>
+   		</div>
+
+    <!--// ------ End of Business ------//-->
+	</div>
+    <?	//jQuery animations for the four sections
+    for($i=1;$i<=4;$i++) { ?>
+        <script>
+        $('#spMenuLink<? echo $i; ?>').click(function() {
+            $('#spResult<? echo $i; ?>').slideToggle('fast', function() {
+        // Animation complete.
+            $('#spPlus<? echo $i; ?>').toggle();
+            });
+        });
+        </script>  <?
+    }
+}
+
+	function sp_get_wallet_item() {
+		$sp_user = new SP_User();
+		$sp_trans = new SP_Transaction($sp_user);
+		
+		try {
+			$wallet = $sp_trans->get_wallet();
+			$wallet = json_decode($wallet);
+			return $wallet;
+		}
+		catch (Exception $e) {
+			echo "Exception: " . $e->get_message();
+			sp_login.php();
+			return;
+		}
+	}
+	
+	function sp_user_info() {
+	
+		$sp_user = new SP_User();
+		$sp_trans = new SP_Transaction($sp_user);
+		try {
+			$user_info = $sp_trans->get_user_info();
+        	return $user_info;
+		}
+		catch (Exception $e) {
+			echo "Exception: " . $e->get_message();
+			sp_login.php();
+			return;
+		}
+		
+	}
+    
+    function sp_print_punches($sp_wallet_info) {
+        
+        $sp_punch_card_punches = "";
+        $sp_total_punches = 5;
+        $sp_acquired_punches = intval($sp_wallet_info->wallet->punch[0]->status);
+        for($i=0; $i<count($sp_wallet_info->wallet->punch); $i++) {
+            $sp_punch_card_punches .=  "<span style='font-size:10px'>"."<span style='margin-bottom:2px'>". 
+                                       $sp_wallet_info->wallet->punch[$i]->title.
+                                       "</span>"; 
+            for($j=0; $j<$sp_total_punches;$j++) {
+                if($j < $sp_acquired_punches)
+                    $sp_punch_card_punches .=   "<img alt='".
+                                                $sp_wallet_info->wallet->punch[i]->Title.
+                                                "' src='wp-content/plugins/supportland/images/punched_punch.png' />";
+                else {
+                    $sp_punch_card_punches .= "<img alt='".
+                                               $sp_wallet_info->wallet->punch[i]->Title."
+                                               ' src='wp-content/plugins/supportland/images/empty_punch.png' />";
+                }
+            }
+            $sp_punch_card_punches .= "</span>";
+        }
+        return $sp_punch_card_punches;
+    }
+    
+?>
