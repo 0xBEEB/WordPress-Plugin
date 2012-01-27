@@ -103,6 +103,8 @@ License: GPLv2 or later
     add_action('wp_enqueue_scripts', 'sp_widget_css_init');
     
     add_action('plugins_loaded','init_supportland');        
+
+    add_shortcode('sp_mini', 'sp_print_mini_widget');
     
     
     
