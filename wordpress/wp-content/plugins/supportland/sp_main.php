@@ -62,6 +62,42 @@ License: GPLv2 or later
     function init_supportland(){
         register_sidebar_widget('SupportlandWallet','display_widget');
     }
+
+    function sp_print_mini_widget() {
+        $sp_user = new SP_User();
+        $sp_trans = new SP_Transaction($sp_user);
+        try {
+            $wallet = $sp_trans->get_wallet();
+            $wallet = json_decode($wallet);
+        }
+        catch(Exception $e) {
+            echo "Exception!!! " . $e->get_message(); 
+            sp_print_login_form();
+            return;
+        }
+    }
+    
+    // initialize the widget
+    function sp_widget_init()
+    {
+        register_widget('SP_Widget');
+    }
+    add_action('widgets_init', 'sp_widget_init');
+            
+    // include JavaScript files
+    function sp_widget_js_init()
+    {
+        wp_enqueue_script("jquery-1.7.1", "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js");
+        wp_enqueue_script("supportland-widget", SP_PLUGIN_URL . "/js/sp.js");
+    }
+    add_action('wp_enqueue_scripts', 'sp_widget_js_init');
+
+    // include css files
+    function sp_widget_css_init()
+    {
+        wp_enqueue_style("supportland-widget", SP_PLUGIN_URL . "/css/style.css");
+    }
+    add_action('wp_enqueue_scripts', 'sp_widget_css_init');
     
     add_action('plugins_loaded','init_supportland');        
     
