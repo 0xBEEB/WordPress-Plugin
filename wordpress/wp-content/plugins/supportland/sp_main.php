@@ -63,16 +63,26 @@ License: GPLv2 or later
         register_sidebar_widget('SupportlandWallet','display_widget');
     }
 
+    // [sp_mini]
     function sp_print_mini_widget() {
         $sp_user = new SP_User();
         $sp_trans = new SP_Transaction($sp_user);
+        $rval = "";
         try {
             $wallet = $sp_trans->get_wallet();
             $wallet = json_decode($wallet);
+            $rval .= '<span style="margin:15 auto; width:200px;font-weight:bold;
+                              color:black;border:1px solid black;
+                              border-radius:10px;-moz-border-radius: 10px;
+                              webkit-border-radius:10px;">';
+            $rval .= $wallet->public_name . ", you have " . $wallet->points . " points <br>";
+            $rval .= "</span>";
+            return $rval;
+
         }
         catch(Exception $e) {
-            echo "Exception!!! " . $e->get_message(); 
-            sp_print_login_form();
+            //echo "Exception!!! " . $e->get_message(); 
+            //sp_print_login_form();
             return;
         }
     }
