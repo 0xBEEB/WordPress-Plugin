@@ -14,9 +14,9 @@ class SP_User_Test extends PHPUnit_TestCase
                 array('teamdoughnut2740','beachc@gmail.com','hellocaseybeach'));
     }
     
-    public static function access_token_provider() {
-        return array( 
-                    array('811b031a8591f45b45d79077df28a6e0abb97804', True));
+    public static function bad_credential_provider() {
+        return array(
+                array('teamdoughnutBAD','bad email','bad password'));
     }
     
     function SP_User_Test($name) {
@@ -40,7 +40,7 @@ class SP_User_Test extends PHPUnit_TestCase
     
         $result = $this->handle->authenticate($user_email, $user_password);
         $this->assertTrue($result);
-        $this->access_token = $this->handle->access_token
+        $this->access_token = $this->handle->access_token;
     }
     
     /*************
@@ -76,6 +76,20 @@ class SP_User_Test extends PHPUnit_TestCase
     function test_logout() {
         $this->handle->logout();
         $this->assertFalse($this->handle->logged_in());
+    }
+    
+    function test_logged_in_false() {
+     $this->assertFalse($this->handle->logged_in());
+    }
+    
+    /*************
+    *
+    * @dataProvider bad_credential_provider
+    * @expectedException Exception
+    *
+    *************/
+    function test_authenticate_bad_credentials($app_token, $user_email, $user_password) {
+        $result = $this->handle->authenticate($user_email, $user_password);
     }
     
     /*************
