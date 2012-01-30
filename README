@@ -16,10 +16,15 @@ Developers:
 --------------------------------------------------------------------------------
 Release Notes:
 
-lochlan-dev
-
 Version 0.1 12/12/2011
 First working version, supportland.php.  Grabs my own personal card info from
 the API as XML, parses it, and outputs it.  Also uses a teensy bit of jQuery
 which was just for the presentation.  Note that hooking into wp_head like this
 does is not a good idea, we should use shortcode.
+
+Version 0.2 01/27/2012
+Centeral library for handling API. User authentication and session handling.
+"Mini-widget" with short code that can be dropped into posts and comments.
+Initial iteration of main widget. Main widget now has user info and wallet
+views. Plugin settings page for storing app_token. All hard coded tokens
+have been removed from code base. Unit tests.
