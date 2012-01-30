@@ -31,14 +31,51 @@ class SP_User_Test extends PHPUnit_TestCase
         unset($this->handle);
     }
 
+    /*************
+    *
+    * @dataProvider credential_provider
+    *
+    *************/
+    function test_authenticate($app_token, $user_email, $user_password) {
+    
+        $result = $this->handle->authenticate($user_email, $user_password);
+        $this->assertTrue($result);
+        $this->access_token = $this->handle->access_token
+    }
+    
+    /*************
+    *
+    * @depends test_authenticate
+    *
+    *************/
     function test_set_access_token($access_token) {
         $this->handle->set_access_token($access_token);
         $this->assertTrue($this->handle->access_token == $access_token);
     }
 
+    /*************
+    *
+    * @depends test_authenticate
+    *
+    *************/
     function test_get_access_token() {
         $result = $this->handle->get_access_token();
         $this->assertTrue($result == $access_token);
+    }
+ 
+    /*************
+    *
+    * @depends test_authenticate
+    *
+    *************/
+    function test_logged_in_true()
+    {
+        $this->assertTrue($this->handle->logged_in());
+    }
+ 
+    function test_logout() {
+        $this->handle->logout();
+        $this->assertFalse($this->handle->logged_in());
     }
     
     /*************
@@ -63,13 +100,6 @@ class SP_User_Test extends PHPUnit_TestCase
         }
 
     }
-   
-    /*************
-    *
-    * @dataProvider access_token_provider
-    *
-    *************/
-    function test_user_token($token) {
-    }
+
 }
 ?>
