@@ -35,10 +35,6 @@ License: GPLv2 or later
 	
     
     
-    function jQueryLoad() {
-    	echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>';
-    }
-    
     //Output Google-hosted jQuery and some CSS (used with jQuery) into the <head> tag
     
     
@@ -52,10 +48,6 @@ License: GPLv2 or later
             sp_login_page();
         }
     }
-    
-    // ----- Loading jQuery first -------- //
-    //jQueryLoad();
-    sp_headerStuff();
     
     
     // Shortcode //
