@@ -1,8 +1,5 @@
 <?php
-	
-	require 'sp_signup_form.php';
-	
-	echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>";
+    require 'sp_signup_form.php';
     function sp_login_page() { 
         
         print  '<div style="margin:10px; width:210px;font-weight:normal;color:black; 

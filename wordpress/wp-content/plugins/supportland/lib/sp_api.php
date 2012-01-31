@@ -46,20 +46,35 @@ class SP_Transaction
 
     /*! @function get_business($bid)
         @abstract Query Supportland for information about a given business
-        @author Thomas Schreiber <ubiquill@gmail.com>
+        @author Lochlan McIntosh <info@lochlanmcintosh.com>
+                Thomas Schreiber <ubiquill@gmail.com>
         @param bid int - The identifcation number for a business
-        @result Object - A bussiness object containing info or an exception
-            if the user is not logged in.
+        @result Object - A business object containing info -or- an exception if:
+                1) The user is not logged in
+                2) The JSON has a problem (json_decode returns false or NULL if
+                    there's an issue decoding)
+                3) The API returned an error (e.g. the App Token is bad)
      */
     public function get_business($bid) {
-        if ($this->sp_user->logged_in()) {
-          $url = sp_get_uri() . "business/" . $bid . ".json?access_token=" . $this->sp_user->access_token;
+        //generic error
+        $error = 'Sorry, there seems to be a problem.  Please try again later or contact an administrator.';
 
-          return json_decode(sp_fetch($url));
+        if ($this->sp_user->logged_in()) {
+            $url = sp_get_uri() . "business/" . $bid . ".json?access_token=" . $this->sp_user->get_access_token();
+            $buffer = sp_fetch($url);       //Get data from API
+            $json = json_decode($buffer);   //Decode JSON
+            if($json) {                     //Something came back from the API
+                if($json->error->message) { //API outputs error, throw it
+                    throw new Exception($json->error->message);
+                } else {                    //If we got here, everything's ok
+                    return $json;
+                }
+            } else {                        //nothing came back from the API
+                throw new Exception ($error);
+            }
         } else {
             throw new Exception('Not logged in');
         }
-
     }
 
     /*! @function get_wallet
@@ -79,13 +94,31 @@ class SP_Transaction
 
     /*! @function get_user_info
         @abstract returns info about the current user
-        @author Thomas Schreiber <ubiquill@gmail.com>
-        @result Object - A user object
+        @author Lochlan McIntosh <info@lochlanmcintosh.com>
+                Thomas Schreiber <ubiquill@gmail.com>
+        @result Object - A user object containing info -or- an exception if:
+                1) The user is not logged in
+                2) The JSON has a problem (json_decode returns false or NULL if
+                    there's an issue decoding)
+                3) The API returned an error (e.g. the Access Token is bad)
      */
     public function get_user_info() {
+        //generic error
+        $error = 'Sorry, there seems to be a problem.  Please try again later or contact an administrator.';
+        
         if($this->sp_user->logged_in()) {
             $url = sp_get_uri() . "user.json?access_token=" . $this->sp_user->get_access_token();
-            return json_decode(sp_fetch($url));
+            $buffer = sp_fetch($url);       //Get data from API
+            $json = json_decode($buffer);   //Decode JSON
+            if($json) {                     //Something came back from the API
+                if($json->error->message) { //API outputs error, throw it
+                    throw new Exception($json->error->message);
+                } else {                    //If we got here, everything's ok
+                    return $json;
+                }
+            } else {                        //nothing came back from the API
+                throw new Exception ($error);
+            }
         } else {
             throw new Exception('Not logged in');
         }
@@ -138,7 +171,6 @@ class SP_User
         }else {
             throw new Exception($result->error->message);
         }
-
     }
 
     /*! @function get_access_token
