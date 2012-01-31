@@ -82,7 +82,7 @@ License: GPLv2 or later
     // include JavaScript files
     function sp_widget_js_init()
     {
-        wp_enqueue_script("jquery-1.7.1", "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js");
+        sp_headerStuff();
         wp_enqueue_script("supportland-widget", SP_PLUGIN_URL . "/js/sp.js");
     }
     add_action('wp_enqueue_scripts', 'sp_widget_js_init');
