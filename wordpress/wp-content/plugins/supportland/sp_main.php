@@ -41,7 +41,7 @@ License: GPLv2 or later
     function display_widget() {
         $sp_user = new SP_User();
         if(sp_get_app_token() == NULL) {
-            echo "Please set an app token under Settings : Supportland Widget";
+            echo "App Token Not Set: Please contact the site administrator";
         }
         else if($sp_user->logged_in() == true) {
             //sp_wallet_page();
@@ -83,22 +83,30 @@ License: GPLv2 or later
     }
     
     // include JavaScript files
-    function sp_widget_js_init()
-    {
+    function sp_widget_js_init()  {
         sp_headerStuff();
         wp_enqueue_script("supportland-widget", SP_PLUGIN_URL . "/js/sp.js");
     }
     add_action('wp_enqueue_scripts', 'sp_widget_js_init');
 
     // include css files
-    function sp_widget_css_init()
-    {
+    function sp_widget_css_init() {
         wp_enqueue_style("supportland-widget", SP_PLUGIN_URL . "/css/style.css");
+    }
+    
+    function sp_error_header() {
+        echo "<div> Stuff in the header yeah </div>";
+        $login_error = $_GET['sp_bad_auth'];
+        if(isset($login_error)) {
+            echo "<div style='color:#FF9999' alight='center'>" . $login_error . " </div> ";
+        }
     }
     add_action('wp_enqueue_scripts', 'sp_widget_css_init');
     
     add_action('plugins_loaded','init_supportland');        
 
+    add_action('wp_head', 'sp_error_header');
+    
     add_shortcode('sp_mini', 'sp_print_mini_widget');
     
     
