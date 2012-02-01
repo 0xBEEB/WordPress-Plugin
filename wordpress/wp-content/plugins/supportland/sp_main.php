@@ -41,7 +41,7 @@ License: GPLv2 or later
     function display_widget() {
         $sp_user = new SP_User();
         if(sp_get_app_token() == NULL) {
-            echo "App Token Not Set: Please contact the site administrator";
+            echo "<div style='color:red'> Supportland app token not set. <br> <br> Please contact the site administrator </div>";
         }
         else if($sp_user->logged_in() == true) {
             //sp_wallet_page();
@@ -95,10 +95,9 @@ License: GPLv2 or later
     }
     
     function sp_error_header() {
-        echo "<div> Stuff in the header yeah </div>";
         $login_error = $_GET['sp_bad_auth'];
         if(isset($login_error)) {
-            echo "<div style='color:#FF9999' alight='center'>" . $login_error . " </div> ";
+            echo "<div style='background-color:#FF9999' align='center'>" . $login_error . " </div> ";
         }
     }
     add_action('wp_enqueue_scripts', 'sp_widget_css_init');
