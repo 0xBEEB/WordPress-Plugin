@@ -18,7 +18,7 @@
         header($sp_loc);
     }catch(Exception $e)
     {
-        $sp_loc = $sp_loc . "?sp_bad_auth=1";
+        $sp_loc = $sp_loc . "?sp_bad_auth=" . $->getMessage();
         echo 'Caught exception: ' , $e->getMessage();
         header($sp_loc);
     }

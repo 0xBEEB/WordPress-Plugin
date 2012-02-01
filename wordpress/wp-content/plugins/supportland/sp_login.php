@@ -69,8 +69,10 @@
     
     
     function sp_login_form() {
-    	if (isset($_GET['sp_bad_auth']) && $_GET['sp_bad_auth'] == 1)
-        		echo "<p> <font color=red>Bad email or password</font></p>";
+        $auth_error = $_GET['sp_bad_auth'];
+    	if (isset($auth_error)) {
+        		echo "<p> <font color=red>" . $auth_error . "</font></p>";
+            }
        		 echo    "<form action='wp-content/plugins/supportland/lib/sp_user_auth.php'>";
        		 echo        "<input type='hidden' name='sp_loc' value='Location: " . home_url() . "'>";
         	 echo        "<label style='margin:5px' for='login_email'>Email</label></br>";

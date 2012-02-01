@@ -40,7 +40,10 @@ License: GPLv2 or later
     
     function display_widget() {
         $sp_user = new SP_User();
-        if($sp_user->logged_in() == true) {
+        if(sp_get_app_token() == NULL) {
+            echo "Please set an app token under Settings : Supportland Widget";
+        }
+        else if($sp_user->logged_in() == true) {
             //sp_wallet_page();
             sp_mainMenu();
         }
