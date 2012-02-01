@@ -11,9 +11,12 @@
 // Values that should not be changing
 define("SP_API_BASE_URI", "https://api.supportland.com/");
 define("SP_API_VERSION", "1.0");
-define("SP_APP_TOKEN", "teamdoughnut2740");
 define("COOKIEPATH", "/");
 
+// This will need to be changed if you have a non-standard
+// plugin directory
+require_once(dirname(__FILE__) . '/../../../../wp-load.php');
+require_once(dirname(__FILE__) . '/../supportland-settings.php');
 
 /*! @class SP_Transaction
  *
@@ -74,6 +77,20 @@ class SP_Transaction
         }
     }
 
+    /*! @function get_user_info
+        @abstract returns info about the current user
+        @author Thomas Schreiber <ubiquill@gmail.com>
+        @result Object - A user object
+     */
+    public function get_user_info() {
+        if($this->sp_user->logged_in()) {
+            $url = sp_get_uri() . "user.json?access_token=" . $this->sp_user->get_access_token();
+            return json_decode(sp_fetch($url));
+        } else {
+            throw new Exception('Not logged in');
+        }
+    }
+
 }
 
 /*! @class SP_User
@@ -86,7 +103,8 @@ class SP_User
 {
     // Access token used by Supportland API
     var $access_token;
-
+    var $user_info;
+    
     /*! @function logged_in
         @author Thomas Schreiber <ubiquill@gmail.com>
         @abstract Checks if a user is logged in
@@ -111,14 +129,14 @@ class SP_User
             is trown.
      */
     public function authenticate($email, $password) {
-        $url = sp_get_uri() . "user.json?app_token=" . SP_APP_TOKEN . "&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
-        $result = json_decode(file_get_contents($url));
+        $url = sp_get_uri() . "user.json?app_token=" . sp_get_app_token() . "&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
+        $result = json_decode(sp_fetch($url));
         if (isset($result->access_token)) {
             $this->set_access_token($result->access_token);
             sp_set_cookie($result->access_token);
             return true;
         }else {
-            throw new Exception($result->error['message']);
+            throw new Exception($result->error->message);
         }
 
     }
@@ -167,8 +185,16 @@ class SP_User
         sp_unset_cookie();
         $this->reset_access_token();
     }
-
-
+    
+    /*! @function fetch_user_info
+        @author David Liang <davidliang2008@hotmail.com>
+        @abstract get user information and store it as json to user_info variable in user object
+        @result 
+     */
+    public function fetch_user_info() {
+        $url = sp_get_uri() . "user.json?access_token=" . $this->access_token;
+        $this->user_info = sp_fetch($url);
+    }
 }
 
 /*! @function sp_get_uri
@@ -222,7 +248,7 @@ function sp_set_cookie($token) {
     // in order for this to work you must add
     // add_action('init', 'sp_set_cookie')
     // to your widget
-    setcookie("sp_access_token", $token, $length_of_time, COOKIEPATH);
+    setcookie("sp_access_token", $token, $length_of_time, COOKIEPATH, COOKIE_DOMAIN);
 }
 
 /*! @function sp_unset_cookie
@@ -235,7 +261,7 @@ function sp_unset_cookie() {
     // in order for this to work you must add
     // add_action('init', 'sp_unset_cookie')
     // to your widget
-    setcookie("sp_access_token", "", time()-3600, COOKIEPATH);
+    setcookie("sp_access_token", "", time()-3600, COOKIEPATH, COOKIE_DOMAIN);
 }
 
 /*! @function sp_good_token
@@ -251,4 +277,15 @@ function sp_good_token($sp_token) {
         return true;
     else
         return false;
+}
+
+/*! @function sp_get_app_token
+ * @author Thomas Schreiber <ubiquill@gmail.com>
+ * @abstract Returns the app token set in the plugin settings
+ * @result string - the app's token
+ */
+function sp_get_app_token() {
+    $plugin_options = get_option('plugin_options');
+    $sp_app_token = $plugin_options['app_token_text_string'];
+    return $sp_app_token;
 }
