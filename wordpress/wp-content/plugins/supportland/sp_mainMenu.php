@@ -1,6 +1,4 @@
 <?php
-    $sp_empty_punch = "wp-content/plugins/supportland_v3/images/empty_punch.png";
-    $punched_punch = "http://capstoneaa.cs.pdx.edu/mcsmash/wordpress/wp-content/plugins/supportland_v3/images/punched_punch.png";
 	require_once 'sp_login.php';
     define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
    
@@ -12,21 +10,18 @@
         .spMenuLink:hover{background-color:#eee;}
 		#spResult1,#spResult2,#spResult3,#spResult4{display:none;}
 		.sp_plusMinusCircle{bottom:-3px;background-color:#a21;height:16px;width:16px;border-radius: 8px;-moz-border-radius:8px;position:relative;display:inline-block;}
-		.sp_empty_punch{bottom:-3px;background:url(" . $sp_empty_punch . ";height:16px;width:16px;border-radius: 8px;-moz-border-radius:8px;position:relative;display:inline-block;}
-        #sp_punch_card_title{font-size=12px;}
-        .sp_punched_punch{display:inline-block;background:url(". $punched_punch . ") top left no-repeat;height:16px;width:16px;}
         .sp_plusMinusHBar{background-color:#fff;height:2px;width:8px;position:absolute;top:7px;left:4px;}
         .sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
         .sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
         .sp_punch_card_display{margin-left:11px;padding-left:11px;}
         </style>";
-
     }
     
     function sp_mainMenu() {
         //Get App Token
         $plugin_options = get_option('plugin_options');
         $app_token = $plugin_options['app_token_text_string'];
+        $sp_wallet_test = sp_wallet_item();
        	$sp_user_info= sp_user_info();
        	$member_since = date('D m/d/Y',strtotime($sp_user_info->member_since));
         
@@ -36,15 +31,14 @@
         			"Member since: "."$member_since"."<br />".
         			"Points: $sp_user_info->points";
         //Casey: store all the wallet stuff in a string called $spWallet and delete the following line
-        $sp_wallet_info = sp_get_wallet_item();
+        $sp_wallet_info = sp_wallet_item();
         $spWallet = "Rewards: ". $sp_wallet_info->rewards ."<br />".
         			"Points Earned: ". $sp_wallet_info->points ." points"."<br />".
         			"Punch Cards: ". "<br />".
                     "<div class='sp_punch_card_display'>".
-                        sp_print_punches($sp_wallet_info) .
+                    sp_print_punches($sp_wallet_info) .
                     "</div>".
         			"Coupons"."<br />".
-        			"Supportland Card";
         $spBusiness = "Business section.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quam ante, mattis interdum semper non, bibendum quis metus. Vestibulum sem risus, eleifend ac adipiscing nec, hendrerit a sem. Curabitur nec augue id lectus feugiat posuere. Phasellus in magna ante, non sagittis ligula.";
         $spSearch = "Search content goes here.  There will be fields for querying the Supportland search API.";
     ?>
@@ -59,7 +53,7 @@
     	<div id='top' style='margin:10px' >
     		<? echo "<a href='" . home_url() . "'
      			class='a_home' style='cursor:pointer;font-size:14px;font-weight:bold'> Supportland</a>"; ?>
-     		<? echo "<a href='" . SP_PLUGIN_URL . "sp_logout.php?sp_loc=Location: " . home_url() . "' 
+     		<? echo "<a href='" . SP_PLUGIN_URL . "lib/sp_logout.php?sp_loc=Location: " . home_url() . "' 
      			class='a_logout' style='cursor:pointer;font-size:14px;font-weight:bold; float:right'> Logout </a><br />"; ?>
      	</div>
      	<hr width = 100% >
@@ -100,7 +94,6 @@
         	<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus4"></span></span>
     	<a>Search</a>
     	</div>
-        <span class="sp_empty_punch"></span>	
     	<div class="sp_Result" id="spResult4">
     		<? echo $spSearch; ?>
    		</div>
@@ -120,7 +113,7 @@
     }
 }
 
-	function sp_get_wallet_item() {
+	function sp_wallet_item() {
 		$sp_user = new SP_User();
 		$sp_trans = new SP_Transaction($sp_user);
 		
@@ -151,16 +144,15 @@
 		}
 		
 	}
-    
     function sp_print_punches($sp_wallet_info) {
         
         $sp_punch_card_punches = "";
         $sp_total_punches = 5;
         $sp_acquired_punches = intval($sp_wallet_info->wallet->punch[0]->status);
         for($i=0; $i<count($sp_wallet_info->wallet->punch); $i++) {
-            $sp_punch_card_punches .=  "<span style='font-size:10px'>"."<span style='margin-bottom:2px'>". 
+            $sp_punch_card_punches .=  "<span style='font-size:10px'>".
                                        $sp_wallet_info->wallet->punch[$i]->title.
-                                       "</span>"; 
+                                       "</span ><br/>"; 
             for($j=0; $j<$sp_total_punches;$j++) {
                 if($j < $sp_acquired_punches)
                     $sp_punch_card_punches .=   "<img alt='".

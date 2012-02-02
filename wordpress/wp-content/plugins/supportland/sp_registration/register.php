@@ -1,11 +1,10 @@
 <?php
 //Should get the app token from somewhere
-$plugin_options = get_option('plugin_options');
-$app_token = $plugin_options['app_token_text_string'];
+$apptoken = "teamdoughnut2740";
 
 //Check to see if all data fields have user input -- this is the one type of
 //error checking we have to do, other errors come from the API.
-if( empty($_POST["firstname"]) || empty($_POST["lastname"]) || empty($_POST["email"])
+if( empty($_POST["fname"]) || empty($_POST["lname"]) || empty($_POST["email"])
         || empty($_POST["password"]) || empty($_POST["password2"]) ) {
     echo "Please enter data in all fields.";
     exit;

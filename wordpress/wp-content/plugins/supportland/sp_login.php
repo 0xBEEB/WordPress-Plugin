@@ -22,14 +22,13 @@
         	 	echo "<div class='hide_login_form' style='display:none;font-size:12;font-weight:normal'>"; 
         	 		sp_login_form();
         	 	echo "</div>";
-       		 
        		 echo "<div style='margin:5px' id='forgot_pass'> <a> Forgot your password?</a> </div>";
        		 
        		 echo "<a class='sp_signup' style='margin:5px;cursor:pointer;font-size:12px;font-weight:bold'> Sign up!</a> <br />";
-        	 	//echo "<div class='sp_signup_form' style='display:none;font-size:12;font-weight:normal'>"; 
-        	 	echo "<p class='sp_signup_form'>";
-        	 		//sp_signup_form();
-       		 	echo "</p>";
+        	 	echo "<div class='sp_signup_form' style='display:none;font-size:12;font-weight:normal'>"; 
+        	 	//echo "<p class='sp_signup_form'>";
+        	 		sp_signup_form();
+       		 	echo "</div>";
        		 // ---------- Disable the jQuery popup form -----------// 
        		 //echo "<div style='margin:5px' class='d_signup'> <a> Sign up! </a> </div>";
         echo "</div>";
@@ -45,12 +44,6 @@
         */
         // ---------- End of jQuery popup form -------------//
         
-    	/*echo "<script type='text/JavaScript'>  
-            	$('a.sp_signup').click(function(){		
-					$('.sp_signup_form').toggle('fast',function() {})
-        		});
-        </script>";
-       */
         
         echo "<script type='text/JavaScript'>  
             	$('a.login').click(function(){		
@@ -76,9 +69,9 @@
        		 echo    "<form action='wp-content/plugins/supportland/lib/sp_user_auth.php'>";
        		 echo        "<input type='hidden' name='sp_loc' value='Location: " . home_url() . "'>";
         	 echo        "<label style='margin:5px' for='login_email'>Email</label></br>";
-        	 echo        "<input style='margin:5px' type='text' name='login_email' id='login_email'/>";
+        	 echo        "<input style='margin:5px' type='text' name='sp_login_email' id='login_email'/>";
        		 echo        "<label  style='margin:5px' for='login_password'>Password</label> </br>";
-        	 echo        "<input style='margin:5px' type='password' name='login_password' id='login_password'/> </br>";
+        	 echo        "<input style='margin:5px' type='password' name='sp_login_password' id='login_password'/> </br>";
        		 echo 		"<p style= 'margin:5px' align='right'> <input name='login' type='submit' value='Log in' > </p>";
        		 echo    "</form>";
     }
@@ -89,12 +82,4 @@
         echo "<p style='margin:5px' align='right'> <input name='sp_search_submit' type='submit' value='Search' > </p>";
     }
     
-    
-    function sp_login_jquery() {
-    	echo "<script type='text/JavaScript'>  
-            	$('a.login').click(function(){		
-					$('.hide_login_form').toggle(300,function() {})
-        		});	
-        </script>";
-    }
 ?>
