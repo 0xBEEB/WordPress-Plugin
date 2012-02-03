@@ -2,7 +2,6 @@
 	
 	require 'sp_signup_form.php';
 	
-	echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>";
     function sp_login_page() { 
         
         print  '<div style="margin:10px; width:210px;font-weight:normal;color:black; 
@@ -18,7 +17,7 @@
         	 sp_search_local_store();
         	 // ----------------------------------------------------//
         	 
-        	 echo    "<div class='login_error' style='color:red;'>".
+        	 echo    "<div class='login_error' style='color:white;background-color:red;text-align:center;margin-left:5px;margin-right:5px;border-style:solid;border-width:1px;border-color:black;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;'>".
                         "<p></p>".
                      "</div>";
         	 echo "<a class='login' style='margin:5px;cursor:pointer;font-size:12px;font-weight:bold'> Login </a> <br />";

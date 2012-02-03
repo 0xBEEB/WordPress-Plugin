@@ -14,7 +14,7 @@
         $user->authenticate($sp_login_email, $sp_login_password);
         $user->fetch_user_info();
         //echo $user->user_info;
-        exit(json_encode(array("Yes")));
+        exit("Yes");
     }catch(Exception $e)
     {
         die('User name or password incorrect!');
