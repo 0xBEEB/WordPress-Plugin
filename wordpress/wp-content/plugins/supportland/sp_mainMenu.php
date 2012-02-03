@@ -5,6 +5,7 @@
     //Goes into <head> tag
     function sp_headerStuff() { ?>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script src="<?php bloginfo('stylesheet_directory'); ?>/fancybox/"></script>
         <style type="text/css">
             .spMenuLink{padding:2px 3px 3px 3px;cursor:pointer;line-height:1.5em;}
             .spMenuLink:hover{background-color:#eee;}

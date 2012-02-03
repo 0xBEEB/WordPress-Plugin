@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
  * Supportland WordPress Widget
- * supportland/supportland.php
+ * supportland/sp_main.php
  * Copyright (c) 2012 Do(ugh)nut Team
  * Developed for Supportland - http://www.supportland.com/
  *
