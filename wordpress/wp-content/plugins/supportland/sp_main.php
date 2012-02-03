@@ -35,9 +35,6 @@ License: GPLv2 or later
 	
     
     
-    function jQueryLoad() {
-    	echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>';
-    }
     
     //Output Google-hosted jQuery and some CSS (used with jQuery) into the <head> tag
     
@@ -55,7 +52,7 @@ License: GPLv2 or later
     
     // ----- Loading jQuery first -------- //
     //jQueryLoad();
-    sp_headerStuff();
+   // sp_headerStuff();
     
     
     // Shortcode //
@@ -90,8 +87,9 @@ License: GPLv2 or later
     // include JavaScript files
     function sp_widget_js_init()
     {
-        wp_enqueue_script("jquery-1.7.1", "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js");
+        //wp_enqueue_script("jquery-1.7.1", "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js");
         wp_enqueue_script("supportland-widget", SP_PLUGIN_URL . "/js/sp.js");
+       sp_headerStuff();
     }
     add_action('wp_enqueue_scripts', 'sp_widget_js_init');
 
