@@ -94,18 +94,10 @@ License: GPLv2 or later
         wp_enqueue_style("supportland-widget", SP_PLUGIN_URL . "/css/style.css");
     }
     
-    function sp_error_header() {
-        $login_error = $_GET['sp_bad_auth'];
-        if(isset($login_error)) {
-            echo "<div style='background-color:#FF9999' align='center'>" . $login_error . " </div> ";
-        }
-    }
     add_action('wp_enqueue_scripts', 'sp_widget_css_init');
     
     add_action('plugins_loaded','init_supportland');        
 
-    add_action('wp_head', 'sp_error_header');
-    
     add_shortcode('sp_mini', 'sp_print_mini_widget');
     
     

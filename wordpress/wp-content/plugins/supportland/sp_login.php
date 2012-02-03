@@ -17,9 +17,11 @@
         	 sp_search_local_store();
         	 // ----------------------------------------------------//
         	 
+             //----------- Casey's dark magic ajax login checker----//
         	 echo    "<div class='login_error' style='color:white;background-color:red;text-align:center;margin-left:5px;margin-right:5px;border-style:solid;border-width:1px;border-color:black;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;'>".
                         "<p></p>".
                      "</div>";
+             //-----------------------------------------------------//
         	 echo "<a class='login' style='margin:5px;cursor:pointer;font-size:12px;font-weight:bold'> Login </a> <br />";
         	 	echo "<div class='hide_login_form' style='display:none;font-size:12;font-weight:normal'>"; 
         	 		sp_login_form();
@@ -45,7 +47,7 @@
         </script>";
         */
         // ---------- End of jQuery popup form -------------//
-        
+        // ---------- Dark Ajax Magic ----------------------//
         ?>
         <script type='text/JavaScript'>
                 $('document').ready(function(){
@@ -74,7 +76,7 @@
         
         </script>";
         <?php     
-        
+        //-------------------------------------------------//
        
       /* echo "<script type='text/JavaScript'>  
             	$('a.sp_signup').click(function(){		
