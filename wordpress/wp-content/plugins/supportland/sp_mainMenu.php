@@ -5,7 +5,8 @@
     //Goes into <head> tag
     function sp_headerStuff() { ?>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-        <script src="<?php bloginfo('stylesheet_directory'); ?>/fancybox/"></script>
+        <script src="<?php echo plugins_url(); ?>/supportland/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+        <link rel="stylesheet" href="<?php echo plugins_url(); ?>/supportland/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
         <style type="text/css">
             .spMenuLink{padding:2px 3px 3px 3px;cursor:pointer;line-height:1.5em;}
             .spMenuLink:hover{background-color:#eee;}
@@ -71,7 +72,23 @@
             <a>Search</a>
     	</div>
         <div class="sp_Result" id="spResult3">
-            <?= $spSearch ?>
+            
+            
+            
+            <a id="inline" href="#data">Display the search data</a>
+            <div style="display:none"><div id="data"><?= $spSearch ?></div></div>
+            
+            <script>
+                $(document).ready(function() {
+                    $("a#inline").fancybox({
+                        'hideOnOverlayClick': false,
+                        'hideOnContentClick': false,
+                        'enableEscapeButton': false,
+                        'showCloseButton': true
+                    });
+                });
+            </script>
+
         </div>
     </div>
 

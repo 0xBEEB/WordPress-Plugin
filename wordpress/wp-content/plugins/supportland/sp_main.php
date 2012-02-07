@@ -32,10 +32,6 @@ License: GPLv2 or later
     require_once 'supportland-settings.php';
     require_once 'sp_login.php';
     require_once 'sp_mainMenu.php';
-
-    function jQueryLoad() {
-    	echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>';
-    }
     
     //Output Google-hosted jQuery and some CSS (used with jQuery) into the <head> tag
     
