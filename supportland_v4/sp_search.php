@@ -11,10 +11,10 @@ function sp_search() {
 			top:0px;
 			left:0px;
 			width:100%;
-			height:100%;
+			height:150%;
 			background:#000;
-			opacity: .0;
-			filter:alpha(opacity=0);
+			opacity: .75;
+			filter:alpha(opacity=75%);
 			z-index:50;
 			display:none;
 			position:absolute;

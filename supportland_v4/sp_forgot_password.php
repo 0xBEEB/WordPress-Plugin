@@ -11,7 +11,7 @@ function sp_forgot_password() {
 			top:0px;
 			left:0px;
 			width:100%;
-			height:auto;
+			height:150%;
 			background:#999;
 			opacity: .0;
 			filter:alpha(opacity=0);

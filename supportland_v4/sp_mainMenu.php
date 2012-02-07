@@ -1,6 +1,7 @@
 <?php
 	
 	require_once 'sp_login.php';
+	require 'sp_search.php';
     define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
    
     
@@ -100,14 +101,8 @@
      	</div>
      	
      	<hr width = 100% >
+     	<? sp_search(); ?>
 
-    	<div id="spMenuLink1" class="spMenuLink">
-        	<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus1"></span></span>
-        	<a>Card</a>
-    	</div>
-    	<div class="sp_Result" id="spResult1">
-    		<? echo $spCard; ?> <br />
-    	</div>
 
     	<div id="spMenuLink2" class="spMenuLink">
         	<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus2"></span></span>
@@ -116,10 +111,15 @@
     	<div class="sp_Result" id="spResult2">
     	<? echo $spWallet; ?>
     	</div>
+    	
+		<div id="spMenuLink1" class="spMenuLink">
+        	<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus1"></span></span>
+        	<a>Card</a>
+    	</div>
+    	<div class="sp_Result" id="spResult1">
+    		<? echo $spCard; ?> <br />
+    	</div>
 
-    <!--// ------ End of Wallet -----//-->
-
-    <!--// ------ Define Business ----//-->
     	<div id="spMenuLink3" class="spMenuLink">
       	  	<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus3"></span></span>
     		<a>Business</a>
@@ -128,7 +128,15 @@
    		 	<? echo $spBusiness; ?>
    		 </div>
 
-    <!--// ------ End of Business ------//-->
+		<!-- User info goes here, not functional now. -->
+    	<div id="spMenuLink1" class="spMenuLink">
+        	<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus1"></span></span>
+        	<a>User [not function now]</a>
+    	</div>
+    	<div class="sp_Result" id="spResult1">
+    		<? echo $spCard; ?> <br />
+    	</div>
+
     	<div id="spMenuLink4" class="spMenuLink">
         	<span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus4"></span></span>
     	<a>Search</a>
@@ -137,7 +145,6 @@
     		<? echo $spSearch; ?>
    		</div>
 
-    <!--// ------ End of Business ------//-->
 	</div>
 	
     <?	//jQuery animations for the four sections
