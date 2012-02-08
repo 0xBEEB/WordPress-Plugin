@@ -39,11 +39,6 @@
     font-size: 100%;
 }
 
-/* login area */
-#sp_login_area {
-    line-height: 200%;
-}
-
 /* login area anchor tag */
 #sp_login_area a {
     cursor: pointer;
@@ -51,9 +46,12 @@
     font-weight: bold;
 }
 
-/* login area submit div */
-#sp_login_area div {
+#sp_login_form_content div {
     text-align: right;
+}
+
+#sp_login_form_content table {
+    line-height: 200%;
 }
 
 /* login area submit button */
@@ -62,7 +60,7 @@
 }
 
 /* login area email and password error message */
-#sp_login_email_error, #sp_login_pw_error {
+#sp_login_error, #sp_login_email_error, #sp_login_pw_error {
     color: red;
-    font-size: 95%;
+    font-size: 90%;
 }
