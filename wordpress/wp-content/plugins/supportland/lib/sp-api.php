@@ -1,6 +1,6 @@
 <?php
 /***************************************
- * sp_api.php
+ * sp-api.php
  * Thomas Schreiber <ubiquill@gmail.com>
  * Copyright (C) 2012 Supportland
  *
@@ -16,7 +16,7 @@ define("COOKIEPATH", "/");
 // This will need to be changed if you have a non-standard
 // plugin directory
 require_once(dirname(__FILE__) . '/../../../../wp-load.php');
-require_once(dirname(__FILE__) . '/../supportland-settings.php');
+//require_once(dirname(__FILE__) . '/../supportland-settings.php');
 
 /*! @class SP_Transaction
  *
@@ -104,7 +104,7 @@ class SP_User
     // Access token used by Supportland API
     var $access_token;
     var $user_info;
-    
+       
     /*! @function logged_in
         @author Thomas Schreiber <ubiquill@gmail.com>
         @abstract Checks if a user is logged in
@@ -130,6 +130,7 @@ class SP_User
      */
     public function authenticate($email, $password) {
         $url = sp_get_uri() . "user.json?app_token=" . sp_get_app_token() . "&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
+        //$url = sp_get_uri() . "user.json?app_token=" . $this->app_token . "&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
         $result = json_decode(sp_fetch($url));
         if (isset($result->access_token)) {
             $this->set_access_token($result->access_token);
@@ -138,7 +139,6 @@ class SP_User
         }else {
             throw new Exception($result->error->message);
         }
-
     }
 
     /*! @function get_access_token
@@ -228,7 +228,6 @@ function sp_fetch($url) {
 
     // make the request
     $response = curl_exec($ch);
-
     // close the call
     curl_close($ch);
 
@@ -284,8 +283,15 @@ function sp_good_token($sp_token) {
  * @abstract Returns the app token set in the plugin settings
  * @result string - the app's token
  */
+
 function sp_get_app_token() {
+    /*
     $plugin_options = get_option('plugin_options');
     $sp_app_token = $plugin_options['app_token_text_string'];
-    return $sp_app_token;
+    return $sp_app_token; */
+    $sp_app_token = get_option('sp_app_token');
+    if (!$sp_app_token)
+        return '';
+    else
+        return $sp_app_token;
 }

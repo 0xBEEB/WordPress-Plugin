@@ -1,5 +1,5 @@
 <?php
-    require_once 'sp_api.php';
+    require_once 'sp-api.php';
  
     $my_user = new SP_User();
     $my_trans = new SP_Transaction($sp_user);
@@ -12,9 +12,4 @@
         die( $my_trans->get_wallet());
     else
         header($sp_loc);
-
-
-
-
-
 ?>
