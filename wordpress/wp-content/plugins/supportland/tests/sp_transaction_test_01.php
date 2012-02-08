@@ -34,7 +34,7 @@ class SP_Transaction_Test extends PHPUnit_TestCase
     function test_get_business() {
         $bid = '14';
         $response = $this->handle->get_business($bid);
-        $result = $response->website;j
+        $result = $response->website;
         $expected = 'cgwc.org';
         $this->assertTrue($result == $expected);
     }
