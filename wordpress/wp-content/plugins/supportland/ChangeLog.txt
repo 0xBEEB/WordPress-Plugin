@@ -1,0 +1,12 @@
+**** sp-api.php ****
+1. In sp_get_app_token() function call, get 'sp_app_token' from options table.
+
+
+**** sp-user-auth.php ****
+1. Use _POST instead of _GET since now the login form submission is processed
+   by AJAX which passes a JSON object that contains the user email and password
+
+
+**** class-sp-widget.php ****
+1. Add a function 'save_apptoken' to save sp_app_token into options table for
+   later usage.
