@@ -1,6 +1,68 @@
-#sp_user_info fieldset {
+#sp_login_wrapper {
+    padding: 10px;
+    width: 100%;
     border: 1px solid black;
-    padding: 1em;
-    font-size: 0.9em;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    webkit-border-radius: 10px;
 }
 
+/* the top of login form */
+#sp_login_top {
+    margin: 5px;
+}
+
+#sp_login_top a {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* search bar area */
+#sp_search_bar {
+    line-height: 200%;
+}
+
+/* the div that contains search submit buttom */
+#sp_search_bar div {
+    text-align: right;
+}
+
+/* the search input */
+#sp_search_store {
+    font-size: 100%;
+    width: 96%;
+}
+
+/* the search submit buttom */
+#sp_search_bar div input {
+    font-size: 100%;
+}
+
+/* login area */
+#sp_login_area {
+    line-height: 200%;
+}
+
+/* login area anchor tag */
+#sp_login_area a {
+    cursor: pointer;
+    font-size: 100%;
+    font-weight: bold;
+}
+
+/* login area submit div */
+#sp_login_area div {
+    text-align: right;
+}
+
+/* login area submit button */
+#sp_login_btn {
+    font-size: 100%;
+}
+
+/* login area email and password error message */
+#sp_login_email_error, #sp_login_pw_error {
+    color: red;
+    font-size: 95%;
+}
