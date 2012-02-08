@@ -28,7 +28,7 @@ class SP_Widget extends WP_Widget {
             </div>
         <?php } 
         else {
-            $sp_app_token = strip_tags($instance['sp_app_token']);
+            //$sp_app_token = strip_tags($instance['sp_app_token']);
             //$this->set_apptoken_cookie($sp_app_token);
             $sp_user = new SP_User();
             if ($sp_user->logged_in()) {
