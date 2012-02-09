@@ -1,6 +1,6 @@
 <?php
-    require_once 'sp_signup_form.php';
-    function sp-login-page() { ?>
+    require_once 'sp-signup-form.php';
+    function sp_login_page() { ?>
         
         <div style="margin:10px; width:210px;font-weight:normal;color:black;border:1px solid black;border-radius:10px;-moz-border-radius:10px;webkit-border-radius:10px;">
             <div style="margin:5px;"> </div>
