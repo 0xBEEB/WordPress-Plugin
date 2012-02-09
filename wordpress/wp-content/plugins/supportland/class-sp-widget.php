@@ -87,8 +87,8 @@ class SP_Widget extends WP_Widget {
     }
     
     function display_main_menu() {
-        //require_once 'sp-mainmenu.php';
-        echo 'sp-mainmenu.php place holder <br /> user logged in';
+        require_once 'sp-mainmenu.php';
+        sp_main_menu();
     }
     
     function display_login_page() {
