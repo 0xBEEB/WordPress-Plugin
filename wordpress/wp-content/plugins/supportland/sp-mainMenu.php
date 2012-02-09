@@ -35,7 +35,7 @@
         //Casey: store all the wallet stuff in a string called $spWallet and delete the following line
         $spWallet =     '<strong>Rewards:</strong> '.$sp_wallet_test->rewards.'<br />'.
                         '<strong>Points Earned:</strong> '.$sp_wallet_test->points.' points'.'<br />'.
-                        '<strong>Punch Cards:</strong> '.$sp_wallet_test->punch_cards.'<br />'.
+                        '<strong>Punch Cards:</strong> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_test) . "</div>".$sp_wallet_test->punch_cards.'<br />'.
                         '<strong>Coupons:</strong> <br />';
         $spSearch =     '<img src="'.$sp_business->image.'" /><br />'.
                         '<strong>Business:</strong> '.$sp_business->local_name.'<br />'.
