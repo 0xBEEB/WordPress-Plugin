@@ -47,7 +47,7 @@
          
     	<div id="top" style="margin:10px;" >
             <a href="<?= home_url() ?>" class="a_home" style="cursor:pointer;font-size:14px;font-weight:bold"> Supportland</a>
-            <a href="<?= SP_PLUGIN_URL ?>lib/sp_logout.php?sp_loc=Location:<?= home_url() ?>" class="a_logout" style="cursor:pointer;font-size:14px;font-weight:bold; float:right"> Logout </a><br />
+            <a href="<?= SP_PLUGIN_URL ?>sp_logout.php?sp_loc=Location:<?= home_url() ?>" class="a_logout" style="cursor:pointer;font-size:14px;font-weight:bold; float:right"> Logout </a><br />
      	</div>
      	<hr width="100%" />
     
