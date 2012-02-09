@@ -64,3 +64,78 @@
     color: red;
     font-size: 90%;
 }
+
+/******************** sp-mainmenu area css ********************************/
+#sp_main_menu_home, #sp_main_menu_logout {
+    cursor: pointer;
+    font-size: 120%;
+    font-weight: bold;
+}
+
+#sp_main_menu_logout {
+    float: right;
+}
+
+#sp_main_menu_top {
+    margin: 10px;
+}
+
+.spMenuLink {
+    padding: 2px 3px 3px 3px;
+    cursor: pointer;
+    line-height: 1.5em;
+}
+
+.spMenuLink:hover {
+    background-color: #eee;
+}
+
+.sp_plusMinusCircle {
+    bottom: -3px;
+    background-color: #a21;
+    height: 16px;
+    width: 16px;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    position: relative;
+    display: inline-block;
+}
+
+.sp_plusMinusHBar {
+    background-color: #fff;
+    height: 2px;
+    width: 8px;
+    position: absolute;
+    top: 7px;
+    left: 4px;
+}
+
+.sp_plusMinusVBar {
+    background-color: #fff;
+    height: 8px;
+    width: 2px;
+    position: absolute;
+    top: 4px;
+    left: 7px;
+}
+
+.sp_Result {
+    margin-left: 11px;
+    padding-left: 11px;
+    border-left: 1px dashed #ccc;
+}
+
+.sp_punch_card_display {
+    margin-left: 11px;
+    padding-left: 11px;
+}
+
+#sp_main_menu {
+    width: 200px;
+    font-weight: normal;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
