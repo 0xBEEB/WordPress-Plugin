@@ -171,4 +171,7 @@
                 }
             }
             $sp_punch_card_punches .= "</span>";
+        }
+        return $sp_punch_card_punches;
+    }
 ?>
