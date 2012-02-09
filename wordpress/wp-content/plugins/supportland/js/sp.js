@@ -53,6 +53,27 @@ jQuery(document).ready(function($){
         else
             return true;
     }
+    
+    // main menu link toggle
+    $(".spMenuLink").click(function(){
+        $(this).parent().find(".sp_Result").slideToggle('fast');
+        $(this).find(".sp_plusMinusVBar").toggle();
+    });
+    
+    // Logout now is handled by AJAX as well
+    $("#sp_main_menu_logout").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "wp-content/plugins/supportland/lib/sp-logout.php",
+            success: function() {
+                location.reload();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Logout error: ' + jqXHR.responseText);
+            }
+        });
+        return false;
+    });
 });
 
 
