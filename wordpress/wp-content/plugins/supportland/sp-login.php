@@ -10,6 +10,10 @@ function sp_login_page() {
             <?php display_search(); ?>
             <!-- display login form -->
             <?php display_login_form(); ?>
+            <!-- display forgot password area -->
+            <?php display_forgot_pw(); ?>
+            <!-- display sign up area -->
+            <?php display_sign_up(); ?>
         </div>
     <?php
 }
@@ -28,48 +32,65 @@ function display_login_form() {
     ?>
         <div id="sp_login_area">
             <a>Login</a><br />
-            <div id="sp_login_form_content">
-                <form action="wp-content/plugins/supportland/lib/sp-user-auth.php">
-                    <input type='hidden' name='sp_loc' value='Location: <?php home_url(); ?>' />
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <label for="sp_login_email">Email</label>
-                                </td>
-                                <td>
-                                    <div id="sp_login_email_error" style="display:none;">
-                                        *** invalid email
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <input type="text" id="sp_login_email" name="sp_login_email" value="" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="sp_login_password">Password</label>
-                                </td>
-                                <td>
-                                    <div id="sp_login_pw_error" style="display:none;">
-                                        *** can't be empty
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <input type="password" id="sp_login_password" name="sp_login_password" value="" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div>
-                        <input type="submit" id="sp_login_btn" name="sp_login_btn" value="Log in" />
-                    </div>
-                </form>
+            <div id="sp_login_form_content" style="display:none;">
+                <!-- display invalid login error message -->
+                <div id="sp_login_error" style="display: none;"></div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label for="sp_login_email">Email</label>
+                            </td>
+                            <td>
+                                <!-- display invalid email error message -->
+                                <div id="sp_login_email_error" style="display:none;">
+                                    *** invalid email
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="text" id="sp_login_email" name="sp_login_email" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="sp_login_password">Password</label>
+                            </td>
+                            <td>
+                                <!-- display empty password error message -->
+                                <div id="sp_login_pw_error" style="display:none;">
+                                    *** can't be empty
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="password" id="sp_login_password" name="sp_login_password" value="" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <input type="button" id="sp_login_btn" name="sp_login_btn" value="Log in" />
+                </div>
             </div>
+        </div>
+    <?php
+}
+
+function display_forgot_pw() {
+    ?>
+        <div id="forgot_pass">
+            <a href="http://supportland.com/">Forgot your password?</a>
+        </div>
+    <?php
+}
+
+function display_sign_up() {
+    ?>
+        <div id="sp_signup">
+            <a>Sign up!</a>
         </div>
     <?php
 }
