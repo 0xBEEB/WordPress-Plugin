@@ -1,5 +1,5 @@
 <?php
-    require_once 'sp_login.php';
+	require_once 'sp-login.php';
     define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
 
     //Goes into <head> tag
@@ -149,4 +149,26 @@
             return;
         }
     }
+
+    function sp_print_punches($sp_wallet_info) {
+        
+        $sp_punch_card_punches = "";
+        $sp_total_punches = 5;
+        $sp_acquired_punches = intval($sp_wallet_info->wallet->punch[0]->status);
+        for($i=0; $i<count($sp_wallet_info->wallet->punch); $i++) {
+            $sp_punch_card_punches .=  "<span style='font-size:10px'>".
+                                       $sp_wallet_info->wallet->punch[$i]->title.
+                                       "</span ><br/>"; 
+            for($j=0; $j<$sp_total_punches;$j++) {
+                if($j < $sp_acquired_punches)
+                    $sp_punch_card_punches .=   "<img alt='".
+                                                $sp_wallet_info->wallet->punch[i]->Title.
+                                                "' src='wp-content/plugins/supportland/images/punched_punch.png' />";
+                else {
+                    $sp_punch_card_punches .= "<img alt='".
+                                               $sp_wallet_info->wallet->punch[i]->Title."
+                                               ' src='wp-content/plugins/supportland/images/empty_punch.png' />";
+                }
+            }
+            $sp_punch_card_punches .= "</span>";
 ?>

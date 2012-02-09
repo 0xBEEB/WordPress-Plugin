@@ -28,10 +28,10 @@ License: GPLv2 or later
 /*
 ------- Program starts here -------
 */
-    require_once 'lib/sp_api.php';
-    require_once 'supportland-settings.php';
-    require_once 'sp_login.php';
-    require_once 'sp_mainMenu.php';
+    require_once 'lib/sp-api.php';
+    require_once 'sp-settings.php';
+    require_once 'sp-login.php';
+    require_once 'sp-mainMenu.php';
     
     //Output Google-hosted jQuery and some CSS (used with jQuery) into the <head> tag
     
