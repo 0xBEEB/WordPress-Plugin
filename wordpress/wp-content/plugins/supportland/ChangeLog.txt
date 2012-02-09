@@ -10,3 +10,7 @@
 **** class-sp-widget.php ****
 1. Add a function 'save_apptoken' to save sp_app_token into options table for
    later usage. 
+
+
+**** sp-logout.php ****
+1. Comment out sp-loc variable.
