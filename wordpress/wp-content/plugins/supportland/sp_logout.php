@@ -1,5 +1,5 @@
 <?php
-    require_once "sp_api.php";
+    require_once "lib/sp_api.php";
     $sp_user = new SP_User();
     $sp_loc = null;
 
