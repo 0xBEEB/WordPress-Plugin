@@ -4,7 +4,6 @@ require_once(dirname(__FILE__) . '/../../../wp-load.php');
 require_once(dirname(__FILE__) . '/supportland-settings.php');
 $plugin_options = get_option('plugin_options');
 $app_token = $plugin_options['app_token_text_string'];
-//$app_token = 'teamdoughnut2740';
 
 //Check to see if all data fields have user input -- this is the one type of
 //error checking we have to do, other errors come from the API.

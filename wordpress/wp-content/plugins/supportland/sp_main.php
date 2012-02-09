@@ -38,7 +38,10 @@ License: GPLv2 or later
     
     function display_widget() {
         $sp_user = new SP_User();
-        if($sp_user->logged_in() == true) {
+        if(sp_get_app_token() == NULL) {
+            echo "<div style='color:red'> Supportland app token not set. <br> <br> Please contact the site administrator </div>";
+        }
+        else if($sp_user->logged_in() == true) {
             //sp_wallet_page();
             sp_mainMenu();
         }
@@ -47,8 +50,6 @@ License: GPLv2 or later
         }
     }
     
-    // ----- Loading jQuery first -------- //
-    //jQueryLoad();
     
     // Shortcode //
     function init_supportland(){
@@ -97,7 +98,4 @@ License: GPLv2 or later
     add_action('plugins_loaded','init_supportland');        
 
     add_shortcode('sp_mini', 'sp_print_mini_widget');
-    
-    
-    
 ?>
