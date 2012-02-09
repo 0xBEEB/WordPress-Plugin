@@ -45,7 +45,7 @@
             <p><?php echo $_GET['sp_bad_auth']; ?></p>
 <?php
     } ?>
-        <form action="wp-content/plugins/supportland/lib/sp_user_auth.php">
+        <form action="wp-content/plugins/supportland/lib/sp-user-auth.php">
             <input type="hidden" name="sp_loc" value="Location:<?= home_url()?>" />
             <label style="margin:5px;" for="login_email">Email</label></br>
             <input style="margin:5px;" type="text" name="sp_login_email" id="login_email"/>
