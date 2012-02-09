@@ -2,7 +2,6 @@
 	
 	require 'sp_signup_form.php';
 	
-	echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>";
     function sp_login_page() { 
         
         print  '<div style="margin:10px; width:210px;font-weight:normal;color:black; 
@@ -18,6 +17,11 @@
         	 sp_search_local_store();
         	 // ----------------------------------------------------//
         	 
+             //----------- Casey's dark magic ajax login checker----//
+        	 echo    "<div class='login_error' style='color:white;background-color:red;text-align:center;margin-left:5px;margin-right:5px;border-style:solid;border-width:1px;border-color:black;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;'>".
+                        "<p></p>".
+                     "</div>";
+             //-----------------------------------------------------//
         	 echo "<a class='login' style='margin:5px;cursor:pointer;font-size:12px;font-weight:bold'> Login </a> <br />";
         	 	echo "<div class='hide_login_form' style='display:none;font-size:12;font-weight:normal'>"; 
         	 		sp_login_form();
@@ -43,21 +47,36 @@
         </script>";
         */
         // ---------- End of jQuery popup form -------------//
+        // ---------- Dark Ajax Magic ----------------------//
+        ?>
+        <script type='text/JavaScript'>
+                $('document').ready(function(){
+                    $(".login_error").hide();
+                    $('a.login').click(function(){		
+                        $('.hide_login_form').toggle('fast',function() {})
+                    });	
+                    $(".login_button").click(function() {
+                        $.ajax({    url: "wp-content/plugins/supportland/lib/sp_user_auth.php",
+                                    data: {'sp_login_email': $("#login_email").val(), 'sp_login_password':$("#login_password").val()},
+
+                                    success: function(data) {
+                                        console.log(data);
+                                        if($.trim(data) == "Yes") 
+                                            window.location.reload();
+                                        else {
+                                            $(".login_error").html(data);
+                                            $(".login_error").show();
+                                        }
+
+                                    }
+                        });
+                        return false;
+                    });
+                });
         
-    	echo "<script type='text/JavaScript'>  
-            	$('a.sp_signup').click(function(){		
-					$('.sp_signup_form').toggle('fast',function() {})
-        		});
         </script>";
-       
-        
-        echo "<script type='text/JavaScript'>  
-            	$('a.login').click(function(){		
-					$('.hide_login_form').toggle('fast',function() {})
-        		});	
-        </script>";
-        
-        
+        <?php     
+        //-------------------------------------------------//
        
       /* echo "<script type='text/JavaScript'>  
             	$('a.sp_signup').click(function(){		
@@ -71,14 +90,15 @@
     
     function sp_login_form() {
     	if (isset($_GET['sp_bad_auth']) && $_GET['sp_bad_auth'] == 1)
-        		echo "<p> <font color=red>Bad email or password</font></p>";
-       		 echo    "<form action='wp-content/plugins/supportland/lib/sp_user_auth.php'>";
+       		 echo    "<form action=''>";
        		 echo        "<input type='hidden' name='sp_loc' value='Location: " . home_url() . "'>";
         	 echo        "<label style='margin:5px' for='login_email'>Email</label></br>";
         	 echo        "<input style='margin:5px' type='text' name='sp_login_email' id='login_email'/>";
        		 echo        "<label  style='margin:5px' for='login_password'>Password</label> </br>";
         	 echo        "<input style='margin:5px' type='password' name='sp_login_password' id='login_password'/> </br>";
-       		 echo 		"<p style= 'margin:5px' align='right'> <input name='login' type='submit' value='Log in' > </p>";
+       		 echo 		"<p style= 'margin:5px' align='right'> 
+                            <input class='login_button' name='login' type='submit' value='Log in' > 
+                         </p>";
        		 echo    "</form>";
     }
     
