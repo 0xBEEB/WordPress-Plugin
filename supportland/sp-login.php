@@ -1,5 +1,6 @@
 <?php
     require_once 'sp-signup-form.php';
+    require_once 'sp-forgot-password.php';
     function sp_login_page() { ?>
         
         <div style="margin:10px; width:210px;font-weight:normal;color:black;border:1px solid black;border-radius:10px;-moz-border-radius:10px;webkit-border-radius:10px;">
@@ -16,7 +17,7 @@
             <div class="hide_login_form" style="display:none;font-size:12px;font-weight:normal;">
         	 <?php echo sp_login_form(); ?>
             </div>
-            <div style="margin:5px" id="forgot_pass"><a>Forgot your password?</a></div>
+            <div style="margin:5px" id="forgot_pass"><?php sp_forgot_password() ?></div>
             <!-- a class="sp_signup" style="margin:5px;cursor:pointer;font-size:12px;font-weight:bold"> Sign up!</a><br / -->
             
             <a id="inline" href="#signupForm">Register</a>
