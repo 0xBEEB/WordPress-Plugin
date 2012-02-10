@@ -1,7 +1,7 @@
 <?php
 	
-	require_once 'sp_login.php';
-	require 'sp_search.php';
+	require_once 'sp-login.php';
+	require 'sp-search.php';
     define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
    
     
