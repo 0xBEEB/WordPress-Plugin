@@ -1,5 +1,6 @@
 <?php
 	require_once 'sp-login.php';
+	require_once 'sp-search.php';
     define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
 
     //Goes into <head> tag
@@ -50,6 +51,7 @@
             <a href="<?= SP_PLUGIN_URL ?>lib/sp-logout.php?sp_loc=Location:<?= home_url() ?>" class="a_logout" style="cursor:pointer;font-size:14px;font-weight:bold; float:right"> Logout </a><br />
      	</div>
      	<hr width="100%" />
+        <?php sp_search(); ?>
     
     	<div id="spMenuLink1" class="spMenuLink">
             <span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus1"></span></span>
