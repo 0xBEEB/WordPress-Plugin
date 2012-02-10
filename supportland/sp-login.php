@@ -17,7 +17,6 @@
             <div class="hide_login_form" style="display:none;font-size:12px;font-weight:normal;">
         	 <?php echo sp_login_form(); ?>
             </div>
-            <div style="margin:5px" id="forgot_pass"><?php sp_forgot_password() ?></div>
             <!-- a class="sp_signup" style="margin:5px;cursor:pointer;font-size:12px;font-weight:bold"> Sign up!</a><br / -->
             
             <a id="inline" href="#signupForm">Register</a>
@@ -75,6 +74,7 @@
             <input style="margin:5px;" type="password" name="sp_login_password" id="login_password"/> <br />
             <p style= "margin:5px;" align="right"> <input class='login_button' name="login" type="submit" value="Log in" /> </p>
         </form>
+        <div style="margin:5px" id="forgot_pass"><?php sp_forgot_password() ?></div>
 <?php
     }
 
