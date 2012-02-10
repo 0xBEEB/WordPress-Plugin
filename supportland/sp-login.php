@@ -35,11 +35,6 @@
             </script>
         </div>
 
-        <script type="text/JavaScript">  
-            $('a.login').click(function(){		
-                $('.hide_login_form').toggle('fast',function() {})
-            });	
-        </script>
         <script type='text/JavaScript'>
             $('document').ready(function(){
                 $(".login_error").hide();
@@ -47,8 +42,8 @@
                     $('.hide_login_form').toggle('fast',function() {})
                 });
                 $(".login_button").click(function() {
-                    $.ajax({ url: "whitep-content/plugins/supportland/lib/sp-user-auth.php",
-                             data: {'sp_login_formgin_email': $("#login_email").val(), 'sp_login_password':$("#login_password").val()},
+                    $.ajax({ url: "wp-content/plugins/supportland/lib/sp-user-auth.php",
+                             data: {'sp_login_email': $("#login_email").val(), 'sp_login_password':$("#login_password").val()},
                              success: function(data) {
                                  console.log(data);
                                 if($.trim(data) == "Yes")
