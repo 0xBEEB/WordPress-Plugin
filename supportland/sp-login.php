@@ -1,6 +1,7 @@
 <?php
     require_once 'sp-signup-form.php';
     require_once 'sp-forgot-password.php';
+    require_once 'sp-search.php';
     function sp_login_page() { ?>
         
         <div style="margin:10px; width:210px;font-weight:normal;color:black;border:1px solid black;border-radius:10px;-moz-border-radius:10px;webkit-border-radius:10px;">
@@ -9,7 +10,7 @@
                 <a href="" class="a_home" style="cursor:pointer;font-size:14px;font-weight:bold;">Welcome to Supportland!</a>
             </div>
             <hr width="100%" />
-            <?php echo sp_search_local_store(); ?>
+            <?php echo sp_search(); ?>
             <div class='login_error' style='color:white;background-color:red;text-align:center;margin-left:5px;margin-right:5px;border-style:solid;border-width:1px;border-color:black;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;'>
                 <p></p>
             </div>
@@ -77,10 +78,4 @@
         <div style="margin:5px" id="forgot_pass"><?php sp_forgot_password() ?></div>
 <?php
     }
-
-    function sp_search_local_store() { ?>
-        <label style="margin:5px;" for="sp_search_store">Search local store</label> </br>
-        <input style="margin:5px;" type="search" name="sp_search_store" id="sp_search_store" /> <br />
-        <p style="margin:5px;" align="right"> <input name="sp_search_submit" type="submit" value="Search" /> </p>
-<?php
-    } ?>
+?>
