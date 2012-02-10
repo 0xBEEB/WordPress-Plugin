@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
  * Supportland WordPress Widget
- * supportland/supportland.php
+ * supportland/sp_main.php
  * Copyright (c) 2012 Do(ugh)nut Team
  * Developed for Supportland - http://www.supportland.com/
  *
@@ -19,7 +19,7 @@
 Plugin Name: Supportland Widget
 Plugin URI: http://www.github.com/supportland/
 Description: A widget that deploys the functionality of supportland.com on a WordPress website.
-Version: 0.2 - KP
+Version: 0.2
 Author: Do(ugh)nut Team
 Author URI: http://www.github.com/supportland/
 License: GPLv2 or later
@@ -28,23 +28,20 @@ License: GPLv2 or later
 /*
 ------- Program starts here -------
 */
-    require_once 'lib/sp_api.php';
-    require_once 'supportland-settings.php';
-    require_once 'sp_login.php';
-    require_once 'sp_mainMenu.php';
-	
-    
-    
-    function jQueryLoad() {
-    	echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>';
-    }
+    require_once 'lib/sp-api.php';
+    require_once 'sp-settings.php';
+    require_once 'sp-login.php';
+    require_once 'sp-mainMenu.php';
     
     //Output Google-hosted jQuery and some CSS (used with jQuery) into the <head> tag
     
     
     function display_widget() {
         $sp_user = new SP_User();
-        if($sp_user->logged_in() == true) {
+        if(sp_get_app_token() == NULL) {
+            echo "<div style='color:red'> Supportland app token not set. <br> <br> Please contact the site administrator </div>";
+        }
+        else if($sp_user->logged_in() == true) {
             //sp_wallet_page();
             sp_mainMenu();
         }
@@ -52,10 +49,6 @@ License: GPLv2 or later
             sp_login_page();
         }
     }
-    
-    // ----- Loading jQuery first -------- //
-    //jQueryLoad();
-    sp_headerStuff();
     
     
     // Shortcode //
@@ -90,7 +83,7 @@ License: GPLv2 or later
     // include JavaScript files
     function sp_widget_js_init()
     {
-        wp_enqueue_script("jquery-1.7.1", "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js");
+        sp_headerStuff();
         wp_enqueue_script("supportland-widget", SP_PLUGIN_URL . "/js/sp.js");
     }
     add_action('wp_enqueue_scripts', 'sp_widget_js_init');
@@ -105,7 +98,4 @@ License: GPLv2 or later
     add_action('plugins_loaded','init_supportland');        
 
     add_shortcode('sp_mini', 'sp_print_mini_widget');
-    
-    
-    
 ?>

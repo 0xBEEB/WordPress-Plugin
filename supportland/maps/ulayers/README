@@ -1,0 +1,18 @@
+uLayers
+=======
+
+uLayers is a micro webmap script. It allows adding a webmap to you site in 
+just 4 lines of JavaScript code, and it's not as heavy as OpenLayers is.
+
+This library isn't an OpenLayers competitor and most likely will never be.
+
+More documentation to come.
+
+
+Copyright and license
+=====================
+Copyright 2010-2011 Andrew O. Shadoura. All rights reserved.
+
+This package can be distributed under terms of 2-clause BSD licence, or 
+X11 MIT license, whichever suits you better.
+

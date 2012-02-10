@@ -1,5 +1,4 @@
 <?php
-
 require_once '../lib/sp_api.php';
 require_once 'PHPUnit.php';
 
@@ -42,9 +41,7 @@ class SP_User_Test extends PHPUnit_TestCase
     }
     
     /*************
-    *
     * @dataProvider credential_provider
-    *
     *************/
     function test_user_auth_success($app_token, $user_email, $user_password) {
         $ret_val = array();
@@ -61,13 +58,10 @@ class SP_User_Test extends PHPUnit_TestCase
             $this->$access_token[i][1] = true;
 
         }
-
     }
    
     /*************
-    *
     * @dataProvider access_token_provider
-    *
     *************/
     function test_user_token($token) {
     }
