@@ -5,6 +5,7 @@
 
     //Goes into <head> tag
     function sp_headerStuff() { ?>
+        <?sp_map(45.5103332, -122.6839178, 15);?>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
         <script src="<?php echo plugins_url(); ?>/supportland/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
         <link rel="stylesheet" href="<?php echo plugins_url(); ?>/supportland/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
@@ -16,6 +17,8 @@
             .sp_plusMinusHBar{background-color:#fff;height:2px;width:8px;position:absolute;top:7px;left:4px;}
             .sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
             .sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
+            .sp_map{border: 1px solid black; width: 300px; height: 240px;position: absolute; right: 0px}
+            .sp_business_results{margin-right: 350px;}
         </style>
 <?  }
     
@@ -38,10 +41,13 @@
                         '<strong>Points Earned:</strong> '.$sp_wallet_test->points.' points'.'<br />'.
                         '<strong>Punch Cards:</strong> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_test) . "</div>".$sp_wallet_test->punch_cards.'<br />'.
                         '<strong>Coupons:</strong> <br />';
-        $spSearch =     '<img src="'.$sp_business->image.'" /><br />'.
+        $spSearch =     '<div id="map" class="sp_map"></div>'.
+                        '<div class="sp_business_results">'.
+                        '<img src="'.$sp_business->image.'" /><br />'.
                         '<strong>Business:</strong> '.$sp_business->local_name.'<br />'.
                         '<strong>Description:</strong> '.$sp_business->description.'<br />'.
-                        '<strong>Hours:</strong> '.$sp_business->hours.'<br />';
+                        '<strong>Hours:</strong> '.$sp_business->hours.'<br />'.
+                        '</div>';
     ?>
 
     <div style="margin:10px auto; width:200px;font-weight:normal;color:black;border:1px solid black;border-radius:10px;-moz-border-radius: 10px;webkit-border-radius:10px;">
@@ -82,6 +88,7 @@
             
             <script>
                 $(document).ready(function() {
+                    init();
                     $("a#inline").fancybox({
                         'hideOnOverlayClick': false,
                         'hideOnContentClick': false,
@@ -175,5 +182,24 @@
             $sp_punch_card_punches .= "</span>";
         }
         return $sp_punch_card_punches;
+    }
+    function sp_map($lat, $lon, $scale) { ?>
+        
+        <script src="wp-content/plugins/supportland/maps/ulayers/ulayers.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            // <![CDATA[
+            var map;
+            function init() {
+                map = new uLayers.Map('map', uLayers.OSM);
+                map.setOrigin({lat: <?php echo $lat;?>, lon: <? echo $lon;?>}, <?echo $scale;?>);
+                map.addMarker({lat: <?php echo $lat;?>, lon: <? echo $lon;?>});
+                map.updateMap();
+            }
+            // ]]>
+        </script>
+
+
+    
+        <?php
     }
 ?>
