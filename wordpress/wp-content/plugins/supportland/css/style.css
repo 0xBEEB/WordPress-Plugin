@@ -40,7 +40,7 @@
 }
 
 /* login area anchor tag */
-#sp_login_area a {
+#sp_login_area a, #sp_signup_a {
     cursor: pointer;
     font-size: 100%;
     font-weight: bold;
@@ -138,4 +138,41 @@
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
+}
+
+/***************** registration form ********************************/
+#signup_top {
+    margin-bottom: 1em;
+    text-align: center;
+    font-size: 12pt;
+    color: #222;
+    line-height: 1.6em;
+    font-weight: bold;
+}
+
+#registration_form table {
+    width: 470px;
+}
+
+#registration_form table td {
+    vertical-align: middle;
+    color: #666666;
+    padding: 3px 0 3px 5px;
+}
+
+#registration_form table input {
+    width: 200px;
+}
+
+.signup_label {
+    padding-top: 9px;
+    text-align: right;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.signup_error {
+    font-size: 11px;
+    color: red;
+    visibility: hidden;
 }
