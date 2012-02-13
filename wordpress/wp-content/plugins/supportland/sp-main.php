@@ -47,6 +47,11 @@ function plugin_load_css() {
             basename(dirname(__FILE__)) . "/css/style.css");
     wp_register_style('supportland-widget', $style_url);
     wp_enqueue_style('supportland-widget');
+    // load fancybox css
+    $fancy_url = path_join(WP_PLUGIN_URL,
+            basename(dirname(__FILE__)) . "/js/fancybox/jquery.fancybox-1.3.4.css");
+    wp_register_style('fancybox-1.3.4', $fancy_url);
+    wp_enqueue_style('fancybox-1.3.4');
 }
 add_action('wp_enqueue_scripts', 'plugin_load_css');
 
@@ -60,6 +65,11 @@ function plugin_load_js() {
             basename(dirname(__FILE__)) . "/js/sp.js");
     wp_register_script('supportland-widget', $script_url);
     wp_enqueue_script('supportland-widget');
+    // load fancy box js
+    $fancy_url = path_join(WP_PLUGIN_URL,
+            basename(dirname(__FILE__)) . "/js/fancybox/jquery.fancybox-1.3.4.pack.js");
+    wp_register_script('fancybox-1.3.4', $fancy_url);
+    wp_enqueue_script('fancybox-1.3.4');
 }
 add_action('wp_enqueue_scripts', 'plugin_load_js');
 ?>
