@@ -88,9 +88,15 @@ function display_forgot_pw() {
 }
 
 function display_sign_up() {
+    require_once 'sp-signup-form.php';
     ?>
         <div id="sp_signup">
-            <a>Sign up!</a>
+            <a id="sp_signup_a" href="#signupform">Sign up!</a>
+            <div style="display:none;">
+                <div id="signupform">
+                    <?php sp_signup_form(); ?>
+                </div>
+            </div>
         </div>
     <?php
 }
