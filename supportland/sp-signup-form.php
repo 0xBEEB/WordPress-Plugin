@@ -7,17 +7,17 @@ function sp_signup_form() {
  	
     
     	<div class="registration_form">
-        <h3 style="margin:5px">Account Registration</h3>
+        <h3 style="margin:5px" abbr title="Signing up for a Supportland account will allow you to see your points and claim rewards online!">Account Registration</h3>
         <div id="formdiv">
         <label for="fname">First Name:</label> <br />
         <input type="text" name="fname" value="" id="fname" /><br />
         <label for="lname">Last Name:</label> <br />
         <input type="text" name="lname" value="" id="lname" /><br />
-        <label for="email">Username:</label> <br />
+        <label for="email" abbr title="Enter the email address you want us to use to contact you">Email Address:</label> <br />
         <input type="text" name="email" value="" id="email" /><br />
-        <label for="password">Password:</label> <br />
+        <label for="password" abbr title="Please choose a password">Password:</label> <br />
         <input type="password" name="password" id="password" /><br />
-        <label for="password2">Confirm Password:</label><br />
+        <label for="password2" abbr title="Please enter your password again to make sure there are no typos.">Confirm Password:</label><br />
         <input type="password" name="password2" id="password2" /><br />
         <p align="right" > <input type="submit" value="Submit" id="submitReg" /> </p>
         <div id="formoutReg" style="width:100%;text-align:right;display:none;"></div>
