@@ -32,11 +32,11 @@
         $spCard =       '<strong>Name:</strong> '.$sp_user_info->public_name.'<br />'.
                         '<strong>ID:</strong> '.$sp_user_info->id.'<br />'.
                         '<strong>Member since:</strong> '.$member_since.'<br />'.
-                        '<strong>Points:</strong> '.$sp_user_info->points;
+                        '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points:</strong></abbr> '.$sp_user_info->points;
         //Casey: store all the wallet stuff in a string called $spWallet and delete the following line
-        $spWallet =     '<strong>Rewards:</strong> '.$sp_wallet_test->rewards.'<br />'.
-                        '<strong>Points Earned:</strong> '.$sp_wallet_test->points.' points'.'<br />'.
-                        '<strong>Punch Cards:</strong> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_test) . "</div>".$sp_wallet_test->punch_cards.'<br />'.
+        $spWallet =     '<abbr title="Spend your points on rewards like free coffee or an oil change"> <strong>Rewards:</strong></abbr> '.$sp_wallet_test->rewards.'<br />'.
+                        '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points Earned:</strong></abbr> '.$sp_wallet_test->points.' points'.'<br />'.
+                        '<abbr title="See your progress on any in-progress punch cards from local businesses"><strong>Punch Cards:</strong></abbr> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_test) . "</div>".$sp_wallet_test->punch_cards.'<br />'.
                         '<strong>Coupons:</strong> <br />';
         $spSearch =     '<img src="'.$sp_business->image.'" /><br />'.
                         '<strong>Business:</strong> '.$sp_business->local_name.'<br />'.
@@ -55,7 +55,7 @@
     
     	<div id="spMenuLink1" class="spMenuLink">
             <span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus1"></span></span>
-            <a>Card</a>
+            <a><abbr title="Information about your Supportland card">Card </abbr></a>
     	</div>
     	<div class="sp_Result" id="spResult1">
             <?= $spCard ?> <br />
@@ -63,7 +63,7 @@
 
     	<div id="spMenuLink2" class="spMenuLink">
             <span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus2"></span></span>
-            <a>Wallet</a>
+            <a><abbr title="Your wallet contains your points earned, rewards purchased, and punch cards in progress">Wallet</abbr></a>
     	</div>
     	<div class="sp_Result" id="spResult2">
             <?= $spWallet ?>
@@ -71,7 +71,7 @@
 
     	<div id="spMenuLink3" class="spMenuLink">
             <span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus3"></span></span>
-            <a>Search</a>
+            <a><abbr title="Find local businesses and the rewards they offer.">Search</abbr></a>
     	</div>
         <div class="sp_Result" id="spResult3">
             
