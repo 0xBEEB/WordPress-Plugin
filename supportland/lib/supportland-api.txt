@@ -1,0 +1,133 @@
+Supportland API Documentation
+By Thomas Schreiber <ubiquill@gmail.com>
+Copyright Team Doughnut 2012
+
+The file 'sp-api.php' is used to communicate with the Supportland REST API
+version 1.0, and the Wordpress plugin API.
+
+
+define("SP_API_BASE_URI", "https://api.supportland.com/");
+define("SP_API_VERSION", "1.0");
+define("COOKIEPATH", "/");
+
+
+functions:
+
+sp_get_app_token()
+    Retrieves the application token from the Wordpress database. It returns the
+    app_token as a string.
+
+sp_good_token(acc_token)
+    Checks to see if an acc_token is valid. Returns True if it is valid,
+    otherwise false.
+
+sp_set_cookie(acc_token)
+    Sets a client side cookie with key 'sp_access_token', and sets its value to
+    acc_token with an expiration date of 30 days.
+
+sp_unset_cookie()
+    Expires client side cookie with key 'sp_access_token'.
+
+sp_fetch(url)
+    Uses a curl call to fetch the results from the Supportland API.
+
+sp_get_uri()
+    Returns the base URI for Supportland's REST interface.
+
+
+Classes:
+
+    SP_Transaction:
+        fields:
+            sp_user:
+                The end user who is requesting the transaction.
+
+        methods:
+            get_business(business_id)
+                Returns a PHP object with the following fields:
+                    * metro: the locality of the business
+                    * access_token: user's access_token
+                    * local_name: Name of business
+                    * description: Information about business
+                    * hours: Business hours
+                    * street1: Address line 1
+                    * street2: Address line 2
+                    * city: City of business
+                    * state: State of business
+                    * zip: Zipcode of business
+                    * lat: Latitude of location
+                    * long: Longitude of location
+                    * phone: Phone number
+                    * email: Email address
+                    * website: URL
+                    * name: Name of business
+                    * incentives: List of users incentives
+                    * image: Action shot
+
+            get_wallet():
+                Returns a PHP object with the following fields:
+                  * metro: 
+                  * access_token:
+                  * id:
+                  * public_name: 
+                  * member_since:
+                  * points: 
+                  * wallet:
+                    punch: [
+                        object_id: 
+                        type:
+                        title:
+                        ven_guid:
+                        ven_location_id: 
+                        expires_on:
+                        acquired_on:
+                        next_available_on:
+                        spent_on:
+                        status:
+                    ]
+
+            get_user_info():
+                Returns a PHP object with the following fields:
+                  * metro:
+                  * access_token: 
+                  * id:
+                  * public_name:
+                  * member_since:
+                  * points:
+                  * wallet:
+
+    SP_User:
+        This creates objects that represent a user.
+
+        Fields:
+
+            access_token: The user's private access token
+
+            user_info: A PHP object of the user's info. Has the following
+            fields:
+              * metro:
+              * access_token: 
+              * id:
+              * public_name:
+              * member_since:
+              * points:
+              * wallet:
+
+        Methods:
+            logged_in():
+                Returns True if the access token cookie is valid, and False
+                otherwise.
+            authenticate(email, password):
+                Retrieves a new access_token from Supportland, and stores it
+                in a client side cookie.
+            get_access_token():
+                Returns the user's access_token.
+            set_access_token():
+                Stores user's access_token.
+            reset_access_token():
+                Retrieves a new access_token.
+            logout():
+                Expires client side cookie, and resets access token on
+                Supportland's side. The new access token is not stored.
+            fetch_user_info():
+                Returns the user_info object.
