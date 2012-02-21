@@ -5,6 +5,7 @@
 
     //Goes into <head> tag
     function sp_headerStuff() { ?>
+        <?sp_map(45.5103332, -122.6839178, 15);?>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
         <script src="<?php echo plugins_url(); ?>/supportland/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
         <link rel="stylesheet" href="<?php echo plugins_url(); ?>/supportland/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
@@ -16,6 +17,8 @@
             .sp_plusMinusHBar{background-color:#fff;height:2px;width:8px;position:absolute;top:7px;left:4px;}
             .sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
             .sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
+            .sp_map{border: 1px solid black; width: 300px; height: 240px;position: absolute; right: 0px}
+            .sp_business_results{margin-right: 350px;}
         </style>
 <?  }
     
@@ -32,16 +35,19 @@
         $spCard =       '<strong>Name:</strong> '.$sp_user_info->public_name.'<br />'.
                         '<strong>ID:</strong> '.$sp_user_info->id.'<br />'.
                         '<strong>Member since:</strong> '.$member_since.'<br />'.
-                        '<strong>Points:</strong> '.$sp_user_info->points;
+                        '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points:</strong></abbr> '.$sp_user_info->points;
         //Casey: store all the wallet stuff in a string called $spWallet and delete the following line
-        $spWallet =     '<strong>Rewards:</strong> '.$sp_wallet_test->rewards.'<br />'.
-                        '<strong>Points Earned:</strong> '.$sp_wallet_test->points.' points'.'<br />'.
-                        '<strong>Punch Cards:</strong> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_test) . "</div>".$sp_wallet_test->punch_cards.'<br />'.
+        $spWallet =     '<abbr title="Spend your points on rewards like free coffee or an oil change"> <strong>Rewards:</strong></abbr> '.$sp_wallet_test->rewards.'<br />'.
+                        '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points Earned:</strong></abbr> '.$sp_wallet_test->points.' points'.'<br />'.
+                        '<abbr title="See your progress on any in-progress punch cards from local businesses"><strong>Punch Cards:</strong></abbr> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_test) . "</div>".$sp_wallet_test->punch_cards.'<br />'.
                         '<strong>Coupons:</strong> <br />';
-        $spSearch =     '<img src="'.$sp_business->image.'" /><br />'.
+        $spSearch =     '<div id="map" class="sp_map"></div>'.
+                        '<div class="sp_business_results">'.
+                        '<img src="'.$sp_business->image.'" /><br />'.
                         '<strong>Business:</strong> '.$sp_business->local_name.'<br />'.
                         '<strong>Description:</strong> '.$sp_business->description.'<br />'.
-                        '<strong>Hours:</strong> '.$sp_business->hours.'<br />';
+                        '<strong>Hours:</strong> '.$sp_business->hours.'<br />'.
+                        '</div>';
     ?>
 
     <div style="margin:10px auto; width:200px;font-weight:normal;color:black;border:1px solid black;border-radius:10px;-moz-border-radius: 10px;webkit-border-radius:10px;">
@@ -55,7 +61,7 @@
     
     	<div id="spMenuLink1" class="spMenuLink">
             <span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus1"></span></span>
-            <a>Card</a>
+            <a><abbr title="Information about your Supportland card">Card </abbr></a>
     	</div>
     	<div class="sp_Result" id="spResult1">
             <?= $spCard ?> <br />
@@ -63,7 +69,7 @@
 
     	<div id="spMenuLink2" class="spMenuLink">
             <span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus2"></span></span>
-            <a>Wallet</a>
+            <a><abbr title="Your wallet contains your points earned, rewards purchased, and punch cards in progress">Wallet</abbr></a>
     	</div>
     	<div class="sp_Result" id="spResult2">
             <?= $spWallet ?>
@@ -71,7 +77,7 @@
 
     	<div id="spMenuLink3" class="spMenuLink">
             <span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus3"></span></span>
-            <a>Search</a>
+            <a><abbr title="Find local businesses and the rewards they offer.">Search</abbr></a>
     	</div>
         <div class="sp_Result" id="spResult3">
             
@@ -82,6 +88,7 @@
             
             <script>
                 $(document).ready(function() {
+                    init();
                     $("a#inline").fancybox({
                         'hideOnOverlayClick': false,
                         'hideOnContentClick': false,
@@ -175,5 +182,24 @@
             $sp_punch_card_punches .= "</span>";
         }
         return $sp_punch_card_punches;
+    }
+    function sp_map($lat, $lon, $scale) { ?>
+        
+        <script src="wp-content/plugins/supportland/maps/ulayers/ulayers.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            // <![CDATA[
+            var map;
+            function init() {
+                map = new uLayers.Map('map', uLayers.OSM);
+                map.setOrigin({lat: <?php echo $lat;?>, lon: <? echo $lon;?>}, <?echo $scale;?>);
+                map.addMarker({lat: <?php echo $lat;?>, lon: <? echo $lon;?>});
+                map.updateMap();
+            }
+            // ]]>
+        </script>
+
+
+    
+        <?php
     }
 ?>
