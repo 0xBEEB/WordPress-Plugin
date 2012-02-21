@@ -16,7 +16,7 @@ define("COOKIEPATH", "/");
 // This will need to be changed if you have a non-standard
 // plugin directory
 require_once(dirname(__FILE__) . '/../../../../wp-load.php');
-require_once(dirname(__FILE__) . '/../sp-settings.php');
+// require_once(dirname(__FILE__) . '/../sp-settings.php');
 
 /*! @class SP_Transaction
  *
@@ -312,12 +312,14 @@ function sp_good_token($sp_token) {
 }
 
 /*! @function sp_get_app_token
- * @author Thomas Schreiber <ubiquill@gmail.com>
- * @abstract Returns the app token set in the plugin settings
+ * @author Thomas Schreiber <ubiquill@gmail.com>, modified by David Liang
+ * @abstract Returns the app token set in the option table
  * @result string - the app's token
  */
 function sp_get_app_token() {
-    $plugin_options = get_option('plugin_options');
-    $sp_app_token = $plugin_options['app_token_text_string'];
-    return $sp_app_token;
+    $sp_app_token = get_option('sp_app_token');
+    if (!$sp_app_token)
+        return '';
+    else
+        return $sp_app_token;
 }
