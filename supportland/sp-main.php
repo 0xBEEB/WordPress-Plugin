@@ -25,77 +25,51 @@ Author URI: http://www.github.com/supportland/
 License: GPLv2 or later
 */
 
+require_once 'class-sp-widget.php';     // SP_Widget class file
+
+// instance of SP_Widget
+//$sp_widget = new SP_Widget();
+
 /*
-------- Program starts here -------
-*/
-    require_once 'lib/sp-api.php';
-    require_once 'sp-settings.php';
-    require_once 'sp-login.php';
-    require_once 'sp-mainMenu.php';
-    
-    //Output Google-hosted jQuery and some CSS (used with jQuery) into the <head> tag
-    
-    
-    function display_widget() {
-        $sp_user = new SP_User();
-        if(sp_get_app_token() == NULL) {
-            echo "<div style='color:red'> Supportland app token not set. <br> <br> Please contact the site administrator </div>";
-        }
-        else if($sp_user->logged_in() == true) {
-            //sp_wallet_page();
-            sp_mainMenu();
-        }
-        else {
-            sp_login_page();
-        }
-    }
-    
-    
-    // Shortcode //
-    function init_supportland(){
-        register_sidebar_widget('SupportlandWallet','display_widget');
-    }
+ * register the widget
+ */
+function plugin_register_widgets() {
+    register_widget('SP_Widget');
+}
+add_action('widgets_init', 'plugin_register_widgets');
 
-    // [sp_mini]
-    function sp_print_mini_widget() {
-        $sp_user = new SP_User();
-        $sp_trans = new SP_Transaction($sp_user);
-        $rval = "";
-        try {
-            $wallet = $sp_trans->get_wallet();
-            $wallet = json_decode($wallet);
-            $rval .= '<span style="margin:15 auto; width:200px;font-weight:bold;
-                              color:black;border:1px solid black;
-                              border-radius:10px;-moz-border-radius: 10px;
-                              webkit-border-radius:10px;">';
-            $rval .= $wallet->public_name . ", you have " . $wallet->points . " points <br>";
-            $rval .= "</span>";
-            return $rval;
+/*
+ * load CSS file
+ */
+function plugin_load_css() {
+    $style_url = path_join(WP_PLUGIN_URL, 
+            basename(dirname(__FILE__)) . "/css/style.css");
+    wp_register_style('supportland-widget', $style_url);
+    wp_enqueue_style('supportland-widget');
+    // load fancybox css
+    $fancy_url = path_join(WP_PLUGIN_URL,
+            basename(dirname(__FILE__)) . "/fancybox/jquery.fancybox-1.3.4.css");
+    wp_register_style('fancybox-1.3.4', $fancy_url);
+    wp_enqueue_style('fancybox-1.3.4');
+}
+add_action('wp_enqueue_scripts', 'plugin_load_css');
 
-        }
-        catch(Exception $e) {
-            //echo "Exception!!! " . $e->get_message(); 
-            //sp_print_login_form();
-            return;
-        }
-    }
-    
-    // include JavaScript files
-    function sp_widget_js_init()
-    {
-        sp_headerStuff();
-        wp_enqueue_script("supportland-widget", SP_PLUGIN_URL . "/js/sp.js");
-    }
-    add_action('wp_enqueue_scripts', 'sp_widget_js_init');
-
-    // include css files
-    function sp_widget_css_init()
-    {
-        wp_enqueue_style("supportland-widget", SP_PLUGIN_URL . "/css/style.css");
-    }
-    add_action('wp_enqueue_scripts', 'sp_widget_css_init');
-    
-    add_action('plugins_loaded','init_supportland');        
-
-    add_shortcode('sp_mini', 'sp_print_mini_widget');
+/*
+ * load JavaScript file
+ */
+function plugin_load_js() {
+    wp_register_script('jquery-1.7.1', 
+            'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
+    wp_enqueue_script('jquery-1.7.1');
+    $script_url = path_join(WP_PLUGIN_URL,
+            basename(dirname(__FILE__)) . "/js/sp.js");
+    wp_register_script('supportland-widget', $script_url);
+    wp_enqueue_script('supportland-widget');
+    // load fancy box js
+    $fancy_url = path_join(WP_PLUGIN_URL,
+            basename(dirname(__FILE__)) . "/fancybox/jquery.fancybox-1.3.4.pack.js");
+    wp_register_script('fancybox-1.3.4', $fancy_url);
+    wp_enqueue_script('fancybox-1.3.4');
+}
+add_action('wp_enqueue_scripts', 'plugin_load_js');
 ?>
