@@ -1,9 +1,12 @@
 <?php
 function sp_forgot_password() {
 ?>
+<<<<<<< HEAD
 <html>
 	<head>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+=======
+>>>>>>> 6fec4b674e846a648a988e434d4b304d3bdb9ffb
 		<style type="text/css">
  
 		.background
@@ -89,9 +92,12 @@ function sp_forgot_password() {
  
 		</script>
  
+<<<<<<< HEAD
 	</head>
 	<body>
  
+=======
+>>>>>>> 6fec4b674e846a648a988e434d4b304d3bdb9ffb
 	<a href="#" class="lightbox">Forgot your password?</a>
  
 	<div class="background"></div>
@@ -112,8 +118,14 @@ function sp_forgot_password() {
 		</div>	
 	</div>
  
+<<<<<<< HEAD
 	</body>
 </html>
 <?}
 
 ?>
+=======
+<?}
+
+?>
+>>>>>>> 6fec4b674e846a648a988e434d4b304d3bdb9ffb

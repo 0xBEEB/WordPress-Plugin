@@ -1,9 +1,12 @@
 <?php
 function sp_search() {
 ?>
+<<<<<<< HEAD
 <html>
 	<head>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+=======
+>>>>>>> 6fec4b674e846a648a988e434d4b304d3bdb9ffb
 		<style type="text/css">
  
 		.background
@@ -113,9 +116,12 @@ function sp_search() {
  
 		</script>
  
+<<<<<<< HEAD
 	</head>
 	<body>
  
+=======
+>>>>>>> 6fec4b674e846a648a988e434d4b304d3bdb9ffb
 	<label for="sp_search_store"> Search local store </label> </br>
    <div>
     	<input type="search" name="sp_search_store" id="sp_search_store"/> 
@@ -137,8 +143,14 @@ function sp_search() {
 		 <hr width = 100% >	
 	</div>
  
+<<<<<<< HEAD
 	</body>
 </html>
 <?}
 
 ?>
+=======
+<?}
+
+?>
+>>>>>>> 6fec4b674e846a648a988e434d4b304d3bdb9ffb
