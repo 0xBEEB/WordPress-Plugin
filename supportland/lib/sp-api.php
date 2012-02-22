@@ -162,7 +162,7 @@ class SP_User
             is trown.
      */
     public function authenticate($email, $password) {
-        $url = sp_get_uri() . "user.json?app_token=" . sp_get_app_token() . "&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
+        $url = sp_get_uri() . "user.json?&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
         $result = json_decode(sp_fetch($url));
         if (isset($result->access_token)) {
             $this->set_access_token($result->access_token);
@@ -246,6 +246,7 @@ function sp_get_uri() {
     @result string - The information the server responds with
 */
 function sp_fetch($url) {
+    $url = $url . "&app_token=" . sp_get_app_token();
     // initialize curl call
     $ch = curl_init();
 

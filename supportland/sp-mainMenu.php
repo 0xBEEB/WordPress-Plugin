@@ -36,7 +36,7 @@
         $sp_business = sp_business();
        	$member_since = date('D m/d/Y',strtotime($sp_user_info->member_since));
         //The content for the four sections will at some point come from queries to the API, but for now is hard coded as these dummy strings.
-        $spCard =       '<strong>Name:</strong> '.$sp_user_info->public_name.'<br />'.
+        $spCard =       '<strong>Name:</strong> '.$sp_user_info->name.'<br />'.
                         '<strong>ID:</strong> '.$sp_user_info->id.'<br />'.
                         '<strong>Member since:</strong> '.$member_since.'<br />'.
                         '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points:</strong></abbr> '.$sp_user_info->points;

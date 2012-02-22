@@ -68,7 +68,7 @@ License: GPLv2 or later
                               color:black;border:1px solid black;
                               border-radius:10px;-moz-border-radius: 10px;
                               webkit-border-radius:10px;">';
-            $rval .= $wallet->public_name . ", you have " . $wallet->points . " points <br>";
+            $rval .= $wallet->name . ", you have " . $wallet->points . " points <br>";
             $rval .= "</span>";
             return $rval;
 
