@@ -31,7 +31,7 @@
         
         $plugin_options = get_option('plugin_options');
         $app_token = $plugin_options['app_token_text_string'];
-        $sp_wallet_test = sp_wallet_item();
+        $sp_wallet_item = sp_wallet_item();
        	$sp_user_info= sp_user_info();
         $sp_business = sp_business();
        	$member_since = date('D m/d/Y',strtotime($sp_user_info->member_since));
@@ -40,9 +40,9 @@
                         '<strong>ID:</strong> '.$sp_user_info->id.'<br />'.
                         '<strong>Member since:</strong> '.$member_since.'<br />'.
                         '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points:</strong></abbr> '.$sp_user_info->points;
-        $spWallet =     '<abbr title="Spend your points on rewards like free coffee or an oil change"> <strong>Rewards:</strong></abbr> '.$sp_wallet_test->rewards.'<br />'.
-                        '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points Earned:</strong></abbr> '.$sp_wallet_test->points.' points'.'<br />'.
-                        '<abbr title="See your progress on any in-progress punch cards from local businesses"><strong>Punch Cards:</strong></abbr> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_test) . "</div>".$sp_wallet_test->punch_cards.'<br />'.
+        $spWallet =     '<abbr title="Spend your points on rewards like free coffee or an oil change"> <strong>Rewards:</strong></abbr> '.$sp_wallet_item->rewards.'<br />'.
+                        '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points Earned:</strong></abbr> '.$sp_wallet_item->points.' points'.'<br />'.
+                        '<abbr title="See your progress on any in-progress punch cards from local businesses"><strong>Punch Cards:</strong></abbr> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_item) . "</div>".$sp_wallet_test->punch_cards.'<br />'.
                         '<strong>Coupons:</strong> <br />';
         $spSearch =     '<div id="map" class="sp_map"></div>'.
                         '<div class="sp_business_results">'.
