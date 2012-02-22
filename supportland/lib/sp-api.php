@@ -124,7 +124,7 @@ class SP_Transaction
         }
     }
 
-    public function search($query="", $opts) {
+    public function search($query="", $opts=array()) {
         $url = sp_get_uri() . "search.json/?";
         if ($query != "")
             $url .= "&q=" . $query;
