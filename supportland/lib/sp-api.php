@@ -85,7 +85,7 @@ class SP_Transaction
      */
     public function get_wallet() {
         if($this->sp_user->logged_in()) {
-            $url = sp_get_uri() . "user/wallet/?access_token=" . $this->sp_user->get_access_token();
+            $url = sp_get_uri() . "user/wallet.json?access_token=" . $this->sp_user->get_access_token();
             return sp_fetch($url);
         } else {
             throw new Exception('Not logged in');

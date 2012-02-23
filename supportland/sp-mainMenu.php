@@ -39,12 +39,12 @@
         //Casey: store all the wallet stuff in a string called $spWallet and delete the following line
         $spWallet =     '<abbr title="Spend your points on rewards like free coffee or an oil change"> <strong>Rewards:</strong></abbr> '.$sp_wallet_test->rewards.'<br />'.
                         '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points Earned:</strong></abbr> '.$sp_wallet_test->points.' points'.'<br />'.
-                        '<abbr title="See your progress on any in-progress punch cards from local businesses"><strong>Punch Cards:</strong></abbr> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_test) . "</div>".$sp_wallet_test->punch_cards.'<br />'.
+                        '<abbr title="See your progress on any in-progress punch cards from local businesses"><strong>Punch Cards:</strong></abbr> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_test->punch) . "</div>".$sp_wallet_test->punch.'<br />'.
                         '<strong>Coupons:</strong> <br />';
         $spSearch =     '<div id="map" class="sp_map"></div>'.
                         '<div class="sp_business_results">'.
                         '<img src="'.$sp_business->image.'" /><br />'.
-                        '<strong>Business:</strong> '.$sp_business->local_name.'<br />'.
+                        '<strong>Business:</strong> '.$sp_business->name.'<br />'.
                         '<strong>Description:</strong> '.$sp_business->description.'<br />'.
                         '<strong>Hours:</strong> '.$sp_business->hours.'<br />'.
                         '</div>';

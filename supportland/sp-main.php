@@ -62,13 +62,12 @@ License: GPLv2 or later
         $sp_trans = new SP_Transaction($sp_user);
         $rval = "";
         try {
-            $wallet = $sp_trans->get_wallet();
-            $wallet = json_decode($wallet);
+            $user_info = $sp_trans->get_user_info();
             $rval .= '<span style="margin:15 auto; width:200px;font-weight:bold;
                               color:black;border:1px solid black;
                               border-radius:10px;-moz-border-radius: 10px;
                               webkit-border-radius:10px;">';
-            $rval .= $wallet->name . ", you have " . $wallet->points . " points <br>";
+            $rval .= $user_info->name . ", you have " . $user_info->points . " points <br>";
             $rval .= "</span>";
             return $rval;
 
