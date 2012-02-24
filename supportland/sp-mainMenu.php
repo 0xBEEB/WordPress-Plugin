@@ -101,7 +101,7 @@
                     });
                     $("#inline").click(function(){ 
                         console.log("hello");
-                        update_map(<?php echo $sp_business->lat.','.$sp_business->long.',15';?>);
+                        update_map(<?php echo $sp_business->lat.','.$sp_business->lon.',15';?>);
                     });
 
                 });
