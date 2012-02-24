@@ -85,7 +85,7 @@ class SP_Transaction
      */
     public function get_wallet() {
         if($this->sp_user->logged_in()) {
-            $url = sp_get_uri() . "user/wallet/?access_token=" . $this->sp_user->get_access_token();
+            $url = sp_get_uri() . "user/wallet.json?access_token=" . $this->sp_user->get_access_token();
             return sp_fetch($url);
         } else {
             throw new Exception('Not logged in');
@@ -122,6 +122,43 @@ class SP_Transaction
         } else {
             throw new Exception('Not logged in');
         }
+    }
+
+    /*! @function search
+        @abstract Search for businesses or rewards
+        @author Thomas Schreiber <ubiquill@gmail.com>
+        @result Object - A search result holding the various matching rewards 
+                         and businesses
+     */
+    public function search($query="", $opts=array()) {
+        $url = sp_get_uri() . "search.json/?";
+        if ($query != "")
+            $url .= "&q=" . $query;
+        if (isset($opts["sector"]))
+            $url .= "&sector=" . $opts["sector"];
+        if (isset($opts["geo"]))
+            $url .= "&geo=" . $opts["geo"];
+        if (isset($opts["date_range"]))
+            $url .= "&date_range=" . $opts["date_range"];
+        if (isset($opts["time_of_day"]))
+            $url .= "&time_of_day=" . $opts["time_of_day"];
+        if (isset($opts["weekday"]))
+            $url .= "&weekday=" . $opts["weekday"];
+        if (isset($opts["specials"]))
+            $url .= "&specials=" . $opts["specials"];
+        if (isset($opts["restrictions"]))
+            $url .= "&restrictions=" . $opts["restrictions"];
+        if (isset($opts["res_age"]))
+            $url .= "&res_age=" . $opts["res_age"];
+        if (isset($opts["res_sex"]))
+            $url .= "&res_sex=" . $opts["res_sex"];
+        if (isset($opts["points"]))
+            $url .= "&points=" . $opts["points"];
+        if (isset($opts["price"]))
+            $url .= "&price=" . $opts["price"];
+
+        return sp_fetch($url);
+
     }
 
 }

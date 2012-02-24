@@ -47,7 +47,7 @@
         $spSearch =     '<div id="map" class="sp_map"></div>'.
                         '<div class="sp_business_results">'.
                         '<img src="'.$sp_business->image.'" /><br />'.
-                        '<strong>Business:</strong> '.$sp_business->local_name.'<br />'.
+                        '<strong>Business:</strong> '.$sp_business->name.'<br />'.
                         '<strong>Description:</strong> '.$sp_business->description.'<br />'.
                         '<strong>Hours:</strong> '.$sp_business->hours.'<br />'.
                         '</div>';
