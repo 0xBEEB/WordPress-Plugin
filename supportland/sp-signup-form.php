@@ -1,58 +1,93 @@
 <?php
-
-// ----- Need to work on this form in order to get form popup. Will fix later ------//
 function sp_signup_form() {
-?>
+    ?>
         <div id="dialog-modal" title="Registration Form">
- 	
-    
-    	<div class="registration_form">
-        <h3 style="margin:5px" abbr title="Signing up for a Supportland account will allow you to see your points and claim rewards online!">Account Registration</h3>
-        <div id="formdiv">
-        <label for="fname">First Name:</label> <br />
-        <input type="text" name="fname" value="" id="fname" /><br />
-        <label for="lname">Last Name:</label> <br />
-        <input type="text" name="lname" value="" id="lname" /><br />
-        <label for="email" abbr title="Enter the email address you want us to use to contact you">Email Address:</label> <br />
-        <input type="text" name="email" value="" id="email" /><br />
-        <label for="password" abbr title="Please choose a password">Password:</label> <br />
-        <input type="password" name="password" id="password" /><br />
-        <label for="password2" abbr title="Please enter your password again to make sure there are no typos.">Confirm Password:</label><br />
-        <input type="password" name="password2" id="password2" /><br />
-        <p align="right" > <input type="submit" value="Submit" id="submitReg" /> </p>
-        <div id="formoutReg" style="width:100%;text-align:right;display:none;"></div>
+            <div id="signup_top" title="Signing up for a Supportland account will allow you to see your points and claim rewards online!">
+                Account Registration
+            </div>
+            <div id="registration_form">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="signup_label_div">
+                                <label for="fname" title="Enter your first name">First Name:</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input id="fname" name="fname" value="" type="text" />
+                        </td>
+                        <td>
+                            <div id="fn_error" class="signup_error">
+                                first name is required
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="signup_label_div">
+                                <label for="lname" title="Enter your last name">Last Name:</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" name="lname" value="" id="lname" />
+                        </td>
+                        <td>
+                            <div id="ln_error" class="signup_error">
+                                last name is required
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="signup_label_div">
+                                <label for="email" title="Enter the email address you want us to use to contact you">Username(Email):</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" name="email" value="" id="email" />
+                        </td>
+                        <td>
+                            <div id="un_error" class="signup_error">
+                                username is required
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="signup_label_div">
+                                <label for="password" title="Please choose a password">Password:</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="password" name="password" id="password" />
+                        </td>
+                        <td>
+                            <div id="pw_error" class="signup_error">
+                                password can not be empty
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="signup_label_div">
+                                <label for="password2" title="Please enter your password again to make sure there are no typos">Confirm Password:</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="password" name="password2" id="password2" />
+                        </td>
+                        <td>
+                            <div id="pwc_error" class="signup_error">
+                                passwords don't match
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div style="text-align: right;">
+                    <input type="button" value="Submit" id="submitReg" />
+                </div>
+            </div>
         </div>
-
-        <script type="text/JavaScript">  
-            $(document).ready(function(){  
-                $("#submitReg").unbind('click').click(function(){ //unbinding so it doesn't fire twice.  there has to be a better way!!!
-                    $('#lpmError').append('r');
-
-                    if($("#formoutReg").is(":visible")){
-                        $("#formoutReg").toggle(500, function() {
-                            // Animation complete.
-                        })
-                    } 
-
-                    $("#formoutReg").queue(function () {
-                        $(this).load("<?php echo plugins_url(); ?>/supportland/register.php", { fname: $('#fname').val(),
-                            lname: $('#lname').val(), email: $('#email').val(),
-                            password: $('#password').val(),
-                            password2: $('#password2').val() });
-                        $(this).dequeue();
-                    });
-                    
-                     $("#formoutReg").queue(function () {
-                        $(this).delay(500).toggle(500, function() {
-                            // Animation complete.
-                        })
-                        $(this).dequeue();
-                    });
-                });
-            });
-        </script>
-        </div>
-    </div>
-<?}
-
+    <?php
+}
 ?>
