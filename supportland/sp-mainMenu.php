@@ -22,6 +22,7 @@
             .sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
             .sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
             .sp_map{border: 1px solid black; width: 300px; height: 240px;position: absolute; right: 0px}
+            #sp_punch_card_form{border: 1px solid black; width: 300px; height: 240px;position: absolute; right: 0px}
             .sp_business_results{margin-right: 350px;}
         </style>
 <?  }
@@ -42,7 +43,7 @@
                         '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points:</strong></abbr> '.$sp_user_info->points;
         $spWallet =     '<abbr title="Spend your points on rewards like free coffee or an oil change"> <strong>Rewards:</strong></abbr> '.$sp_wallet_item->rewards.'<br />'.
                         '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points Earned:</strong></abbr> '.$sp_wallet_item->points.' points'.'<br />'.
-                        '<abbr title="See your progress on any in-progress punch cards from local businesses"><strong>Punch Cards:</strong></abbr> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_item) . "</div>".$sp_wallet_test->punch_cards.'<br />'.
+                        '<abbr title="See your progress on any in-progress punch cards from local businesses"><strong>Punch Cards:</strong></abbr> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_item) . "</div>".'<br />'.
                         '<strong>Coupons:</strong> <br />';
         $spSearch =     '<div id="map" class="sp_map"></div>'.
                         '<div class="sp_business_results">'.
@@ -100,7 +101,6 @@
                         'showCloseButton': true
                     });
                     $("#inline").click(function(){ 
-                        console.log("hello");
                         update_map(<?php echo $sp_business->lat.','.$sp_business->lon.',15';?>);
                     });
 
@@ -171,24 +171,27 @@
     function sp_print_punches($sp_wallet_info) {
         
         $sp_punch_card_punches = "";
-        $sp_total_punches = 5;
-        $sp_acquired_punches = intval($sp_wallet_info->wallet->punch[0]->status);
-        for($i=0; $i<count($sp_wallet_info->wallet->punch); $i++) {
-            $sp_punch_card_punches .=  "<span style='font-size:10px'>".
-                                       $sp_wallet_info->wallet->punch[$i]->title.
-                                       "</span ><br/>"; 
+        $sp_total_punches = 0;
+        for($i=0; $i<count($sp_wallet_info->punch); $i++) {
+            $sp_acquired_punches = intval($sp_wallet_info->punch[$i]->wallet->quantity);
+            $sp_total_punches = intval($sp_wallet_info->punch[$i]->cost); 
+            $sp_punch_card_punches .=  "\n\t<div id='sp_punch_card_form>\n".
+                                       "\t\t<span>".$sp_wallet_info->punch[$i]->title."</span><br />";
+            
             for($j=0; $j<$sp_total_punches;$j++) {
                 if($j < $sp_acquired_punches)
                     $sp_punch_card_punches .=   "<img alt='".
-                                                $sp_wallet_info->wallet->punch[i]->Title.
+                                                $sp_wallet_info->punch[i]->title.
                                                 "' src='wp-content/plugins/supportland/images/punched_punch.png' />";
                 else {
                     $sp_punch_card_punches .= "<img alt='".
-                                               $sp_wallet_info->wallet->punch[i]->Title."
+                                               $sp_wallet_info->punch[i]->title."
                                                ' src='wp-content/plugins/supportland/images/empty_punch.png' />";
                 }
             }
-            $sp_punch_card_punches .= "</span>";
+            $sp_punch_card_punches .= "</div>";
+//            "\t\t</fieldset>\n".
+//                                      "\t</form>\n";
         }
         return $sp_punch_card_punches;
     }
@@ -224,14 +227,11 @@
             var map;
             function init() {
                 map = new uLayers.Map('map', uLayers.OSM);
-                console.log("map initialized");
             }
             function update_map(latitude, longitude, scale) {
-                console.log(latitude, longitude, scale);
                 map.setOrigin({lat: latitude, lon: longitude}, scale);
                 map.addMarker({lat: latitude, lon: longitude});
                 map.updateMap();
-                console.log("map printing");
             }
             // ]]>
         </script>
