@@ -124,6 +124,12 @@ class SP_Transaction
         }
     }
 
+    /*! @function search
+        @abstract Search for businesses or rewards
+        @author Thomas Schreiber <ubiquill@gmail.com>
+        @result Object - A search result holding the various matching rewards 
+                         and businesses
+     */
     public function search($query="", $opts=array()) {
         $url = sp_get_uri() . "search.json/?";
         if ($query != "")
