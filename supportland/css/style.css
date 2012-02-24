@@ -164,11 +164,15 @@
     width: 200px;
 }
 
-.signup_label {
+.signup_label_div {
     padding-top: 9px;
     text-align: right;
     white-space: nowrap;
     font-size: 12px;
+}
+
+.signup_label_div label {
+    cursor: help;
 }
 
 .signup_error {
