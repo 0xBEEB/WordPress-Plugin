@@ -3,7 +3,7 @@ function sp_search() {
 ?>
     <div>
     Search Local Businesses:
-    <input type="search" name="sp_search" id="sp_search" /> 
+    <input type="text" name="sp_search" id="sp_search" /> 
     <input type="submit" name="sp_search_submit" id="sp_search_submit" value="Search" />
     <span style="float:right;"><a>[?]</a></span>
     

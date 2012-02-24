@@ -1,5 +1,7 @@
 #sp_wrapper{background-color:#f4f4f4;padding:8px;}
 #sp_wrapper hr{margin:2px;}
+#sp_wrapper input[type="text"]{height:14px;width:95%;font-size:12px;padding:3px;}
+#sp_wrapper input[type="password"]{height:14px;width:95%;font-size:12px;padding:3px;}
 .sp_clear{clear:both;}
 
 #sp_user_info fieldset {border:1px solid black;padding:1em;font-size:0.9em;}
@@ -8,5 +10,5 @@
                   background:url('../images/supportland_s_logo_sm.png') no-repeat;}
 
 /* Search */
-#sp_search {width:95%;clear:both;}
+#sp_search {clear:both;}
 #sp_search_submit{}

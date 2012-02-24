@@ -70,7 +70,7 @@ function sp_mainMenu() {
 
     <div id="spMenuLink1" class="spMenuLink">
         <span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus1"></span></span>
-        <a><abbr title="Information about your Supportland card">Card </abbr></a>
+        <a>Card</a> <span style="float:right;"><a title="Your wallet contains your points earned, rewards purchased, and punch cards in progress">[?]</a></span>
     </div>
     <div class="sp_Result" id="spResult1">
         <?php echo $spCard; ?> <br />
@@ -78,18 +78,18 @@ function sp_mainMenu() {
 
     <div id="spMenuLink2" class="spMenuLink">
         <span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus2"></span></span>
-        <a><abbr title="Your wallet contains your points earned, rewards purchased, and punch cards in progress">Wallet</abbr></a>
+        <a>Wallet</a> <span style="float:right;"><a title="Your wallet contains your points earned, rewards purchased, and punch cards in progress">[?]</a></span>
     </div>
     <div class="sp_Result" id="spResult2">
         <?php echo $spWallet; ?>
     </div>
-
+<?php /*
     <div id="spMenuLink3" class="spMenuLink">
         <span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus3"></span></span>
         <a><abbr title="Find local businesses and the rewards they offer.">Search</abbr></a>
     </div>
     <div class="sp_Result" id="spResult3">
-<?php /*
+
         <a id="inline" href="#data">Display the search data</a>
         <div style="display:none"><div id="data"><?php echo $spSearch; ?></div></div>
 
