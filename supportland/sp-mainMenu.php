@@ -40,11 +40,11 @@ function sp_display_card_menu($user_info) {
                 <a>Card</a>
             </div>
             <div class="sp_Result" style="display:none;">
-                <strong>Name:</strong> <?php echo($user_info->public_name); ?> <br />
-                <strong>ID:</strong> <?php echo($user_info->id); ?> <br />
-                <strong>Member since:</strong> <?php echo($member_since); ?> <br />
+                <strong>Name: </strong> <?php echo($user_info->name); ?> <br />
+                <strong>ID: </strong> <?php echo($user_info->id); ?> <br />
+                <strong>Member since: </strong> <?php echo($member_since); ?> <br />
                 <abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business">
-                    <strong>Points:</strong><?php echo($user_info->points); ?>
+                    <strong>Points: </strong><?php echo($user_info->points); ?>
                 </abbr>
             </div>
         </div>
@@ -62,7 +62,7 @@ function sp_display_wallet_menu($wallet) {
                 <a>Wallet</a>
             </div>
             <div class="sp_Result" style="display:none;">
-                <abbr title="Spend yur points on rewards like free coffee or an oil change">
+                <abbr title="Spend your points on rewards like free coffee or an oil change">
                     <strong>Rewards:</strong>
                 </abbr><?php echo($wallet->rewards); ?> <br />
                 <abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business">
@@ -72,7 +72,7 @@ function sp_display_wallet_menu($wallet) {
                     <strong>Punch Cards:</strong>
                 </abbr>
                 <div class="sp_punch_card_display">
-                    <?php sp_print_punches($wallet); ?>
+                    <?php sp_print_punches($wallet->punch); ?>
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@ function sp_display_search_menu($sp_business) {
                         <div id="map" class="sp_map"></div>
                         <div class="sp_business_results">
                             <img src="<?php echo $sp_business->image; ?>" /><br/>
-                            <strong>Business:</strong><?php echo $sp_business->local_name; ?><br/>
+                            <strong>Business:</strong><?php echo $sp_business->name; ?><br/>
                             <strong>Description:</strong><?php echo $sp_business->description; ?><br/>
                             <strong>Hours:</strong><?php echo $sp_business->hours; ?>
                         </div>
