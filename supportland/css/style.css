@@ -1,6 +1,12 @@
-#sp_user_info fieldset {
-    border: 1px solid black;
-    padding: 1em;
-    font-size: 0.9em;
-}
+#sp_wrapper{background-color:#f4f4f4;padding:8px;}
+#sp_wrapper hr{margin:2px;}
+.sp_clear{clear:both;}
 
+#sp_user_info fieldset {border:1px solid black;padding:1em;font-size:0.9em;}
+
+#sp_logo{display:inline-block;vertical-align:middle;height:19px;width:24px;margin-right:4px;
+                  background:url('../images/supportland_s_logo_sm.png') no-repeat;}
+
+/* Search */
+#sp_search {width:95%;clear:both;}
+#sp_search_submit{}

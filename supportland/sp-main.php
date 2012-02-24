@@ -1,4 +1,4 @@
-<?php
+ <?php
 /*******************************************************************************
  * Supportland WordPress Widget
  * supportland/sp_main.php
@@ -32,10 +32,7 @@ License: GPLv2 or later
     require_once 'sp-settings.php';
     require_once 'sp-login.php';
     require_once 'sp-mainMenu.php';
-    
-    //Output Google-hosted jQuery and some CSS (used with jQuery) into the <head> tag
-    
-    
+
     function display_widget() {
         $sp_user = new SP_User();
         if(sp_get_app_token() == NULL) {
@@ -49,8 +46,7 @@ License: GPLv2 or later
             sp_login_page();
         }
     }
-    
-    
+
     // Shortcode //
     function init_supportland(){
         register_sidebar_widget('SupportlandWallet','display_widget');

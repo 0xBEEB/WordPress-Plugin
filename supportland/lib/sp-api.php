@@ -125,9 +125,9 @@ class SP_Transaction
     }
 
     public function search($query="", $opts=array()) {
-        $url = sp_get_uri() . "search.json/?";
-        if ($query != "")
-            $url .= "&q=" . $query;
+
+        $url = sp_get_uri() . "search.json?q=" . $query;
+        
         if (isset($opts["sector"]))
             $url .= "&sector=" . $opts["sector"];
         if (isset($opts["geo"]))
@@ -150,11 +150,9 @@ class SP_Transaction
             $url .= "&points=" . $opts["points"];
         if (isset($opts["price"]))
             $url .= "&price=" . $opts["price"];
-
+        
         return sp_fetch($url);
-
     }
-
 }
 
 /*! @class SP_User

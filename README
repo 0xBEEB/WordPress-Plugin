@@ -28,3 +28,10 @@ Centeral library for handling API. User authentication and session handling.
 Initial iteration of main widget. Main widget now has user info and wallet
 views. Plugin settings page for storing app_token. All hard coded tokens
 have been removed from code base. Unit tests.
+
+--------------------------------------------------------------------------------
+Known Issues:
+If you're using the Twenty Eleven theme you may find that the fancybox pop-ups
+appear below the banner you may have to change the z-index for #branding to 999.
+For more information please visit the following URL:
+http://wordpress.org/support/topic/plugin-easy-fancybox-fancybox-popout-under-menuheader
