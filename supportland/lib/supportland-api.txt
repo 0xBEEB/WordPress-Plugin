@@ -96,6 +96,16 @@ Classes:
                   * points:
                   * wallet:
 
+            search(query, opts):
+                Returns a PHP object with the search results:
+                * metro: Locality
+                * access_token: The users access token 
+                * link: URL of current search
+                * page_number: Number of pages
+                * page_size: Number of results per page
+                * hit_count: Total number of results
+                * results: Array of results
+
     SP_User:
         This creates objects that represent a user.
 
