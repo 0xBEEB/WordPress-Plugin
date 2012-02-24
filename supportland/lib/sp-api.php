@@ -85,7 +85,7 @@ class SP_Transaction
      */
     public function get_wallet() {
         if($this->sp_user->logged_in()) {
-            $url = sp_get_uri() . "user/wallet/?access_token=" . $this->sp_user->get_access_token();
+            $url = sp_get_uri() . "user/wallet.json?access_token=" . $this->sp_user->get_access_token();
             return sp_fetch($url);
         } else {
             throw new Exception('Not logged in');
@@ -122,6 +122,44 @@ class SP_Transaction
         } else {
             throw new Exception('Not logged in');
         }
+    }
+
+    
+    /*! @function search
+        @abstract Search for businesses or rewards
+        @author Thomas Schreiber <ubiquill@gmail.com>
+        @result Object - A search result holding the various matching rewards 
+                         and businesses
+     */
+    public function search($query="", $opts=array()) {
+        $url = sp_get_uri() . "search.json/?";
+        if ($query != "")
+            $url .= "&q=" . $query;
+        if (isset($opts["sector"]))
+            $url .= "&sector=" . $opts["sector"];
+        if (isset($opts["geo"]))
+            $url .= "&geo=" . $opts["geo"];
+        if (isset($opts["date_range"]))
+            $url .= "&date_range=" . $opts["date_range"];
+        if (isset($opts["time_of_day"]))
+            $url .= "&time_of_day=" . $opts["time_of_day"];
+        if (isset($opts["weekday"]))
+            $url .= "&weekday=" . $opts["weekday"];
+        if (isset($opts["specials"]))
+            $url .= "&specials=" . $opts["specials"];
+        if (isset($opts["restrictions"]))
+            $url .= "&restrictions=" . $opts["restrictions"];
+        if (isset($opts["res_age"]))
+            $url .= "&res_age=" . $opts["res_age"];
+        if (isset($opts["res_sex"]))
+            $url .= "&res_sex=" . $opts["res_sex"];
+        if (isset($opts["points"]))
+            $url .= "&points=" . $opts["points"];
+        if (isset($opts["price"]))
+            $url .= "&price=" . $opts["price"];
+
+        return sp_fetch($url);
+
     }
 
 }
@@ -162,7 +200,7 @@ class SP_User
             is trown.
      */
     public function authenticate($email, $password) {
-        $url = sp_get_uri() . "user.json?app_token=" . sp_get_app_token() . "&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
+        $url = sp_get_uri() . "user.json?&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
         $result = json_decode(sp_fetch($url));
         if (isset($result->access_token)) {
             $this->set_access_token($result->access_token);
@@ -246,6 +284,7 @@ function sp_get_uri() {
     @result string - The information the server responds with
 */
 function sp_fetch($url) {
+    $url = $url . "&app_token=" . sp_get_app_token();
     // initialize curl call
     $ch = curl_init();
 
