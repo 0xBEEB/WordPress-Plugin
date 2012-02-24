@@ -47,9 +47,12 @@
                              data: {'sp_login_email': $("#login_email").val(), 'sp_login_password':$("#login_password").val()},
                              success: function(data) {
                                  console.log(data);
-                                if($.trim(data) == "Yes")
-                                    window.location.reload();
-                                else {
+                                if($.trim(data) == "Yes") {
+                                    var selfUrl = unescape(window.location.pathname);
+                                    location.reload(true);
+                                    window.location.replace(selfUrl);
+                                    window.location.href = selfUrl;
+                                } else {
                                     $(".login_error").html(data);
                                     $(".login_error").show();
                                 }
