@@ -47,6 +47,7 @@
 }
 
 #sp_login_form_content div {
+    vertical-align: middle;
     text-align: right;
 }
 
