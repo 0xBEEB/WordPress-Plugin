@@ -72,6 +72,9 @@ function display_login_form() {
                     </tbody>
                 </table>
                 <div>
+                    <span>
+                        <img id="sp_login_loader" src="wp-content/plugins/supportland/images/ajax-loader.gif" alt="loading..." />
+                    </span>&nbsp;&nbsp;
                     <input type="button" id="sp_login_btn" name="sp_login_btn" value="Log in" />
                 </div>
             </div>
