@@ -126,6 +126,67 @@
     border-left: 1px dashed #ccc;
 }
 
+/* user information board css */
+#sp_user_info_board {
+    border-radius: 5px 5px 5px 5px;
+    display: block;
+    margin: 0;
+    padding: 3px;
+    position: relative;
+    text-decoration: none;
+    width: 95%;
+    z-index: 99;
+    background: none repeat scroll 0 0 #F5F5F5;
+    border: 1px solid #F5F5F5;
+    box-shadow: 1px 5px 10px #888888;
+    color: #000000;
+    cursor: text;
+}
+
+/* left column of user info card */
+#sp_user_points_area {
+    vertical-align: bottom; 
+    line-height: 12px;
+    width: 55px;
+    padding-top: 15px;
+}
+
+/* user point label */
+#sp_user_points_area label {
+    float: left;
+    font: bold 45px Verdana,Arial,Helvetica,sans-serif;
+    padding: 0 5px;
+    position: relative;
+    text-align: left;
+    width: 30px;
+}
+
+#sp_user_points_area span {
+    margin-left: 38px; 
+    float: left;
+}
+
+/* right column of user info card */
+#sp_user_info_area {
+    font-size: 10px; 
+    vertical-align: top;
+    text-align: right;
+}
+
+/* user name tag */
+#sp_user_name {
+    font: bold 16px Verdana,Arial,Helvetica,sans-serif;
+    padding: 5px 0;
+}
+
+#sp_user_id {
+    font-size: 10px;
+}
+
+#sp_user_since {
+    font-size: 8px;
+}
+
 .sp_punch_card_display {
     margin-left: 11px;
     padding-left: 11px;
