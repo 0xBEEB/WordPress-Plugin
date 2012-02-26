@@ -1,4 +1,5 @@
 jQuery(document).ready(function($){
+    hide_login_loader();
     // login anchor click
     $("#sp_login_area").find('a').click(function(){
         $("#sp_login_form_content").toggle('fast');
@@ -6,11 +7,13 @@ jQuery(document).ready(function($){
     
     // login form validation
     $("#sp_login_btn").click(function(){
+        show_login_loader();
         var email = $("#sp_login_email").val();
         if (!is_valid_email(email)) {
             // show email error message
             $("#sp_login_email_error").show();
             $("#sp_login_email").css('border-color', 'orange red');
+            hide_login_loader();
             return false;
         }
         else {
@@ -22,6 +25,7 @@ jQuery(document).ready(function($){
             // show password error message
             $("#sp_login_pw_error").show();
             $("#sp_login_password").css('border-color', 'orange red');
+            hide_login_loader();
             return false;
         }
         else {
@@ -41,10 +45,23 @@ jQuery(document).ready(function($){
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 $("#sp_login_error").html(jqXHR.responseText).show();
+                hide_login_loader();
             }
         });
         return false;
     });
+    
+    // show login loader
+    function show_login_loader() {
+        $("#sp_login_loader").show();
+        // disable login button, and change text to 'loading'
+        $("#sp_login_btn").val('loading...').attr('disabled', 'disabled');
+    }
+    // hide login loader
+    function hide_login_loader() {
+        $("#sp_login_btn").val('Log in').removeAttr('disabled');
+        $("#sp_login_loader").hide();
+    }
     
     function is_valid_email(email) {
         if (email == '')
