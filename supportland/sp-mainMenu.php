@@ -22,8 +22,11 @@
             .sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
             .sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
             .sp_map{border: 1px solid black; width: 300px; height: 240px;position: absolute; right: 0px}
-            #sp_punch_card_form{border: 1px solid black; width: 300px; height: 240px;position: absolute; right: 0px}
             .sp_business_results{margin-right: 350px;}
+            .sp_punch_card_punch{bottom:-3px;background-color:#2b3856;height:14px;width:14px;border-radius: 7px;-moz-border-radius:7px;position:relative;display:inline-block;border-style:solid;border-width:1px;border-color:black;}
+            .sp_punch_card_empty{bottom:-3px;background-color:#FFFFFF;height:14px;width:14px;border-radius: 7px;-moz-border-radius:7px;position:relative;display:inline-block;border-style:solid;border-width:1px;border-color:black;}
+            .sp_punch_card{margin-right:5px;border-style:solid;border-width:1px;border-color:black;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:2px;}
+            .sp_punch_title{margin-left:5px;}
         </style>
 <?  }
     
@@ -173,23 +176,22 @@
         $sp_punch_card_punches = "";
         $sp_total_punches = 0;
         for($i=0; $i<count($sp_wallet_info->punch); $i++) {
-            $sp_acquired_punches = intval($sp_wallet_info->punch[$i]->wallet->quantity);
             $sp_total_punches = intval($sp_wallet_info->punch[$i]->cost); 
-            $sp_punch_card_punches .=  "\n\t<div id='sp_punch_card_form>\n".
-                                       "\t\t<span>".$sp_wallet_info->punch[$i]->title."</span><br />";
-            
+            $sp_acquired_punches = $sp_total_punches - intval($sp_wallet_info->punch[$i]->wallet->quantity);
+//            $sp_punch_card_punches .= "\t\t<div class='sp_punch_card'>".$sp_wallet_info->punch[$i]->title."<br/>";
+            $sp_punch_card_punches .= '<form><fieldset class="sp_punch_card"><legend>'.$sp_wallet_info->punch[$i]->title.'</legend>';
             for($j=0; $j<$sp_total_punches;$j++) {
                 if($j < $sp_acquired_punches)
-                    $sp_punch_card_punches .=   "<img alt='".
-                                                $sp_wallet_info->punch[i]->title.
-                                                "' src='wp-content/plugins/supportland/images/punched_punch.png' />";
+                    $sp_punch_card_punches .= '<span class="sp_punch_card_punch"></span>';
                 else {
-                    $sp_punch_card_punches .= "<img alt='".
-                                               $sp_wallet_info->punch[i]->title."
-                                               ' src='wp-content/plugins/supportland/images/empty_punch.png' />";
+                    //$sp_punch_card_punches .= '<span class="sp_plusMinusHBar"></span>';//"<img alt='".
+                    $sp_punch_card_punches .= '<span class="sp_punch_card_empty"></span>';
+                                              // $sp_wallet_info->punch[i]->title."
+                                              // ' src='wp-content/plugins/supportland/images/empty_punch.png' />";
                 }
             }
-            $sp_punch_card_punches .= "</div>";
+            $sp_punch_card_punches .= '</fieldset></form>';
+//            $sp_punch_card_punches .= "</div>";
 //            "\t\t</fieldset>\n".
 //                                      "\t</form>\n";
         }
