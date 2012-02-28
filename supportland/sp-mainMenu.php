@@ -40,21 +40,18 @@ function sp_display_card_menu($user_info) {
                 <a>Card</a>
             </div>
             <div class="sp_Result" style="display:none;">
-                <table id="sp_user_info_board">
-                    <tr>
-                        <td id="sp_user_points_area">
-                            <label>
-                                <?php echo($user_info->points); ?>
-                            </label>
-                            <span>pts</span>
-                        </td>
-                        <td id="sp_user_info_area">
-                            <div id="sp_user_name"><?php echo($user_info->name); ?></div>
-                            <div id="sp_user_id">ID: <?php echo($user_info->id); ?></div>
-                            <div id="sp_user_since">since: <?php echo($member_since); ?></div>
-                        </td>
-                    </tr>
-                </table>
+                <div id="sp_user_info_board">
+                    <div id="sp_user_name"><?php echo($user_info->name); ?></div>
+                    <div id="sp_point_area">
+                        <label id="sp_user_point_label"><?php echo($user_info->points); ?></label>
+                        <span id="sp_user_info_etc">
+                            ID: <?php echo($user_info->id); ?>
+                        </span>
+                    </div>
+                    <div id="sp_user_point_marker">
+                        pts
+                    </div>
+                </div>
             </div>
         </div>
     <?php
