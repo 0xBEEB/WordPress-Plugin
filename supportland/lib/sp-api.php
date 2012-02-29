@@ -127,21 +127,31 @@ class SP_Transaction
         }
     }
         
-        public function get_reward($rewardid)
-        {
-            $url = "https://api.supportland.com/1.0/reward/2072.xml?app_token=teamdoughnut2740&access_token=d4a68f6645b0e24bc3bbfe9e12c06d7e55894897";
-            $opts = array('https' =>
-                array(
-                       'method' => 'POST',
-                )
-            );
+    public function get_reward($rewardid)
+    {
+        $url = sp_get_uri()."reward/".$rewardid."?app_token=".sp_get_app_token()."&access_token=".$this->sp_user->get_access_token();
+        echo $url."<br>";
             
-            $context = stream_context_create($opts);
-            $stream = fopen($url, 'r', false, $context);
-            
-            var_dump(stream_get_contents($stream));
-            fclose($stream);
-        }
+        $ch = curl_init();
+
+        // set curl url
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // set curl https settings
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);  // SSL, Y U NO WORK?
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/CAcerts/BuiltinObjectToken_GoDaddyClass2CA.crt");
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+
+        // make the request
+        $response = curl_exec($ch);
+
+        // close the call
+        curl_close($ch);
+
+        return $response;
+    }
     
 
     /*! @function search

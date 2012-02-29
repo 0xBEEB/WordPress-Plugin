@@ -44,13 +44,13 @@ License: GPLv2 or later
         else if($sp_user->logged_in() == true) {
             //sp_wallet_page();
             sp_mainMenu();
-            
+            $sp_trans = new SP_Transaction($sp_user);
+            $rewardreply = $sp_trans->get_reward('2072'); 
+            echo "<div>".$rewardreply."</div>";
         }
         else {
-            $sp_user = new SP_User();
-            $sp_trans = new SP_Transaction($sp_user);
-            $sp_trans->get_reward('2702');
-            //sp_login_page();
+            
+            sp_login_page();
         }
     }
     
