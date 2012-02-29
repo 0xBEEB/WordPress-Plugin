@@ -1,13 +1,10 @@
 <?php
 //Should get the app token from somewhere
-require_once(dirname(__FILE__) . '/../../../wp-load.php');
-require_once(dirname(__FILE__) . '/sp-settings.php');
-$plugin_options = get_option('plugin_options');
-$app_token = $plugin_options['app_token_text_string'];
+require_once('lib/sp-api.php');
 
 //Check to see if all data fields have user input -- this is the one type of
 //error checking we have to do, other errors come from the API.
-if( empty($_POST["firstname"]) || empty($_POST["lastname"]) || empty($_POST["email"])
+if( empty($_POST["fname"]) || empty($_POST["lname"]) || empty($_POST["email"])
         || empty($_POST["password"]) || empty($_POST["password2"]) ) {
     echo "Please enter data in all fields.";
     exit;
@@ -24,7 +21,7 @@ $password2 = $_POST["password2"];
 
 //Get SP API data from endpoint using cURL
 $url = 'https://api.supportland.com/1.0/user/registration/'.$email.'/'.$password
-        .'/'.$password2.'/'.$fname.'/'.$lname.'?app_token='.$apptoken;
+        .'/'.$password2.'/'.$fname.'/'.$lname.'?app_token='. sp_get_app_token();
 $curl_handle=curl_init();
 curl_setopt($curl_handle,CURLOPT_URL,$url);
 curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,2);
