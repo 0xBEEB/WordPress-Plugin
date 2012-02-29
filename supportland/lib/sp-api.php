@@ -61,6 +61,7 @@ class SP_Transaction
 
         if ($this->sp_user->logged_in()) {
             $url = sp_get_uri() . "business/" . $bid . ".json?access_token=" . $this->sp_user->get_access_token();
+            $url .= "&app_token=" . sp_get_app_token();
             $buffer = sp_fetch($url);       //Get data from API
             $json = json_decode($buffer);   //Decode JSON
             if($json) {                     //Something came back from the API
@@ -86,6 +87,7 @@ class SP_Transaction
     public function get_wallet() {
         if($this->sp_user->logged_in()) {
             $url = sp_get_uri() . "user/wallet.json?access_token=" . $this->sp_user->get_access_token();
+            $url .= "&app_token=" . sp_get_app_token();
             return sp_fetch($url);
         } else {
             throw new Exception('Not logged in');
@@ -108,6 +110,7 @@ class SP_Transaction
         
         if($this->sp_user->logged_in()) {
             $url = sp_get_uri() . "user.json?access_token=" . $this->sp_user->get_access_token();
+            $url .= "&app_token=" . sp_get_app_token();
             $buffer = sp_fetch($url);       //Get data from API
             $json = json_decode($buffer);   //Decode JSON
             if($json) {                     //Something came back from the API
@@ -158,6 +161,7 @@ class SP_Transaction
         if (isset($opts["price"]))
             $url .= "&price=" . $opts["price"];
 
+        $url .= "&app_token=" . sp_get_app_token();
         return sp_fetch($url);
 
     }
@@ -201,6 +205,7 @@ class SP_User
      */
     public function authenticate($email, $password) {
         $url = sp_get_uri() . "user.json?&login_email=" . $email . "&login_password=" . $password . "&reset_access_token=1";
+        $url .= "&app_token=" . sp_get_app_token();
         $result = json_decode(sp_fetch($url));
         if (isset($result->access_token)) {
             $this->set_access_token($result->access_token);
@@ -243,7 +248,7 @@ class SP_User
         @result 
      */
     public function reset_access_token() {
-        sp_fetch(sp_get_uri() . "user?access_token=" . $this->get_access_token() . "&reset_access_token=1");
+        sp_fetch(sp_get_uri() . "user?access_token=" . $this->get_access_token() . "&reset_access_token=1" . "&app_token=" . sp_get_app_token());
     }
 
     /*! @function logout
@@ -263,6 +268,7 @@ class SP_User
      */
     public function fetch_user_info() {
         $url = sp_get_uri() . "user.json?access_token=" . $this->access_token;
+        $url .= "&app_token=" . sp_get_app_token();
         $this->user_info = sp_fetch($url);
     }
 }
@@ -284,7 +290,6 @@ function sp_get_uri() {
     @result string - The information the server responds with
 */
 function sp_fetch($url) {
-    $url = $url . "&app_token=" . sp_get_app_token();
     // initialize curl call
     $ch = curl_init();
 
@@ -343,6 +348,7 @@ function sp_unset_cookie() {
 */
 function sp_good_token($sp_token) {
     $url = sp_get_uri() . "user.json?access_token=" . $sp_token;
+    $url .= "&app_token=" . sp_get_app_token();
     $result = json_decode(sp_fetch($url));
     if (isset($result->id)) 
         return true;
