@@ -126,6 +126,23 @@ class SP_Transaction
             throw new Exception('Not logged in');
         }
     }
+        
+        public function get_reward($rewardid)
+        {
+            $url = "https://api.supportland.com/1.0/reward/2072.xml?app_token=teamdoughnut2740&access_token=d4a68f6645b0e24bc3bbfe9e12c06d7e55894897";
+            $opts = array('https' =>
+                array(
+                       'method' => 'POST',
+                )
+            );
+            
+            $context = stream_context_create($opts);
+            $stream = fopen($url, 'r', false, $context);
+            
+            var_dump(stream_get_contents($stream));
+            fclose($stream);
+        }
+    
 
     /*! @function search
         @abstract Search for businesses or rewards
