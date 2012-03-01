@@ -32,6 +32,7 @@ License: GPLv2 or later
     require_once 'sp-settings.php';
     require_once 'sp-login.php';
     require_once 'sp-mainMenu.php';
+    require_once 'sp-get-reward.php';
     
     //Output Google-hosted jQuery and some CSS (used with jQuery) into the <head> tag
     
@@ -44,8 +45,7 @@ License: GPLv2 or later
         else if($sp_user->logged_in() == true) {
             //sp_wallet_page();
             sp_mainMenu();
-            $sp_trans = new SP_Transaction($sp_user);
-            $rewardreply = $sp_trans->get_reward('2072'); 
+            $rewardreply = purchase_reward('2072'); 
             echo "<div>".$rewardreply."</div>";
         }
         else {

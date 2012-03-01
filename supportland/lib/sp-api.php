@@ -127,30 +127,16 @@ class SP_Transaction
         }
     }
         
-    public function get_reward($rewardid)
-    {
-        $url = sp_get_uri()."reward/".$rewardid."?app_token=".sp_get_app_token()."&access_token=".$this->sp_user->get_access_token();
-        echo $url."<br>";
-            
-        $ch = curl_init();
+    /*! @function get_reward(rewardid)
+        @abstract purchases reward for the current user
+        @author Alexis Carlough <alexiscarlough@gmail.com>
+        @result Object - A 'transaction' object containing info on the reward purchased
+    
+    */
+    public function get_reward($rewardid) {
+        $url = sp_get_uri()."reward/".$rewardid.".json?app_token=".sp_get_app_token()."&access_token=".$this->sp_user->get_access_token();
 
-        // set curl url
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        // set curl https settings
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);  // SSL, Y U NO WORK?
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/CAcerts/BuiltinObjectToken_GoDaddyClass2CA.crt");
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-
-        // make the request
-        $response = curl_exec($ch);
-
-        // close the call
-        curl_close($ch);
-
-        return $response;
+        return json_decode(sp_fetch($url, "PUT"));
     }
     
 
@@ -316,7 +302,7 @@ function sp_get_uri() {
     @param url string - The url to query
     @result string - The information the server responds with
 */
-function sp_fetch($url) {
+function sp_fetch($url, $method="GET") {
     // initialize curl call
     $ch = curl_init();
 
@@ -328,6 +314,15 @@ function sp_fetch($url) {
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);  // SSL, Y U NO WORK?
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
     curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/CAcerts/BuiltinObjectToken_GoDaddyClass2CA.crt");
+    
+    if($method == "GET") {
+        curl_setopt($ch, CURLOPT_HTTPGET, true);
+    } else if($method == "PUT") {
+        curl_setopt($ch, CURLOPT_PUT, true);
+    } else if($method == "POST") {
+        curl_setopt($ch, CURLOPT_POST, true);
+    }
+    
 
     // make the request
     $response = curl_exec($ch);
