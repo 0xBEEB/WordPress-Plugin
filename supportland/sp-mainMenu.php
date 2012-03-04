@@ -3,6 +3,7 @@
 	require_once 'sp-login.php';
 <<<<<<< HEAD
 	require 'sp-search.php';
+	require_once 'sp-maps.php';
     define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
    
     
@@ -303,24 +304,6 @@
         }
         return $sp_punch_card_punches;
     }
-    function sp_map($lat, $lon, $scale) { ?>
-        
-        <script src="wp-content/plugins/supportland/maps/ulayers/ulayers.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            // <![CDATA[
-            var map;
-            function init() {
-                map = new uLayers.Map('map', uLayers.OSM);
-                map.setOrigin({lat: <?php echo $lat;?>, lon: <? echo $lon;?>}, <?echo $scale;?>);
-                map.addMarker({lat: <?php echo $lat;?>, lon: <? echo $lon;?>});
-                map.updateMap();
-            }
-            // ]]>
-        </script>
 
-
-    
-        <?php
-    }
 >>>>>>> 75aa97d8cbdf8dd53b75ee9aab8cb4056fe2073d
 ?>
