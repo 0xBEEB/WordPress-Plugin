@@ -45,7 +45,7 @@ License: GPLv2 or later
         else if($sp_user->logged_in() == true) {
             //sp_wallet_page();
             sp_mainMenu();
-            $rewardreply = purchase_reward('2072'); 
+            $rewardreply = sp_purchase_reward('2072'); 
             echo "<div>".$rewardreply."</div>";
         }
         else {

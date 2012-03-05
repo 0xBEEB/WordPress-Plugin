@@ -51,6 +51,7 @@
                         '<strong>Business:</strong> '.$sp_business->name.'<br />'.
                         '<strong>Description:</strong> '.$sp_business->description.'<br />'.
                         '<strong>Hours:</strong> '.$sp_business->hours.'<br />'.
+                        sp_print_rewards($sp_business). 
                         '</div>';
     ?>
 
@@ -194,6 +195,19 @@
 //                                      "\t</form>\n";
         }
         return $sp_punch_card_punches;
+    }
+    
+    function sp_print_rewards($sp_business)
+    {
+        $rewards_list = "";
+        
+        for($i=0; $i<count($sp_business->inventory->reward); $i++) {
+        
+            $reward_info = sp_get_reward_info($sp_business->inventory->reward[$i]->id);
+            $rewards_list = $rewards_list . $reward_info->title ."<br/>";
+        }
+        
+        return $rewards_list;
     }
 
     function sp_map() {
