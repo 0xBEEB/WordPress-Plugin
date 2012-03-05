@@ -22,13 +22,16 @@
             .sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
             .sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
             .sp_map{border: 1px solid black; width: 300px; height: 240px;position: absolute; right: 0px}
+            .sp_business_punch_reward{border: 1px solid black; width: 300px; height: 240px;position: absolute; right: 0px}
             .sp_business_results{margin-right: 350px;}
             .sp_punch_card_punch{bottom:-3px;background-color:#2b3856;height:14px;width:14px;border-radius: 7px;-moz-border-radius:7px;position:relative;display:inline-block;border-style:solid;border-width:1px;border-color:black;}
             .sp_punch_card_empty{bottom:-3px;background-color:#FFFFFF;height:14px;width:14px;border-radius: 7px;-moz-border-radius:7px;position:relative;display:inline-block;border-style:solid;border-width:1px;border-color:black;}
             .sp_punch_card{margin-right:5px;border-style:solid;border-width:1px;border-color:black;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:2px;}
             .sp_punch_title{margin-left:5px;}
             .sp_business_wallet_button{width=50px; height=10px;}
-            .punch_title{position:relative;background-color:#fff;top:-8px;left:5px;width:130px}
+            .sp_punch_title{position:relative;background-color:#fff;top:-8px;left:5px;width:130px}
+            .sp_business_progress{border: 1px solid black;padding:15px;}
+            .sp_progress_bar_name{position:relative;top:-5px;left:10px;}
         </style>
 <?  }
     
@@ -46,7 +49,7 @@
                         '<strong>ID:</strong> '.$sp_user_info->id.'<br />'.
                         '<strong>Member since:</strong> '.$member_since.'<br />'.
                         '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points:</strong></abbr> '.$sp_user_info->points;
-        $spWallet =     '<div class="sp_punch_card"><div class="punch_title">Punches and Rewards</div>'.
+        $spWallet =     '<div class="sp_punch_card"><div class="sp_punch_title">Punches and Rewards</div>'.
                         sp_print_punch_buttons($sp_wallet_item).
                         sp_print_business_info($sp_wallet_item).
                         '</div>';       /*
@@ -173,14 +176,54 @@
             return;
         }
     }
+    //TODO: finish this section
+    //I'm going to have to reorganize how I do things.  I'll need to iterate over the user's wallet, to get the filled progress bars, then the businesses to get the empty ones
+    function sp_print_business_progress_bars($sp_wallet_item, $sp_business_item) {
+        $business_progress = '<div class="sp_business_progress">';
+        if (is_array($sp_business_item->inventory->punch)){
+        foreach($sp_wallet_item->punch as $value) {
+            $sp_total_punches = intval($value->cost); 
+            $sp_acquired_punches = $sp_total_punches - intval($sp_wallet_item->punch[$i]->wallet->quantity);
+            $percent_done = $sp_acquired_punches / $sp_total_punches;
+            echo $percent_done;
+            if (in_array($value, $sp_wallet_item->punch)) {
+                $business_progress .= '<style type="text/css">'.
+                                      '.sp_progress_bar_punch'.$value->id.'{background-color:black;height:14px;padding-right:22px;border-radius:13px;-moz-border-radius:13px;-webkit-border-radius:13px;margin-left:5px;margin-right:5px;}'.
+                                      '.sp_progress_bar_punch'.$value->id.' div{position:relative;top:2px;left:2px;background-color:orange;width:100%;height:10px;border-radius:5px;-moz-border-radius:10px;-webkit-border-radius:10px;}'.
+                                      '</style>';
+                $business_progress .= '<div class="sp_progress_bar_punch'.$value->id.'"><div><span class="sp_progress_bar_name">'.$value->title.'</span></div></div>';
+            }
+        }}
 
+        if (is_array($sp_business_item->inventory->punch)){
+        foreach($sp_business_item->inventory->punch as $value) {
+            if (in_array($value, $sp_business_item->inventory->punch)) {
+                $business_progress .= '<style type="text/css">'.
+                                      '.sp_progress_bar_punch'.$value->id.'{background-color:black;height:14px;padding-right:22px;border-radius:13px;-moz-border-radius:13px;-webkit-border-radius:13px;margin-left:5px;margin-right:5px;}'.
+                                      '.sp_progress_bar_punch'.$value->id.' div{position:relative;top:2px;left:2px;background-color:orange;width:100%;height:10px;border-radius:5px;-moz-border-radius:10px;-webkit-border-radius:10px;}'.
+                                      '</style>';
+                $business_progress .= '<div class="sp_progress_bar_punch'.$value->id.'"><div><span class="sp_progress_bar_name">'.$value->title.'</span></div></div>';
+            }
+        }}
+        $business_progress .= '</div>';
+        return $business_progress;
+    }
     function sp_print_punch_buttons($sp_wallet_info) {
-        $punch_buttons = ""; 
+        $punch_buttons = "";
+        $punch_buttons_array = array();
         for($i = 0; $i < count($sp_wallet_info->punch); $i++) {
             $business_id = $sp_wallet_info->punch[$i]->business_links[0]->id;
             $business_name = $sp_wallet_info->punch[$i]->business_links[0]->name;
-//            $punch_buttons .=  '<a id="inline" href="#business'.$business_id.'"><input class="button"  type="button" value="'.$business_name.'"></a>';
-            $punch_buttons .=  '<a id="inline" href="#business'.$business_id.'">'.$business_name.'</a>';
+            $punch_buttons_array[$business_id] =  '<a id="inline" href="#business'.$business_id.'">'.$business_name.'</a>';
+        }
+        
+        for($i = 0; $i < count($sp_wallet_info->reward); $i++) {
+            $business_id = $sp_wallet_info->reward[$i]->business_links[0]->id;
+            $business_name = $sp_wallet_info->reward[$i]->business_links[0]->name;
+            $punch_buttons_array[$business_id] =  '<a id="inline" href="#business'.$business_id.'">'.$business_name.'</a>';
+        }
+        foreach($punch_buttons_array as $key=>$value) {
+            $punch_buttons .= $value;
         }
         return $punch_buttons;
     }
@@ -194,6 +237,7 @@
             $business_info = '<div id="map" class="sp_map"></div>'.
                              '<div class="sp_business_results">'.
                              '<img src="'.$business->image.'" /><br />'.
+                             sp_print_business_progress_bars($sp_wallet_info, $business).
                              '<strong>Business:</strong> '.$business->name.'<br />'.
                              '<strong>Description:</strong> '.$business->description.'<br />'.
                              '<strong>Hours:</strong> '.$business->hours.'<br />'.
@@ -202,9 +246,8 @@
             $html_for_fancy_box .= '<div style="display:none"><div id="business'.$business_id.'">'.$business_info.'</div></div>';
         }
         return $html_for_fancy_box;
-
-
     }
+
     function sp_print_punches($sp_wallet_info) {
         
         $sp_punch_card_punches = "";
@@ -212,16 +255,12 @@
         for($i=0; $i<count($sp_wallet_info->punch); $i++) {
             $sp_total_punches = intval($sp_wallet_info->punch[$i]->cost); 
             $sp_acquired_punches = $sp_total_punches - intval($sp_wallet_info->punch[$i]->wallet->quantity);
-//            $sp_punch_card_punches .= "\t\t<div class='sp_punch_card'>".$sp_wallet_info->punch[$i]->title."<br/>";
             $sp_punch_card_punches .= '<form><fieldset class="sp_punch_card"><legend>'.$sp_wallet_info->punch[$i]->title.'</legend>';
             for($j=0; $j<$sp_total_punches;$j++) {
                 if($j < $sp_acquired_punches)
                     $sp_punch_card_punches .= '<span class="sp_punch_card_punch"></span>';
                 else {
-                    //$sp_punch_card_punches .= '<span class="sp_plusMinusHBar"></span>';//"<img alt='".
                     $sp_punch_card_punches .= '<span class="sp_punch_card_empty"></span>';
-                                              // $sp_wallet_info->punch[i]->title."
-                                              // ' src='wp-content/plugins/supportland/images/empty_punch.png' />";
                 }
             }
             $sp_punch_card_punches .= '</fieldset></form>';
