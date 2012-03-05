@@ -1,0 +1,178 @@
+#sp_login_wrapper {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    webkit-border-radius: 10px;
+}
+
+/* the top of login form */
+#sp_login_top {
+    margin: 5px;
+}
+
+#sp_login_top a {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* search bar area */
+#sp_search_bar {
+    line-height: 200%;
+}
+
+/* the div that contains search submit buttom */
+#sp_search_bar div {
+    text-align: right;
+}
+
+/* the search input */
+#sp_search_store {
+    font-size: 100%;
+    width: 96%;
+}
+
+/* the search submit buttom */
+#sp_search_bar div input {
+    font-size: 100%;
+}
+
+/* login area anchor tag */
+#sp_login_area a, #sp_signup_a {
+    cursor: pointer;
+    font-size: 100%;
+    font-weight: bold;
+}
+
+#sp_login_form_content div {
+    text-align: right;
+}
+
+#sp_login_form_content table {
+    line-height: 200%;
+}
+
+/* login area submit button */
+#sp_login_btn {
+    font-size: 100%;
+}
+
+/* login area email and password error message */
+#sp_login_error, #sp_login_email_error, #sp_login_pw_error {
+    color: red;
+    font-size: 90%;
+}
+
+/******************** sp-mainmenu area css ********************************/
+#sp_main_menu_home, #sp_main_menu_logout {
+    cursor: pointer;
+    font-size: 120%;
+    font-weight: bold;
+}
+
+#sp_main_menu_logout {
+    float: right;
+}
+
+#sp_main_menu_top {
+    margin: 10px;
+}
+
+.spMenuLink {
+    padding: 2px 3px 3px 3px;
+    cursor: pointer;
+    line-height: 1.5em;
+}
+
+.spMenuLink:hover {
+    background-color: #eee;
+}
+
+.sp_plusMinusCircle {
+    bottom: -3px;
+    background-color: #a21;
+    height: 16px;
+    width: 16px;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    position: relative;
+    display: inline-block;
+}
+
+.sp_plusMinusHBar {
+    background-color: #fff;
+    height: 2px;
+    width: 8px;
+    position: absolute;
+    top: 7px;
+    left: 4px;
+}
+
+.sp_plusMinusVBar {
+    background-color: #fff;
+    height: 8px;
+    width: 2px;
+    position: absolute;
+    top: 4px;
+    left: 7px;
+}
+
+.sp_Result {
+    margin-left: 11px;
+    padding-left: 11px;
+    border-left: 1px dashed #ccc;
+}
+
+.sp_punch_card_display {
+    margin-left: 11px;
+    padding-left: 11px;
+}
+
+#sp_main_menu {
+    width: 200px;
+    font-weight: normal;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+/***************** registration form ********************************/
+#signup_top {
+    margin-bottom: 1em;
+    text-align: center;
+    font-size: 12pt;
+    color: #222;
+    line-height: 1.6em;
+    font-weight: bold;
+}
+
+#registration_form table {
+    width: 470px;
+}
+
+#registration_form table td {
+    vertical-align: middle;
+    color: #666666;
+    padding: 3px 0 3px 5px;
+}
+
+#registration_form table input {
+    width: 200px;
+}
+
+.signup_label {
+    padding-top: 9px;
+    text-align: right;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.signup_error {
+    font-size: 11px;
+    color: red;
+    visibility: hidden;
+}
