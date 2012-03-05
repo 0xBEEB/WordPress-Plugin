@@ -27,6 +27,8 @@
             .sp_punch_card_empty{bottom:-3px;background-color:#FFFFFF;height:14px;width:14px;border-radius: 7px;-moz-border-radius:7px;position:relative;display:inline-block;border-style:solid;border-width:1px;border-color:black;}
             .sp_punch_card{margin-right:5px;border-style:solid;border-width:1px;border-color:black;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:2px;}
             .sp_punch_title{margin-left:5px;}
+            .sp_business_wallet_button{width=50px; height=10px;}
+            .punch_title{position:relative;background-color:#fff;top:-8px;left:5px;width:130px}
         </style>
 <?  }
     
@@ -44,10 +46,14 @@
                         '<strong>ID:</strong> '.$sp_user_info->id.'<br />'.
                         '<strong>Member since:</strong> '.$member_since.'<br />'.
                         '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points:</strong></abbr> '.$sp_user_info->points;
-        $spWallet =     '<abbr title="Spend your points on rewards like free coffee or an oil change"> <strong>Rewards:</strong></abbr> '.$sp_wallet_item->rewards.'<br />'.
+        $spWallet =     '<div class="sp_punch_card"><div class="punch_title">Punches and Rewards</div>'.
+                        sp_print_punch_buttons($sp_wallet_item).
+                        sp_print_business_info($sp_wallet_item).
+                        '</div>';       /*
+                        '<abbr title="Spend your points on rewards like free coffee or an oil change"> <strong>Rewards:</strong></abbr> '.$sp_wallet_item->rewards.'<br />'.
                         '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points Earned:</strong></abbr> '.$sp_wallet_item->points.' points'.'<br />'.
                         '<abbr title="See your progress on any in-progress punch cards from local businesses"><strong>Punch Cards:</strong></abbr> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_item) . "</div>".'<br />'.
-                        '<strong>Coupons:</strong> <br />';
+                        '<strong>Coupons:</strong> <br />';*/
         $spSearch =     '<div id="map" class="sp_map"></div>'.
                         '<div class="sp_business_results">'.
                         '<img src="'.$sp_business->image.'" /><br />'.
@@ -87,9 +93,6 @@
             <a><abbr title="Find local businesses and the rewards they offer.">Search</abbr></a>
     	</div>
         <div class="sp_Result" id="spResult3">
-            
-            
-            
             <a id="inline" href="#data">Display the search data</a>
             <div style="display:none"><div id="data"><?= $spSearch ?></div></div>
             
@@ -171,6 +174,37 @@
         }
     }
 
+    function sp_print_punch_buttons($sp_wallet_info) {
+        $punch_buttons = ""; 
+        for($i = 0; $i < count($sp_wallet_info->punch); $i++) {
+            $business_id = $sp_wallet_info->punch[$i]->business_links[0]->id;
+            $business_name = $sp_wallet_info->punch[$i]->business_links[0]->name;
+//            $punch_buttons .=  '<a id="inline" href="#business'.$business_id.'"><input class="button"  type="button" value="'.$business_name.'"></a>';
+            $punch_buttons .=  '<a id="inline" href="#business'.$business_id.'">'.$business_name.'</a>';
+        }
+        return $punch_buttons;
+    }
+    function sp_print_business_info($sp_wallet_info) {
+        
+        $html_for_fancy_box = ""; 
+        for($i = 0; $i < count($sp_wallet_info->punch); $i++) {
+            $business_id = $sp_wallet_info->punch[$i]->business_links[0]->id;
+            $business_name = $sp_wallet_info->punch[$i]->business_links[0]->name;
+            $business = sp_business($business_id);
+            $business_info = '<div id="map" class="sp_map"></div>'.
+                             '<div class="sp_business_results">'.
+                             '<img src="'.$business->image.'" /><br />'.
+                             '<strong>Business:</strong> '.$business->name.'<br />'.
+                             '<strong>Description:</strong> '.$business->description.'<br />'.
+                             '<strong>Hours:</strong> '.$business->hours.'<br />'.
+                             '</div>';
+            
+            $html_for_fancy_box .= '<div style="display:none"><div id="business'.$business_id.'">'.$business_info.'</div></div>';
+        }
+        return $html_for_fancy_box;
+
+
+    }
     function sp_print_punches($sp_wallet_info) {
         
         $sp_punch_card_punches = "";
@@ -191,9 +225,6 @@
                 }
             }
             $sp_punch_card_punches .= '</fieldset></form>';
-//            $sp_punch_card_punches .= "</div>";
-//            "\t\t</fieldset>\n".
-//                                      "\t</form>\n";
         }
         return $sp_punch_card_punches;
     }
