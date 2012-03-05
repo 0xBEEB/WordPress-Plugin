@@ -127,16 +127,17 @@ class SP_Transaction
         }
     }
         
-    /*! @function get_reward(rewardid)
+    /*! @function get_reward(rewardid, method)
         @abstract purchases reward for the current user
         @author Alexis Carlough <alexiscarlough@gmail.com>
-        @result Object - A 'transaction' object containing info on the reward purchased
+        @result Object - A 'transaction' object containing info on the reward; if method is PUT, reward will be purchased; method GET will simply query info.
     
     */
-    public function get_reward($rewardid) {
+    public function get_reward($rewardid, $method="GET") {
         $url = sp_get_uri()."reward/".$rewardid.".json?app_token=".sp_get_app_token()."&access_token=".$this->sp_user->get_access_token();
-
-        return json_decode(sp_fetch($url, "PUT"));
+        
+        return json_decode(sp_fetch($url, $method));
+        
     }
     
 
