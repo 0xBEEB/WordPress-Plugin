@@ -51,7 +51,7 @@
                         '<strong>Business:</strong> '.$sp_business->name.'<br />'.
                         '<strong>Description:</strong> '.$sp_business->description.'<br />'.
                         '<strong>Hours:</strong> '.$sp_business->hours.'<br />'.
-                        sp_print_rewards($sp_business). 
+                        '<strong>Rewards:</strong> <br />' . sp_print_rewards($sp_business). 
                         '</div>';
     ?>
 
@@ -204,7 +204,12 @@
         for($i=0; $i<count($sp_business->inventory->reward); $i++) {
         
             $reward_info = sp_get_reward_info($sp_business->inventory->reward[$i]->id);
-            $rewards_list = $rewards_list . $reward_info->title ."<br/>";
+            if($reward_info->wallet->quantity > 0) {
+                $rewards_list = $rewards_list . $reward_info->title . "     owned: 1 <br />";
+            } else {
+                $rewards_list = $rewards_list . $reward_info->title . " ........" .$reward_info->cost . " points! ....... get it now! <br />";
+            }
+            
         }
         
         return $rewards_list;
