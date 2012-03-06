@@ -22,25 +22,8 @@ function sp_search() {
                     'enableEscapeButton' : false,
                     'showCloseButton' : true,
                     'href' : '<?php echo plugins_url(); ?>/supportland/supportland-search-results.php?q='+$('#sp_search').val().replace(/\s/g,"+")
-                    //'content' : $('#search_result').load('<?php echo plugins_url(); ?>/supportland/supportland-search-results.php?q='+$('#sp_search').val().replace(/\s/g,"+")).val()
-
-                }).click();
+                 }).click();
             });
-            /*
-            $('#sp_search_submit').click(function() {
-                $('#search_result').load('<?php echo plugins_url(); ?>/supportland/supportland-search-results.php?q='+$('#sp_search').val().replace(/\s/g,"+"), function() {
-                    $('a#supportland_search_result').fancybox({
-                        'autoDimensions' : true,
-                        'hideOnOverlayClick' : false,
-                        'hideOnContentClick' : false,
-                        'enableEscapeButton' : false,
-                        'showCloseButton' : true,
-                        //'content' : $('#search_result').val()
-                        'href' : '<?php echo plugins_url(); ?>/supportland/supportland-search-results.php?q='+$('#sp_search').val().replace(/\s/g,"+")
-                    }).click();
-                });
-            });
-            */
 
             $('#sp_search').keypress(function(event) {
                 if(event.which == 13) {

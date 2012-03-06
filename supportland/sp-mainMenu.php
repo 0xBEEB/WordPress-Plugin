@@ -42,23 +42,10 @@ function sp_mainMenu() {
                     '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points Earned:</strong></abbr> '.$sp_wallet_test->points.' points'.'<br />'.
                     '<abbr title="See your progress on any in-progress punch cards from local businesses"><strong>Punch Cards:</strong></abbr> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_test->punch) . "</div>".$sp_wallet_test->punch.'<br />'.
                     '<strong>Coupons:</strong> <br />';
-/*
- * $sp_business = sp_business();
-    $spSearch =     '<div id="map" class="sp_map"></div>'.
-                    '<div class="sp_business_results">'.
-                    '<img src="'.$sp_business->image.'" /><br />'.
-                    '<strong>Business:</strong> '.$sp_business->name.'<br />'.
-                    '<strong>Description:</strong> '.$sp_business->description.'<br />'.
-                    '<strong>Hours:</strong> '.$sp_business->hours.'<br />'.
-                    '</div>';
 
-    $spSearch = "test";
-* 
-*/
 ?>
 
 <div id="sp_wrapper">
-
 
     <div>
         <a href="http://www.supportland.com/" style="display:inline-block;vertical-align:middle;height:19px;width:24px;margin-right:4px;background-image:url('<?php echo plugins_url(); ?>/supportland/images/supportland_s_logo_sm.png');background-repeat:no-repeat;"></a>
@@ -85,30 +72,6 @@ function sp_mainMenu() {
     <div class="sp_Result" id="spResult2">
         <?php echo $spWallet; ?>
     </div>
-<?php /*
-    <div id="spMenuLink3" class="spMenuLink">
-        <span class="sp_plusMinusCircle"><span class="sp_plusMinusHBar"></span><span class="sp_plusMinusVBar" id="spPlus3"></span></span>
-        <a><abbr title="Find local businesses and the rewards they offer.">Search</abbr></a>
-    </div>
-    <div class="sp_Result" id="spResult3">
-
-        <a id="inline" href="#data">Display the search data</a>
-        <div style="display:none"><div id="data"><?php echo $spSearch; ?></div></div>
-
-        <script>
-            $(document).ready(function() {
-                init();
-                $("a#inline").fancybox({
-                    'hideOnOverlayClick': false,
-                    'hideOnContentClick': false,
-                    'enableEscapeButton': false,
-                    'showCloseButton': true
-                });
-            });
-        </script>
-
-    </div>
- * */ ?>
 
 </div>
 
@@ -139,23 +102,7 @@ function sp_wallet_item() {
         return;
     }
 }
-/*
-function sp_business($bid=14) { //hard-coded business ID for now
-    $sp_user = new SP_User();
-    $sp_trans = new SP_Transaction($sp_user);
 
-    try {
-        $business = $sp_trans->get_business($bid);
-        return $business;
-    } catch (Exception $e) {
-        echo "Exception: " . $e->get_message();
-        if($e->get_message() == 'Not logged in')	//there are multiple exceptions now
-            sp_login.php();
-        return;
-    }
-    return;
-}
-*/
 function sp_user_info() {
     $sp_user = new SP_User();
     $sp_trans = new SP_Transaction($sp_user);
@@ -194,10 +141,6 @@ function sp_print_punches($sp_wallet_info) {
     }
     return $sp_punch_card_punches;
 }
-
-
-
-
 
 function sp_map($lat, $lon, $scale) { ?>
 

@@ -45,6 +45,11 @@ function printSearchResults($query) {
                 $('a#sp-bid<?php echo $sp_business->id; ?>').click(function() {
                     $('#sp_buffer').text('<?php echo $query; ?>');
                     $('a#supportland_search_result').fancybox({
+                        'autoDimensions' : true,
+                        'hideOnOverlayClick' : false,
+                        'hideOnContentClick' : false,
+                        'enableEscapeButton' : false,
+                        'showCloseButton' : true,
                         'href' : '<?php echo plugins_url(); ?>/supportland/sp-business.php?bid=<?php print $sp_business->id; ?>'
                     }).click();
                 });

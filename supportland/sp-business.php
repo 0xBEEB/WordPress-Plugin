@@ -29,6 +29,11 @@ $sp_rewards_array = sp_get_rewards($sp_business);
         $(document).ready(function() {
             $('a#sp_back_link').click(function() {
                 $('a#supportland_search_result').fancybox({
+                    'autoDimensions' : true,
+                    'hideOnOverlayClick' : false,
+                    'hideOnContentClick' : false,
+                    'enableEscapeButton' : false,
+                    'showCloseButton' : true,
                     'href' : '<?php echo plugins_url(); ?>/supportland/supportland-search-results.php?q='+$('#sp_buffer').text()
                 }).click();
             });
