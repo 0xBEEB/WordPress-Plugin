@@ -155,9 +155,9 @@
             $business = $sp_trans->get_business($bid);
             return $business;
         } catch (Exception $e) {
-            echo "Exception: " . $e->get_message();
-            if($e->get_message() == 'Not logged in')	//there are multiple exceptions now
-                sp_login.php();
+//            echo "Exception: " . $e->get_message();
+//            if($e->get_message() == 'Not logged in')	//there are multiple exceptions now
+//                sp_login.php();
             return;
         }
         return;
@@ -180,33 +180,79 @@
     //I'm going to have to reorganize how I do things.  I'll need to iterate over the user's wallet, to get the filled progress bars, then the businesses to get the empty ones
     function sp_print_business_progress_bars($sp_wallet_item, $sp_business_item) {
         $business_progress = '<div class="sp_business_progress">';
-        if (is_array($sp_business_item->inventory->punch)){
+        $business_punch_ids = array();
         foreach($sp_wallet_item->punch as $value) {
             $sp_total_punches = intval($value->cost); 
-            $sp_acquired_punches = $sp_total_punches - intval($sp_wallet_item->punch[$i]->wallet->quantity);
-            $percent_done = $sp_acquired_punches / $sp_total_punches;
-            echo $percent_done;
+            $sp_acquired_punches = intval($value->wallet->quantity);
+            echo $sp_total_punches.' '.$sp_acquired_punches.' ';
+            $percent_done = (floatval((floatval($sp_acquired_punches) / floatval($sp_total_punches))*100));
             if (in_array($value, $sp_wallet_item->punch)) {
                 $business_progress .= '<style type="text/css">'.
                                       '.sp_progress_bar_punch'.$value->id.'{background-color:black;height:14px;padding-right:22px;border-radius:13px;-moz-border-radius:13px;-webkit-border-radius:13px;margin-left:5px;margin-right:5px;}'.
-                                      '.sp_progress_bar_punch'.$value->id.' div{position:relative;top:2px;left:2px;background-color:orange;width:100%;height:10px;border-radius:5px;-moz-border-radius:10px;-webkit-border-radius:10px;}'.
+                                      '.sp_progress_bar_punch'.$value->id.' div{position:relative;top:2px;left:2px;background-color:orange;width:'.$percent_done.'%;height:10px;border-radius:5px;-moz-border-radius:10px;-webkit-border-radius:10px;}'.
                                       '</style>';
                 $business_progress .= '<div class="sp_progress_bar_punch'.$value->id.'"><div><span class="sp_progress_bar_name">'.$value->title.'</span></div></div>';
+                $business_punch_ids[$value->id] = $value->id;
             }
-        }}
-
-        if (is_array($sp_business_item->inventory->punch)){
+        }
+         
         foreach($sp_business_item->inventory->punch as $value) {
-            if (in_array($value, $sp_business_item->inventory->punch)) {
+            if(!sp_punch_in_wallet($sp_wallet_item, 8)){
                 $business_progress .= '<style type="text/css">'.
-                                      '.sp_progress_bar_punch'.$value->id.'{background-color:black;height:14px;padding-right:22px;border-radius:13px;-moz-border-radius:13px;-webkit-border-radius:13px;margin-left:5px;margin-right:5px;}'.
-                                      '.sp_progress_bar_punch'.$value->id.' div{position:relative;top:2px;left:2px;background-color:orange;width:100%;height:10px;border-radius:5px;-moz-border-radius:10px;-webkit-border-radius:10px;}'.
+                                      '.sp_progress_bar_punch'.$value->id.'{background-color:black;height:14px;padding-right:4px;border-radius:13px;-moz-border-radius:13px;-webkit-border-radius:13px;margin-left:5px;margin-right:5px;}'.
+                                      '.sp_progress_bar_punch'.$value->id.' div{position:relative;top:2px;left:2px;background-color:gray;width:100%;height:10px;border-radius:5px;-moz-border-radius:10px;-webkit-border-radius:10px;}'.
                                       '</style>';
                 $business_progress .= '<div class="sp_progress_bar_punch'.$value->id.'"><div><span class="sp_progress_bar_name">'.$value->title.'</span></div></div>';
             }
-        }}
+        }
+        
+        $business_progress .= '</div></br>';
+        
+        $business_progress = '<div class="sp_business_progress">';
+        $business_reward_ids = array();
+        foreach($sp_wallet_item->reward as $value) {
+            if (in_array($value, $sp_wallet_item->reward)) {
+                $business_progress .= '<style type="text/css">'.
+                                      '.sp_progress_bar_reward'.$value->id.'{background-color:black;height:14px;padding-right:22px;border-radius:13px;-moz-border-radius:13px;-webkit-border-radius:13px;margin-left:5px;margin-right:5px;}'.
+                                      '.sp_progress_bar_reward'.$value->id.' div{position:relative;top:2px;left:2px;background-color:orange;width:'.$percent_done.'%;height:10px;border-radius:5px;-moz-border-radius:10px;-webkit-border-radius:10px;}'.
+                                      '</style>';
+                $business_progress .= '<div class="sp_progress_bar_reward'.$value->id.'"><div><span class="sp_progress_bar_name">'.$value->title.'</span></div></div>';
+                $business_reward_ids[$value->id] = $value->id;
+            }
+        }
+         
+        foreach($sp_business_item->inventory->reward as $value) {
+            if(!sp_reward_in_wallet($sp_wallet_item, 8)){
+                $business_progress .= '<style type="text/css">'.
+                                      '.sp_progress_bar_reward'.$value->id.'{background-color:black;height:14px;padding-right:4px;border-radius:13px;-moz-border-radius:13px;-webkit-border-radius:13px;margin-left:5px;margin-right:5px;}'.
+                                      '.sp_progress_bar_reward'.$value->id.' div{position:relative;top:2px;left:2px;background-color:gray;width:100%;height:10px;border-radius:5px;-moz-border-radius:10px;-webkit-border-radius:10px;}'.
+                                      '</style>';
+                $business_progress .= '<div class="sp_progress_bar_reward'.$value->id.'"><div><span class="sp_progress_bar_name">'.$value->title.'</span></div></div>';
+            }
+        }
         $business_progress .= '</div>';
         return $business_progress;
+    }
+    function sp_reward_in_wallet($sp_wallet_item, $punch_id) {
+
+            for($i = 0; $i < $sp_wallet_item->reward[$i]; $i++){
+                if(intval($sp_wallet_item->reward[$i]->id) == intval($reward_id)){
+                    return true;
+                }
+            }
+            return false;
+
+    }
+    function sp_punch_in_wallet($sp_wallet_item, $punch_id) {
+
+            for($i = 0; $i < $sp_wallet_item->punch[$i]; $i++){
+                if(intval($sp_wallet_item->punch[$i]->id) == intval($punch_id)){
+                    echo " True";
+                    return true;
+                }
+            }
+            return false;
+
     }
     function sp_print_punch_buttons($sp_wallet_info) {
         $punch_buttons = "";
