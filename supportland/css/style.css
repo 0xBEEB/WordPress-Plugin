@@ -9,7 +9,7 @@
 /* the outer div of the widget */
 #sp_wrapper {
     display: block;
-    margin-bottom: 17px;
+    margin-bottom: 20px;
     background: none repeat scroll 0 0 #FDFDFD;
     border: 1px solid #FDFDFD;
     border-radius: 5px 5px 5px 5px;
@@ -17,7 +17,6 @@
     color: #000000;
     cursor: text;
     display: block;
-    margin: 0;
     padding: 5px;
     position: relative;
     text-decoration: none;
