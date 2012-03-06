@@ -23,10 +23,16 @@ class SP_Widget extends WP_widget {
     //      $args - arguments from the theme
     //      $instance - the instance of the class
     function widget($args, $instance) {
+        ?>
+            <div id="sp_wrapper">
+                <div id="sp_top">
+                    <a id="sp_logo" href="http://supportland.com/">Supportland Widget</a>
+                </div>
+        <?php
         // if app token is not present, show error
         if ($instance['show_error']) {
             ?>
-                <div style="color:red;">
+                <div id="sp_app_error">
                     Supportland app token not set. <br /><br />
                     Go to Supportland Widget (Appearance->Widgets) to enter
                     app token.
@@ -44,6 +50,9 @@ class SP_Widget extends WP_widget {
                 $this->display_login_page();
             }
         }
+        ?>
+            </div>
+        <?php
     }
     
     // Update callback when pressing 'save' button on the widget
