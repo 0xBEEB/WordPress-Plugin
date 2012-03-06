@@ -1,21 +1,126 @@
-#sp_login_wrapper {
-    padding: 10px;
+/* general classes */
+.title_font {
+    font-family: Century Gothic, sans-serif;
+    font-size: 14px;
+    color: #333333;
+    font-weight: 600;
+}
+
+/* the outer div of the widget */
+#sp_wrapper {
+    display: block;
+    margin-bottom: 17px;
+    background: none repeat scroll 0 0 #FDFDFD;
+    border: 1px solid #FDFDFD;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 2px 4px 5px #888888;
+    color: #000000;
+    cursor: text;
+    display: block;
+    margin: 0;
+    padding: 5px;
+    position: relative;
+    text-decoration: none;
     width: 100%;
-    border: 1px solid black;
+    z-index: 10;
+}
+
+/* the container of the logo area */
+#sp_top {
+    padding: 8px 0;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+/* the supportland logo anchor*/
+#sp_logo {
+    display: inline-block;
+    background-image: url('http://capstoneaa.cs.pdx.edu/david_liang/wordpress/wp-content/plugins/supportland/images/supportland_s_logo_sm.png');
+    background-repeat: no-repeat;
+    height: 20px;
+    padding-left: 30px;
+    font-weight: bold;
+}
+
+/* the wrapper of the login form and the main menu form*/
+#sp_login_wrapper, #sp_mm_wrapper {
+    margin: 5px;
+    width: 100%;
     border-radius: 10px;
     -moz-border-radius: 10px;
     webkit-border-radius: 10px;
 }
 
-/* the top of login form */
-#sp_login_top {
-    margin: 5px;
+#sp_login_form {
+    font-size: 97%;
+    margin: 2px 10px 9px 10px;
 }
 
-#sp_login_top a {
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
+#sp_login_form table {
+    line-height: 190%;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+#sp_login_form div {
+    text-align: right;
+}
+
+#sp_login_email, #sp_login_password {
+    padding: 2px;
+    height: 14px;
+    font-size: 12px;
+    width: 93%;
+}
+
+/* login area submit button */
+.sp_btn {
+    cursor:pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #050505;
+    padding: 3px 10px;
+    background: -moz-linear-gradient(
+            top,
+            #ffffff 0%,
+            #ebebeb 50%,
+            #dbdbdb 50%,
+            #b5b5b5);
+    background: -webkit-gradient(
+            linear, left top, left bottom, 
+            from(#ffffff),
+            color-stop(0.50, #ebebeb),
+            color-stop(0.50, #dbdbdb),
+            to(#b5b5b5));
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border: 1px solid #949494;
+    -moz-box-shadow:
+            0px 1px 3px rgba(000,000,000,0.5),
+            inset 0px 0px 2px rgba(255,255,255,1);
+    -webkit-box-shadow:
+            0px 1px 3px rgba(000,000,000,0.5),
+            inset 0px 0px 2px rgba(255,255,255,1);
+    text-shadow:
+            0px -1px 0px rgba(000,000,000,0.2),
+            0px 1px 0px rgba(255,255,255,1);
+}
+
+/* login other links like forgot password, register, etc*/
+#sp_login_otherlinks {
+    margin-right: 8px;
+}
+
+#sp_login_otherlinks ul {
+    list-style: none outside none;
+    border-top: 1px solid #DDDDDD;
+    margin: 0;
+    padding: 0;
+}
+
+#sp_login_otherlinks ul li {
+    padding: 4px 0;
+    border-bottom: 1px solid #DDDDDD;
 }
 
 /* search bar area */
@@ -46,39 +151,34 @@
     font-weight: bold;
 }
 
-#sp_login_form_content div {
-    vertical-align: middle;
-    text-align: right;
-}
-
-#sp_login_form_content table {
-    line-height: 200%;
-}
-
-/* login area submit button */
-#sp_login_btn {
-    font-size: 100%;
-}
-
-/* login area email and password error message */
-#sp_login_error, #sp_login_email_error, #sp_login_pw_error {
-    color: red;
-    font-size: 90%;
-}
-
 /******************** sp-mainmenu area css ********************************/
-#sp_main_menu_home, #sp_main_menu_logout {
-    cursor: pointer;
-    font-size: 120%;
+#sp_mm_nav {
+    display: block;
+    text-align: right;
+    margin-right: 10px;
+}
+
+#sp_mm_user_info {
+    font-size: 9px;
+    border-bottom: 1px dashed #DDDDDD;
+    border-top: 1px dashed #DDDDDD;
+    margin-right: 10px;
+}
+
+#sp_mm_user_info table td {
+    vertical-align: middle;
+}
+
+/* user points label*/
+#sp_mm_user_point {
+    font-size: 16px;
     font-weight: bold;
+    color: #90D93F;
 }
 
-#sp_main_menu_logout {
-    float: right;
-}
-
-#sp_main_menu_top {
-    margin: 10px;
+#sp_mm_logout, #sp_mm_profile {
+    cursor: pointer;
+    font-size: 9px;
 }
 
 .spMenuLink {
@@ -126,69 +226,9 @@
     border-left: 1px dashed #ccc;
 }
 
-/* user information board css */
-#sp_user_info_board {
-    border-radius: 5px 5px 5px 5px;
-    display: block;
-    margin: 0;
-    padding: 5px;
-    position: relative;
-    text-decoration: none;
-    width: 90%;
-    z-index: 99;
-    background: none repeat scroll 0 0 #F5F5F5;
-    border: 1px solid #F5F5F5;
-    box-shadow: 1px 5px 10px #888888;
-    color: #000000;
-    cursor: text;
-}
-
-#sp_point_area {
-    display: block;
-    height: 50px;
-}
-
-/* user point label */
-#sp_user_point_label {
-    font: bold 37px Verdana,Arial,Helvetica,sans-serif;
-    padding: 0 5px;
-    float: left;
-    width: 50%;
-    position: relative;
-}
-
-#sp_user_info_etc {
-    display: block;
-    padding-top: 15px;
-    position: relative;
-    text-align: left;
-}
-
-#sp_user_point_marker {
-    display: block;
-    margin-left: 33%;
-}
-
-/* user name tag */
-#sp_user_name {
-    font: bold 16px Verdana,Arial,Helvetica,sans-serif;
-    display: block;
-    text-align: right;
-}
-
 .sp_punch_card_display {
     margin-left: 11px;
     padding-left: 11px;
-}
-
-#sp_main_menu {
-    width: 200px;
-    font-weight: normal;
-    color: black;
-    border: 1px solid black;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
 }
 
 /***************** registration form ********************************/
@@ -199,6 +239,10 @@
     color: #222;
     line-height: 1.6em;
     font-weight: bold;
+}
+
+#registration_form {
+    margin: 10px;
 }
 
 #registration_form table {
@@ -222,12 +266,28 @@
     font-size: 12px;
 }
 
-.signup_label_div label {
-    cursor: help;
+.signup_error {
+    visibility: hidden;
 }
 
-.signup_error {
-    font-size: 11px;
+/* change default tooltip size */
+.ui-tooltip-green .ui-tooltip-content {
+    font-size: 10px;
+}
+
+/* genius error class */
+.sp_error {
+    color: #FF4545;
+    font-size: 10px;
+}
+
+.sp_login_error {
+    color: white;
+    background-color: #FF4545;
+}
+
+/* the error from missing app token */
+#sp_app_error {
     color: red;
-    visibility: hidden;
+    padding: 10px 0;
 }
