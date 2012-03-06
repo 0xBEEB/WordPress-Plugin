@@ -42,15 +42,20 @@ add_action('widgets_init', 'plugin_register_widgets');
  * load CSS file
  */
 function plugin_load_css() {
-    $style_url = path_join(WP_PLUGIN_URL, 
-            basename(dirname(__FILE__)) . "/css/style.css");
-    wp_register_style('supportland-widget', $style_url);
+    $css_url = path_join(WP_PLUGIN_URL, 
+            basename(dirname(__FILE__)) . "/css/");
+    wp_register_style('supportland-widget', $css_url.'style.css');
     wp_enqueue_style('supportland-widget');
     // load fancybox css
     $fancy_url = path_join(WP_PLUGIN_URL,
             basename(dirname(__FILE__)) . "/fancybox/jquery.fancybox-1.3.4.css");
     wp_register_style('fancybox-1.3.4', $fancy_url);
     wp_enqueue_style('fancybox-1.3.4');
+    // load qtip css
+    $script_url = path_join(WP_PLUGIN_URL,
+            basename(dirname(__FILE__)) . "/js/");
+    wp_register_style('supportland-qtip2', $script_url.'qtip2/jquery.qtip.min.css');
+    wp_enqueue_style('supportland-qtip2');
 }
 add_action('wp_enqueue_scripts', 'plugin_load_css');
 
@@ -62,8 +67,10 @@ function plugin_load_js() {
             'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
     wp_enqueue_script('jquery-1.7.1');
     $script_url = path_join(WP_PLUGIN_URL,
-            basename(dirname(__FILE__)) . "/js/sp.js");
-    wp_register_script('supportland-widget', $script_url);
+            basename(dirname(__FILE__)) . "/js/");
+    wp_register_script('supportland-qtip2', $script_url.'qtip2/jquery.qtip.min.js');
+    wp_enqueue_script('supportland-qtip2');
+    wp_register_script('supportland-widget', $script_url.'sp.js');
     wp_enqueue_script('supportland-widget');
     // load fancy box js
     $fancy_url = path_join(WP_PLUGIN_URL,
