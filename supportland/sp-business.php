@@ -2,7 +2,7 @@
 require_once(dirname(__FILE__) . '/../../../wp-load.php');
 require_once(dirname(__FILE__) . '/sp-settings.php');
 
-function sp_business($bid=6) { //hard-coded business ID for now
+function sp_business($bid=6) {
     $sp_user = new SP_User();
     $sp_trans = new SP_Transaction($sp_user);
     
@@ -10,7 +10,7 @@ function sp_business($bid=6) { //hard-coded business ID for now
         $business = $sp_trans->get_business($bid);
         return $business;
     } catch (Exception $e) {                    //Breaks if user isn't logged in
-        echo "Exception: " . $e->get_message(); //this line is invalid if bid is invalid
+        echo "Exception: " . $e->get_message();
         if($e->get_message() == 'Not logged in')
             sp_login.php();
         return;
