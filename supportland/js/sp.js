@@ -1,9 +1,71 @@
 jQuery(document).ready(function($){
     hide_login_loader();
-    // login anchor click
-    $("#sp_login_area").find('a').click(function(){
-        $("#sp_login_form_content").toggle('fast');
-    });
+    create_qtips();
+    
+    function create_qtips() {
+        // login email input
+        create_qtip('sp_login_email', 'Type in the email you used to signup', 'bottom left', 
+            'top center', 'green', 'focus', 'unfocus');
+        // login password input
+        create_qtip('sp_login_password', 'Type in your password', 'bottom left', 'top center',
+            'green', 'focus', 'unfocus');
+        // register anchor
+        create_qtip('sp_register_anchor', 'Signing up for a Supportland account will allow you to see your points and claim rewards online', 'top left', 'bottom center',
+            'green', 'mouseover', 'mouseleave');    
+        // user profile anchor
+        create_qtip('sp_mm_profile', 'Click to view / hide your profile', 'bottom left', 'top right',
+            'green', 'mouseover', 'mouseleave');
+        // wallet reward label
+        create_qtip('sp_wallet_reward', 'Spend your points on rewards like free coffee or an oil change', 'bottom left', 'top right',
+            'green', 'mouseover', 'mouseleave');
+        // wallet point earned label
+        create_qtip('sp_wallet_earned', 'Shop at local businesses to earn points that can be used for rewards at your favorite business', 'bottom left', 'top right',
+            'green', 'mouseover', 'mouseleave');  
+        // wallet punch card label
+        create_qtip('sp_wallet_punch', 'See your progress on any in-progress punch cards from local businesses', 'bottom left', 'top right',
+            'green', 'mouseover', 'mouseleave');
+        // Main menu search
+        create_qtip('sp_mm_search', 'Find local businesses and the rewards they offer', 'bottom left', 'top center',
+            'green', 'mouseover', 'mouseleave');
+        // Registration form
+        create_qtip('fname', 'Enter your first name', 'bottom left', 'top right', 'green', 'focus', 'unfocus');
+        create_qtip('lname', 'Enter your last name', 'bottom left', 'top right', 'green', 'focus', 'unfocus');
+        create_qtip('email', 'Enter the email address you want us to use to contact you', 'bottom left', 'top right', 'green', 'focus', 'unfocus');
+        create_qtip('password', 'Please choose a password', 'bottom left', 'top right', 'green', 'focus', 'unfocus');
+        create_qtip('password2', 'Please enter your password again to make sure there are no typos', 'bottom left', 'top right', 'green', 'focus', 'unfocus');
+    }
+    
+    function create_qtip(target_id, message, my_pos, at_pos, color, show_e, hide_e) {
+        var color_class = 'ui-tooltip-shadows ui-tooltip-rounded ';
+        if (color == 'plain' || color == 'light' || color == 'dark' || color == 'red' ||
+            color == 'green' || color == 'blue') {
+            color_class += 'ui-tooltip-' + color;
+        }
+        else {
+            color_class += 'ui-tooltip';
+        }
+        
+        $('#'+target_id).qtip({
+           id: target_id,   // will be prepended with 'ui-tooltip-'
+           content: {
+               text: message
+           },
+           position: {
+               my: my_pos,
+               at: at_pos,
+               viewport: $(window)
+           },
+           show: {
+               event: show_e
+           },
+           hide: {
+               event: hide_e
+           },
+           style: {
+               classes: color_class
+           }
+        });
+    }
     
     // login form validation
     $("#sp_login_btn").click(function(){
@@ -12,27 +74,27 @@ jQuery(document).ready(function($){
         if (!is_valid_email(email)) {
             // show email error message
             $("#sp_login_email_error").show();
-            $("#sp_login_email").css('border-color', 'orange red');
+            $("#sp_login_email").css('border', '2px solid #FF4545');
             hide_login_loader();
             return false;
         }
         else {
             $("#sp_login_email_error").hide();
-            $("#sp_login_email").css('border-color', '#DDDDDD');
+            $("#sp_login_email").css('border', '1px solid #DDDDDD');
         }
         var pw = $("#sp_login_password").val();
         if (pw == '') {
             // show password error message
             $("#sp_login_pw_error").show();
-            $("#sp_login_password").css('border-color', 'orange red');
+            $("#sp_login_password").css('border', '2px solid #FF4545');
             hide_login_loader();
             return false;
         }
         else {
             $("#sp_login_pw_error").hide();
-            $("#sp_login_password").css('border-color', '#DDDDDD');
+            $("#sp_login_password").css('border', '1px solid #DDDDDD');
         }
-        // if email and password are in correty form, use AJAX to login
+        // if email and password are correct, use AJAX to login
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -62,7 +124,7 @@ jQuery(document).ready(function($){
         $("#sp_login_btn").val('Log in').removeAttr('disabled');
         $("#sp_login_loader").hide();
     }
-    
+    // check if the email is in valid form using regular expression
     function is_valid_email(email) {
         if (email == '')
             return false;
@@ -79,8 +141,14 @@ jQuery(document).ready(function($){
         $(this).find(".sp_plusMinusVBar").toggle();
     });
     
+    // profile toggle
+    $("#sp_mm_profile").click(function(){
+        $("#sp_mm_user_info").toggle('fast');
+        return false;
+    });
+    
     // Logout now is handled by AJAX as well
-    $("#sp_main_menu_logout").click(function(){
+    $("#sp_mm_logout").click(function(){
         $.ajax({
             type: "POST",
             url: "wp-content/plugins/supportland/lib/sp-logout.php",
@@ -103,7 +171,7 @@ jQuery(document).ready(function($){
     });
     
     // Sign up anchor click
-    $("#sp_signup_a").fancybox({
+    $("#sp_register_anchor").fancybox({
         'hideOnOverlayClick': false,
         'titleShow': false,
         'hideOnContentClick': false,
@@ -116,43 +184,58 @@ jQuery(document).ready(function($){
         //////// validation
         // first name
         if (fn == '') {
+            $("#fname").css('border', '2px solid #FF4545');
             $("#fn_error").css('visibility', 'visible');
             return false;
         }
-        else
+        else {
+            $("#fname").css('border', '1px solid #DDDDDD');
             $("#fn_error").css('visibility', 'hidden');
+        }            
         // last name
         var ln = $("#lname").val();
         if (ln == '') {
+            $("#lname").css('border', '2px solid #FF4545');
             $("#ln_error").css('visibility', 'visible');
             return false;
         }
-        else
+        else {
+            $("#lname").css('border', '1px solid #DDDDDD');
             $("#ln_error").css('visibility', 'hidden');
+        }
         // username (email)
         var email = $("#email").val();
         if (!is_valid_email(email)){
+            $("#email").css('border', '2px solid #FF4545');
             $("#un_error").css('visibility', 'visible');
             return false;
         }
-        else
+        else {
+            $("#email").css('border', '1px solid #DDDDDD');
             $("#un_error").css('visibility', 'hidden');
+        }
         // password
         var pw = $("#password").val();
         if (pw == '') {
+            $("#password").css('border', '2px solid #FF4545');
             $("#pw_error").css('visibility', 'visible');
             return false;
         }
-        else
+        else {
+            $("#password").css('border', '1px solid #DDDDDD');
             $("#pw_error").css('visibility', 'hidden');
+        }
         // confirm password
         var pw2 = $("#password2").val();
         if (pw != pw2) {
+            $("#password2").css('border', '2px solid #FF4545');
             $("#pwc_error").css('visibility', 'visible');
             return false;
         }
-        else 
+        else {
+            $("#password2").css('border', '1px solid #DDDDDD');
             $("#pwc_error").css('visibility', 'hidden');
+        }
         
         // use AJAX to do the registration
         $.ajax({
