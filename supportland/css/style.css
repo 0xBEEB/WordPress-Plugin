@@ -1,3 +1,5 @@
+.clear{clear:both;}
+
 #sp_wrapper{background-color:#f4f4f4;padding:8px;}
 #sp_wrapper hr{margin:2px;}
 #sp_wrapper input[type="text"]{height:14px;width:95%;font-size:12px;padding:3px;}
@@ -12,3 +14,17 @@
 /* Search */
 #sp_search {clear:both;}
 #sp_search_submit{}
+
+
+
+
+/* Search Results */
+.sp_business_name{font-weight:bold;font-size:18px;}
+.sp_business_tag{color:#aaa;}
+.sp_search_result_image, .sp_business_view_image {float:left;margin:8px;width:100px;height:100px;}
+.sp_search_result_info, .sp_business_view_info {margin-left:10px;padding-left:110px;}
+
+.sp_business_description, .sp_business_address{margin-top:5px;margin-bottom:5px;}
+.sp_business_hours, .sp_business_address{font-weight:bold;}
+
+/* Business View*/

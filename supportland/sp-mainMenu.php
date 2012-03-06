@@ -9,6 +9,7 @@ function sp_headerStuff() { ?>
     <?php sp_map(45.5103332, -122.6839178, 15); ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script src="<?php echo plugins_url(); ?>/supportland/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script src="<?php echo plugins_url(); ?>/supportland/jquery.address/jquery.address-1.4.min.js?tracker=track"></script>
     <link rel="stylesheet" href="<?php echo plugins_url(); ?>/supportland/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
     <style type="text/css">
         .spMenuLink{padding:2px 3px 3px 3px;cursor:pointer;line-height:1.5em;}
@@ -29,7 +30,7 @@ function sp_mainMenu() {
     $app_token = $plugin_options['app_token_text_string'];
     $sp_wallet_test = sp_wallet_item();
     $sp_user_info= sp_user_info();
-    $sp_business = sp_business();
+    
     $member_since = date('D m/d/Y',strtotime($sp_user_info->member_since));
 
     $spCard =       '<strong>Name:</strong> '.$sp_user_info->name.'<br />'.
@@ -41,7 +42,8 @@ function sp_mainMenu() {
                     '<abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business"><strong>Points Earned:</strong></abbr> '.$sp_wallet_test->points.' points'.'<br />'.
                     '<abbr title="See your progress on any in-progress punch cards from local businesses"><strong>Punch Cards:</strong></abbr> '. "<div class='sp_punch_card_display'>". sp_print_punches($sp_wallet_test->punch) . "</div>".$sp_wallet_test->punch.'<br />'.
                     '<strong>Coupons:</strong> <br />';
-
+/*
+ * $sp_business = sp_business();
     $spSearch =     '<div id="map" class="sp_map"></div>'.
                     '<div class="sp_business_results">'.
                     '<img src="'.$sp_business->image.'" /><br />'.
@@ -49,7 +51,7 @@ function sp_mainMenu() {
                     '<strong>Description:</strong> '.$sp_business->description.'<br />'.
                     '<strong>Hours:</strong> '.$sp_business->hours.'<br />'.
                     '</div>';
-/*
+
     $spSearch = "test";
 * 
 */
@@ -104,8 +106,10 @@ function sp_mainMenu() {
                 });
             });
         </script>
-*/ ?>
+
     </div>
+ * */ ?>
+
 </div>
 
     <?  //jQuery animations for the four sections
@@ -135,7 +139,7 @@ function sp_wallet_item() {
         return;
     }
 }
-
+/*
 function sp_business($bid=14) { //hard-coded business ID for now
     $sp_user = new SP_User();
     $sp_trans = new SP_Transaction($sp_user);
@@ -151,7 +155,7 @@ function sp_business($bid=14) { //hard-coded business ID for now
     }
     return;
 }
-
+*/
 function sp_user_info() {
     $sp_user = new SP_User();
     $sp_trans = new SP_Transaction($sp_user);
@@ -190,6 +194,10 @@ function sp_print_punches($sp_wallet_info) {
     }
     return $sp_punch_card_punches;
 }
+
+
+
+
 
 function sp_map($lat, $lon, $scale) { ?>
 

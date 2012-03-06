@@ -32,6 +32,7 @@ License: GPLv2 or later
     require_once 'sp-settings.php';
     require_once 'sp-login.php';
     require_once 'sp-mainMenu.php';
+    require_once 'sp-get-reward.php';
 
     function display_widget() {
         $sp_user = new SP_User();
