@@ -7,11 +7,9 @@ function sp_mainMenu() {
     $user_info = sp_user_info();
     $sp_business = sp_business();
     ?>
-        <div id="sp_main_menu">
-            <?php echo sp_display_top_area(); ?>
-            <hr style="width: 100%;" />
-            <?php
-                echo sp_display_card_menu($user_info);
+        <div id="sp_mm_wrapper">
+            <?php 
+                echo sp_display_nav_menu($user_info);
                 echo sp_display_wallet_menu($wallet);
                 echo sp_display_search_menu($sp_business);
             ?>
@@ -19,47 +17,39 @@ function sp_mainMenu() {
     <?php
 }
 
-function sp_display_top_area() {
-    ?>
-        <div id="sp_main_menu_top">
-            <a id="sp_main_menu_home" href="">Supportland</a>
-            <a id="sp_main_menu_logout">Logout</a>
-        </div>
-    <?php
-}
-
-function sp_display_card_menu($user_info) {
+function sp_display_nav_menu($user_info) {
     $member_since = date('D m/d/Y',strtotime($user_info->member_since));
     ?>
-        <div id="sp_main_menu_card">
-            <div class="spMenuLink">
-                <span class="sp_plusMinusCircle">
-                    <span class="sp_plusMinusHBar"></span>
-                    <span class="sp_plusMinusVBar"></span>
-                </span>
-                <a>Card</a>
-            </div>
-            <div class="sp_Result" style="display:none;">
-                <div id="sp_user_info_board">
-                    <div id="sp_user_name"><?php echo($user_info->name); ?></div>
-                    <div id="sp_point_area">
-                        <label id="sp_user_point_label"><?php echo($user_info->points); ?></label>
-                        <span id="sp_user_info_etc">
-                            ID: <?php echo($user_info->id); ?>
-                        </span>
-                    </div>
-                    <div id="sp_user_point_marker">
-                        pts
-                    </div>
-                </div>
-            </div>
+        <label>Welcome <span class="title_font"><?php echo $user_info->name; ?></span></label>
+        <div id="sp_mm_nav">
+            <a id="sp_mm_profile">
+                <span>
+                    <img src="<?php echo WP_PLUGIN_URL; ?>/supportland/images/arrow_down.png" alt="down arrow"></img>
+                </span>Profile</a> | 
+            <a id="sp_mm_logout">Logout</a>
+        </div>
+        <div id="sp_mm_user_info">
+            <table>
+                <tr>
+                    <td>
+                        <img src="<?php echo WP_PLUGIN_URL; ?>/supportland/images/avatar.png" alt="avatar" />
+                    </td>
+                    <td>
+                        <ul>                          
+                            <li>You have <span id="sp_mm_user_point"><?php echo($user_info->points); ?></span> points</li>
+                            <li>ID: <?php echo($user_info->id); ?></li>
+                            <li>Since: <?php echo $member_since; ?></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>           
         </div>
     <?php
 }
 
 function sp_display_wallet_menu($wallet) {
     ?>
-        <div id="sp_main_menu_wallet">
+        <div id="sp_mm_wallet">
             <div class="spMenuLink">
                 <span class="sp_plusMinusCircle">
                     <span class="sp_plusMinusHBar"></span>
@@ -68,15 +58,9 @@ function sp_display_wallet_menu($wallet) {
                 <a>Wallet</a>
             </div>
             <div class="sp_Result" style="display:none;">
-                <abbr title="Spend your points on rewards like free coffee or an oil change">
-                    <strong>Rewards:</strong>
-                </abbr><?php echo($wallet->rewards); ?> <br />
-                <abbr title="Shop at local businesses to earn points that can be used for rewards at your favorite business">
-                    <strong>Points Earned:</strong>
-                </abbr><?php echo($wallet->points); ?> points <br />
-                <abbr title="See your progress on any in-progress punch cards from local businesses">
-                    <strong>Punch Cards:</strong>
-                </abbr>
+                <label id="sp_wallet_reward">Rewards: </label><?php echo($wallet->rewards); ?> <br />
+                <label id="sp_wallet_earned">Points Earned: </label><?php echo($wallet->points); ?> points <br />
+                <label id="sp_wallet_punch">Punch Cards: </label>
                 <div class="sp_punch_card_display">
                     <?php sp_print_punches($wallet->punch); ?>
                 </div>
@@ -87,16 +71,13 @@ function sp_display_wallet_menu($wallet) {
 
 function sp_display_search_menu($sp_business) {
     ?>
-        <div id="sp_main_menu_search">
+        <div id="sp_mm_search">
             <div class="spMenuLink">
                 <span class="sp_plusMinusCircle">
                     <span class="sp_plusMinusHBar"></span>
                     <span class="sp_plusMinusVBar"></span>
                 </span>
-                <a>
-                    <abbr title="Find local businesses and the rewards they offer.">
-                        Search
-                    </abbr></a>
+                <a id="sp_mm_search">Search</a>
             </div>
             <div class="sp_Result" style="display:none;">
                 <a id="inline" href="#data">Display the search data</a>
