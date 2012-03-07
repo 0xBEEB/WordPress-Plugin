@@ -269,10 +269,12 @@ jQuery(document).ready(function($){
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 if(jqXHR.status == 200) {
-                    alert(jqXHR.responseText);
+                    $("#sp_signup_ok").html(jqXHR.responseText).show();
+                    $("#sp_signup_fail").hide();
                 }
                 else {
-                   alert('Register error: ' + jqXHR.responseText);
+                    $("#sp_signup_ok").hide();
+                    $("#sp_signup_fail").html('Register error: ' + jqXHR.responseText).show();
                 }
             }
         });
