@@ -69,6 +69,24 @@ jQuery(document).ready(function($){
     
     // login form validation
     $("#sp_login_btn").click(function(){
+        do_login();
+    });
+    
+    // bind "enter" key on the login email and password input
+    $("#sp_login_email").keypress(function(e){
+        if (e.which == 13) {    // keycode for the enter key
+            $("#sp_login_btn").focus();
+            do_login();
+        }
+    });
+    $("#sp_login_password").keypress(function(e){
+        if (e.which == 13) {    // keycode for the enter key
+            $("#sp_login_btn").focus();
+            do_login();
+        }
+    });
+    
+    function do_login() {
         show_login_loader();
         var email = $("#sp_login_email").val();
         if (!is_valid_email(email)) {
@@ -111,7 +129,7 @@ jQuery(document).ready(function($){
             }
         });
         return false;
-    });
+    }
     
     // show login loader
     function show_login_loader() {
