@@ -83,7 +83,9 @@ function sp_signup_form() {
                 </table>
                 <div style="text-align: right;">
                     <input type="button" value="Submit" class="sp_btn" id="submitReg" />
-                </div>
+                </div><br />
+                <div id="sp_signup_ok"></div>
+                <div id="sp_signup_fail"></div>
             </div>
         </div>
     <?php
