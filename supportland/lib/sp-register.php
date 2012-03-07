@@ -11,7 +11,7 @@
         .'/'.$password2.'/'.$fname.'/'.$lname.'?app_token='.  sp_get_app_token();
 
     $buffer = sp_fetch($url);
-    exit($buffer);
+    //exit($buffer);
     
     //success and error messages
     $error = "Sorry, registration doesn't seem to be working!  Please try again later or contact an administrator.";
