@@ -196,14 +196,28 @@ jQuery(document).ready(function($){
         'showCloseButton': true
     });
     
+    // bind "enter" key on the login email and password input
+    $("#registration_form input").keypress(function(e){
+        if (e.which == 13) {
+            $("#submitReg").focus();
+            do_registration();
+        }
+    })
+    
     // Sign up form submission
     $("#submitReg").click(function(){
+        do_registration();
+    });
+    
+    function do_registration() {
+        show_signup_loader();
         var fn = $("#fname").val();
         //////// validation
         // first name
         if (fn == '') {
             $("#fname").css('border', '2px solid #FF4545');
             $("#fn_error").css('visibility', 'visible');
+            hide_signup_loader();
             return false;
         }
         else {
@@ -215,6 +229,7 @@ jQuery(document).ready(function($){
         if (ln == '') {
             $("#lname").css('border', '2px solid #FF4545');
             $("#ln_error").css('visibility', 'visible');
+            hide_signup_loader();
             return false;
         }
         else {
@@ -226,6 +241,7 @@ jQuery(document).ready(function($){
         if (!is_valid_email(email)){
             $("#email").css('border', '2px solid #FF4545');
             $("#un_error").css('visibility', 'visible');
+            hide_signup_loader();
             return false;
         }
         else {
@@ -237,6 +253,7 @@ jQuery(document).ready(function($){
         if (pw == '') {
             $("#password").css('border', '2px solid #FF4545');
             $("#pw_error").css('visibility', 'visible');
+            hide_signup_loader();
             return false;
         }
         else {
@@ -248,6 +265,7 @@ jQuery(document).ready(function($){
         if (pw != pw2) {
             $("#password2").css('border', '2px solid #FF4545');
             $("#pwc_error").css('visibility', 'visible');
+            hide_signup_loader();
             return false;
         }
         else {
@@ -278,6 +296,19 @@ jQuery(document).ready(function($){
                 }
             }
         });
+        hide_signup_loader();
         return false;
-    });
+    }
+           
+    // show registration loader
+    function show_signup_loader() {
+        $("#sp_signup_loader").show();
+        // disable login button, and change text to 'loading'
+        $("#submitReg").val('loading...').attr('disabled', 'disabled');
+    }
+    // hide registration loader
+    function hide_signup_loader() {
+        $("#submitReg").val('Submit').removeAttr('disabled');
+        $("#sp_signup_loader").hide();
+    }
 });
