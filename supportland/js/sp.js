@@ -28,11 +28,11 @@ jQuery(document).ready(function($){
         create_qtip('sp_mm_search', 'Find local businesses and the rewards they offer', 'bottom left', 'top center',
             'green', 'mouseover', 'mouseleave');
         // Registration form
-        create_qtip('fname', 'Enter your first name', 'bottom left', 'top right', 'green', 'focus', 'unfocus');
-        create_qtip('lname', 'Enter your last name', 'bottom left', 'top right', 'green', 'focus', 'unfocus');
-        create_qtip('email', 'Enter the email address you want us to use to contact you', 'bottom left', 'top right', 'green', 'focus', 'unfocus');
-        create_qtip('password', 'Please choose a password', 'bottom left', 'top right', 'green', 'focus', 'unfocus');
-        create_qtip('password2', 'Please enter your password again to make sure there are no typos', 'bottom left', 'top right', 'green', 'focus', 'unfocus');
+        create_qtip('fname', 'Enter your first name', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
+        create_qtip('lname', 'Enter your last name', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
+        create_qtip('email', 'Enter the email address you want us to use to contact you', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
+        create_qtip('password', 'Please choose a password', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
+        create_qtip('password2', 'Please enter your password again to make sure there are no typos', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
     }
     
     function create_qtip(target_id, message, my_pos, at_pos, color, show_e, hide_e) {
