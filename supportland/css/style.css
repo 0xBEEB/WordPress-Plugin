@@ -33,7 +33,7 @@
 /* the supportland logo anchor*/
 #sp_logo {
     display: inline-block;
-    background-image: url('http://capstoneaa.cs.pdx.edu/david_liang/wordpress/wp-content/plugins/supportland/images/supportland_s_logo_sm.png');
+    background-image: url(../images/supportland_s_logo_sm.png);
     background-repeat: no-repeat;
     height: 20px;
     padding-left: 30px;
@@ -127,34 +127,6 @@
 #sp_login_otherlinks ul li {
     padding: 4px 0;
     border-bottom: 1px solid #DDDDDD;
-}
-
-/* search bar area */
-#sp_search_bar {
-    line-height: 200%;
-}
-
-/* the div that contains search submit buttom */
-#sp_search_bar div {
-    text-align: right;
-}
-
-/* the search input */
-#sp_search_store {
-    font-size: 100%;
-    width: 96%;
-}
-
-/* the search submit buttom */
-#sp_search_bar div input {
-    font-size: 100%;
-}
-
-/* login area anchor tag */
-#sp_login_area a, #sp_signup_a {
-    cursor: pointer;
-    font-size: 100%;
-    font-weight: bold;
 }
 
 /******************** sp-mainmenu area css ********************************/
@@ -279,6 +251,26 @@
 
 .signup_error {
     visibility: hidden;
+}
+
+#sp_signup_ok {
+    background-image: url(../images/signup_ok.png);
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    height: 32px;
+    vertical-align: middle;
+    display: none;
+    font-size: 11px;
+}
+
+#sp_signup_fail {
+    background-image: url(../images/signup_error.png);
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    height: 32px;
+    vertical-align: middle;
+    display: none;
+    font-size: 11px;
 }
 
 /* change default tooltip size */
