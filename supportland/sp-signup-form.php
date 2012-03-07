@@ -82,6 +82,9 @@ function sp_signup_form() {
                     </tr>
                 </table>
                 <div style="text-align: right;">
+                    <span>
+                        <img id="sp_signup_loader" src="wp-content/plugins/supportland/images/ajax-loader.gif" alt="loading..." style="display:none;" />
+                    </span>&nbsp;&nbsp;
                     <input type="button" value="Submit" class="sp_btn" id="submitReg" />
                 </div><br />
                 <div id="sp_signup_ok"></div>
