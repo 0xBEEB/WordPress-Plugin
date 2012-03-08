@@ -180,12 +180,24 @@ jQuery(document).ready(function($){
         return false;
     });
     
+    // search to login click
+    $("#sp_search_login a").click(function(){
+        $("#sp_search_wrapper").slideUp(800);
+        $("#sp_login_wrapper").slideDown(800);
+    });
+    
+    // login back to search
+    $("#sp_login_search a").click(function() {
+        $("#sp_login_wrapper").slideUp(800);
+        $("#sp_search_wrapper").slideDown(800);
+    });
+    
     // Search popup anchor
-    $("#inline").fancybox({
-        'hideOnOverlayClick': false,
-        'hideOnContentClick': false,
-        'enableEscapeButton': false,
-        'showCloseButton': true
+    $("#sp_search_button").click(function(){
+        $.fancybox({
+            'href': ''
+        });
+        return false;
     });
     
     // Sign up anchor click
