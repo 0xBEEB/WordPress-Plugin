@@ -129,6 +129,13 @@
     border-bottom: 1px solid #DDDDDD;
 }
 
+#sp_login_search {
+    background-image: url(../images/arrow_up.png);
+    background-repeat: no-repeat;
+    padding-left: 15px;
+    background-position: left center;
+}
+
 /******************** sp-mainmenu area css ********************************/
 #sp_mm_nav {
     display: block;
@@ -271,6 +278,30 @@
     vertical-align: middle;
     display: none;
     font-size: 11px;
+}
+
+/************************** search form **********************/
+#sp_search_wrapper {
+    margin: 5px;
+    width: 95%;
+}
+
+#sp_search_wrapper div {
+    text-align: right;
+}
+
+#sp_search_input {
+    width: 93%;
+    font-size: 13px;
+    margin: 10px 0;
+}
+
+#sp_search_login {
+    margin: 20px 0;
+}
+
+#sp_login_search a, #sp_search_login a {
+    cursor: pointer;
 }
 
 /* change default tooltip size */
