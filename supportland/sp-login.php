@@ -1,9 +1,7 @@
 <?php
 function sp_login_page() {
     ?>
-        <div id="sp_login_wrapper">
-            <!-- display search store form -->
-            <?php //display_search(); ?>
+        <div id="sp_login_wrapper" style="display: none;">
             <!-- display login form -->
             <?php display_login_form(); ?>
             <!-- display other links like forgot password, register, etc -->
@@ -12,18 +10,9 @@ function sp_login_page() {
     <?php
 }
 
-function display_search() {
-    ?>
-        <div id="sp_search_bar">
-            <label for="sp_search_store">Search local store</label><br />
-            <input type="search" name="sp_search_store" id="sp_search_store" value="" /><br />
-            <div><input type="submit" name="sp_search_sumit" value="Search" /></div>
-        </div>
-    <?php
-}
-
 function display_login_form() {
     ?>
+        <div id="sp_login_search">go back to <a>search</a></div>
         <label class="title_font">Log in</label>
         <div id="sp_login_form">
             <!-- display invalid login error message -->
