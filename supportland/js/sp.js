@@ -5,10 +5,10 @@ jQuery(document).ready(function($){
     function create_qtips() {
         // login email input
         create_qtip('sp_login_email', 'Type in the email you used to signup', 'bottom left', 
-            'top center', 'green', 'focus', 'unfocus');
+            'top center', 'green', 'focus', 'unfocus focusout');
         // login password input
         create_qtip('sp_login_password', 'Type in your password', 'bottom left', 'top center',
-            'green', 'focus', 'unfocus');
+            'green', 'focus', 'unfocus focusout');
         // register anchor
         create_qtip('sp_register_anchor', 'Signing up for a Supportland account will allow you to see your points and claim rewards online', 'top left', 'bottom center',
             'green', 'mouseover', 'mouseleave');    
