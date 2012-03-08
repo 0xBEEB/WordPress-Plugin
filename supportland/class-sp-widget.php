@@ -45,8 +45,9 @@ class SP_Widget extends WP_widget {
             if ($sp_user->logged_in()) {
                 $this->display_main_menu();
             }
-            // else, display the login page
+            // else, display the search bar and login page
             else {
+                $this->display_search_bar();
                 $this->display_login_page();
             }
         }
@@ -118,6 +119,11 @@ class SP_Widget extends WP_widget {
     function display_login_page() {
         require_once 'sp-login.php';
         sp_login_page();
+    }
+    
+    function display_search_bar() {
+        require_once 'sp-search.php';
+        sp_search();
     }
     
     function save_app_token($token) {
