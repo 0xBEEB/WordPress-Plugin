@@ -303,6 +303,7 @@ function sp_get_uri() {
 */
 function sp_fetch($url, $method="GET") {
     $url = $url . "&app_token=" . sp_get_app_token();
+
     // initialize curl call
     $ch = curl_init();
 

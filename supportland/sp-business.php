@@ -1,6 +1,7 @@
 <?php
-require_once(dirname(__FILE__) . '/../../../wp-load.php');
-require_once(dirname(__FILE__) . '/sp-settings.php');
+//require_once(dirname(__FILE__) . '/../../../wp-load.php');
+//require_once(dirname(__FILE__) . '/sp-settings.php');
+require_once('sp-main.php');
 
 function sp_business($bid=6) {
     $sp_user = new SP_User();
@@ -23,6 +24,9 @@ $bid = $_GET['bid'];    //business ID
 $sp_business = sp_business($bid);
 $sp_rewards_array = sp_get_rewards($sp_business);
 
+//Clean up hours string so that it isn't a single line
+$sp_business_hours = str_replace(";","<br />",$sp_business->hours);
+
 ?>
     <a href="#whatever" id="sp_back_link">&laquo; Back</a>
     <script>
@@ -43,10 +47,23 @@ $sp_rewards_array = sp_get_rewards($sp_business);
         <div class="sp_business_view_image">
                 <img src="<?php echo $sp_business->image; ?>" alt="<?php echo $sp_business->name; ?>" height="100" width="100" style="display:inline;" />
         </div>
+        
+        
+        <div id="map_wrapper" style="float:right;">
+            <div id="map" class="sp_map"></div>
+            <?php sp_map();?>
+            <script>
+                $(document).ready(function() {
+                    sp_init_map();
+                    update_map(<?php echo $sp_business->lat.','.$sp_business->lon.',15';?>);
+                });
+            </script>
+        </div>
+        
         <div class="sp_business_view_info">
             <div class="sp_business_name"><a href="#business<?php echo $sp_business->id; ?>" id="sp-bid<?php echo $sp_business->id; ?>"><?php echo $sp_business->name; ?></a></div>
             <div class="sp_business_tag"><?php echo $sp_business->tag; ?></div>
-            <div class="sp_business_hours"><?php echo $sp_business->hours; ?></div>
+            <div class="sp_business_hours"><?php echo $sp_business_hours; ?></div>
             <div class="sp_business_address">
                 <?php echo $sp_business->street1; ?><br />
                 <?php 
@@ -60,7 +77,7 @@ $sp_rewards_array = sp_get_rewards($sp_business);
             <div class="sp_business_contact"><?php echo $sp_business->phone; ?> &nbsp;|&nbsp; <a href="mailto:<?php echo $sp_business->email; ?>"><?php echo $sp_business->email; ?></a> &nbsp;|&nbsp; <a href="http://<?php echo $sp_business->website; ?>"><?php echo $sp_business->website; ?></a></div>
         </div>
         <div class="clear"></div>
-        
+
 <hr />
 <div>Rewards</div>
 <?php

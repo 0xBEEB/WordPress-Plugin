@@ -2,6 +2,7 @@
 require_once 'sp-login.php';
 require_once 'sp-search.php';
 define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
+define("SP_USE_MAP", "OPEN_STREET_MAPS");
 
 
 //Goes into <head> tag
@@ -11,17 +12,6 @@ function sp_headerStuff() { ?>
     <script src="<?php echo plugins_url(); ?>/supportland/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
     <script src="<?php echo plugins_url(); ?>/supportland/jquery.address/jquery.address-1.4.min.js?tracker=track"></script>
     <link rel="stylesheet" href="<?php echo plugins_url(); ?>/supportland/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
-    <style type="text/css">
-        .spMenuLink{padding:2px 3px 3px 3px;cursor:pointer;line-height:1.5em;}
-        .spMenuLink:hover{background-color:#eee;}
-        #spResult1,#spResult2,#spResult3{display:none;}
-        .sp_plusMinusCircle{bottom:-3px;background-color:#a21;height:16px;width:16px;border-radius: 8px;-moz-border-radius:8px;position:relative;display:inline-block;}
-        .sp_plusMinusHBar{background-color:#fff;height:2px;width:8px;position:absolute;top:7px;left:4px;}
-        .sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
-        .sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
-        .sp_map{border: 1px solid black; width: 300px; height: 240px;position: absolute; right: 0px}
-        .sp_business_results{margin-right: 350px;}
-    </style>
 <?  }
 
 function sp_mainMenu() {
@@ -142,21 +132,46 @@ function sp_print_punches($sp_wallet_info) {
     return $sp_punch_card_punches;
 }
 
-function sp_map($lat, $lon, $scale) { ?>
-
-    <script src="wp-content/plugins/supportland/maps/ulayers/ulayers.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        // <![CDATA[
-        var map;
-        function init() {
-            map = new uLayers.Map('map', uLayers.OSM);
-            map.setOrigin({lat: <?php echo $lat;?>, lon: <? echo $lon;?>}, <?echo $scale;?>);
-            map.addMarker({lat: <?php echo $lat;?>, lon: <? echo $lon;?>});
-            map.updateMap();
-        }
-        // ]]>
-    </script>
-
-<?php
+function sp_map() {
+    if(SP_USE_MAP == 'GOOGLE_MAPS')
+        sp_google_maps();
+    else if (SP_USE_MAP == 'OPEN_STREET_MAPS')
+        sp_open_street_maps();
 }
+    
+    function sp_google_maps() { ?>
+        <script src="//maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=AIzaSyDtNqsYp25iDElsfwh4yVd23Ul0NobTbtU" type="text/javascript"></script>
+        <script type="text/javascript">
+
+            function sp_init_map() {
+                if (GBrowserIsCompatible()) {
+                    var map = new GMap2(document.getElementById("map"));
+                }
+            }
+            function update_map(latitude, longitude, scale) {
+                    map.setCenter(new GLatLng(latitude, longitude),scale);
+                    map.setUIToDefault();
+            }
+        </script>
+        <?php
+    }
+    function sp_open_street_maps() {?>
+
+        <script src="<?php echo SP_PLUGIN_URL?>maps/ulayers/ulayers.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            // <![CDATA[
+            var map;
+            function sp_init_map() {
+                map = new uLayers.Map('map', uLayers.OSM);
+            }
+            function update_map(latitude, longitude, scale) {
+                map.setOrigin({lat: latitude, lon: longitude}, scale);
+                map.addMarker({lat: latitude, lon: longitude});
+                map.updateMap();
+            }
+            // ]]>
+        </script>
+    <?php
+    }
+
 ?>

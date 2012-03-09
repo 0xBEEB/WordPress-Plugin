@@ -1,6 +1,7 @@
 <?php
-require_once(dirname(__FILE__) . '/../../../wp-load.php');
-require_once(dirname(__FILE__) . '/sp-settings.php');
+//require_once(dirname(__FILE__) . '/../../../wp-load.php');
+//require_once(dirname(__FILE__) . '/sp-settings.php');
+require_once('sp-main.php');
 
 function printSearchResults($query) {
     if(!isset($query) || ($query=="")){
