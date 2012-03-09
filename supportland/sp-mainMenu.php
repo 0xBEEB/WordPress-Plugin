@@ -5,10 +5,10 @@ function sp_mainMenu() {
     $app_token = sp_get_app_token();
     $wallet = sp_wallet_item();
     $user_info = sp_user_info();
-    $sp_business = sp_business();
     ?>
         <div id="sp_mm_wrapper">
-            <?php 
+            <?php
+                sp_search();
                 echo sp_display_nav_menu($user_info);
                 echo sp_display_wallet_menu($wallet);
                 echo sp_display_search_menu($sp_business);
@@ -24,7 +24,7 @@ function sp_display_nav_menu($user_info) {
         <div id="sp_mm_nav">
             <a id="sp_mm_profile">
                 <span>
-                    <img src="<?php echo WP_PLUGIN_URL; ?>/supportland/images/arrow_down.png" alt="down arrow"></img>
+                    <img src="<?php echo WP_PLUGIN_URL; ?>/supportland/images/arrow_down.png" alt="down arrow" />
                 </span>Profile</a> | 
             <a id="sp_mm_logout">Logout</a>
         </div>
@@ -69,8 +69,7 @@ function sp_display_wallet_menu($wallet) {
     <?php
 }
 
-function sp_display_search_menu($sp_business) {
-    ?>
+function sp_display_search_menu($sp_business) { ?>
         <div id="sp_mm_search">
             <div class="spMenuLink">
                 <span class="sp_plusMinusCircle">
@@ -104,19 +103,6 @@ function sp_wallet_item() {
         $wallet = $sp_trans->get_wallet();
         $wallet = json_decode($wallet);
         return $wallet;
-    } catch (Exception $e) {
-        echo "Exception: " . $e->getMessage();
-        return;
-    }
-}
-
-// hard-coded business ID for now
-function sp_business($bid=14) {
-    $sp_user = new SP_User();
-    $sp_trans = new SP_Transaction($sp_user);
-    try {
-        $business = $sp_trans->get_business($bid);
-        return $business;
     } catch (Exception $e) {
         echo "Exception: " . $e->getMessage();
         return;

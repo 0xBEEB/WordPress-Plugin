@@ -325,3 +325,53 @@
     color: red;
     padding: 10px 0;
 }
+
+
+
+
+
+
+
+.clear{clear:both;}
+
+#sp_wrapper{background-color:#f4f4f4;padding:8px;}
+#sp_wrapper hr{margin:2px;}
+#sp_wrapper input[type="text"]{height:14px;width:95%;font-size:12px;padding:3px;}
+#sp_wrapper input[type="password"]{height:14px;width:95%;font-size:12px;padding:3px;}
+.sp_clear{clear:both;}
+
+#sp_user_info fieldset {border:1px solid black;padding:1em;font-size:0.9em;}
+
+#sp_logo{display:inline-block;vertical-align:middle;height:19px;width:24px;margin-right:4px;
+                  background:url('../images/supportland_s_logo_sm.png') no-repeat;}
+
+/* Search */
+#sp_search {clear:both;}
+#sp_search_submit{}
+
+
+
+
+/* Search Results */
+.sp_business_name{font-weight:bold;font-size:18px;}
+.sp_business_tag{color:#aaa;}
+.sp_search_result_image, .sp_business_view_image {float:left;margin:8px;width:100px;height:100px;}
+.sp_search_result_info, .sp_business_view_info {margin-left:10px;padding-left:110px;}
+
+.sp_business_description, .sp_business_address{margin-top:5px;margin-bottom:5px;}
+.sp_business_address{font-weight:bold;}
+
+/* Business View*/
+
+
+/* map */
+.sp_map{border:1px solid black;width:300px;height:240px;}
+
+.spMenuLink{padding:2px 3px 3px 3px;cursor:pointer;line-height:1.5em;}
+.spMenuLink:hover{background-color:#eee;}
+#spResult1,#spResult2,#spResult3{display:none;}
+.sp_plusMinusCircle{bottom:-3px;background-color:#a21;height:16px;width:16px;border-radius: 8px;-moz-border-radius:8px;position:relative;display:inline-block;}
+.sp_plusMinusHBar{background-color:#fff;height:2px;width:8px;position:absolute;top:7px;left:4px;}
+.sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
+.sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
+.sp_business_results{margin-right: 350px;}

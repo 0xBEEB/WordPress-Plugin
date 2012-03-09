@@ -27,20 +27,17 @@ License: GPLv2 or later
 
 require_once 'class-sp-widget.php';     // SP_Widget class file
 
-// instance of SP_Widget
-//$sp_widget = new SP_Widget();
+require_once 'sp-search.php';
+require_once 'sp-get-reward.php';
+require_once 'sp-map.php';
 
-/*
- * register the widget
- */
+/// Register the widget
 function plugin_register_widgets() {
     register_widget('SP_Widget');
 }
 add_action('widgets_init', 'plugin_register_widgets');
 
-/*
- * load CSS file
- */
+// Load CSS file
 function plugin_load_css() {
     $css_url = path_join(WP_PLUGIN_URL, 
             basename(dirname(__FILE__)) . "/css/");
@@ -59,9 +56,7 @@ function plugin_load_css() {
 }
 add_action('wp_enqueue_scripts', 'plugin_load_css');
 
-/*
- * load JavaScript file
- */
+// Load JavaScript file
 function plugin_load_js() {
     wp_register_script('jquery-1.7.1', 
             'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
