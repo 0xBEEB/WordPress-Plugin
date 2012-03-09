@@ -1,9 +1,27 @@
 <?php
 /***************************************
+ * Copyright (C) 2012 Team Do(ugh)nut
+ * This file is part of Supportland Plugin.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Supportland Plugin.  If not, see <http://www.gnu.org/licenses/>.
+ * Released under the GPLv2
+ * See COPYING for more information.
+ **************************************/
+ 
+ /*************************************
  * sp_api.php
  * Thomas Schreiber <ubiquill@gmail.com>
- * Copyright (C) 2012 Team Do(ugh)nut
- *
  * Library for interacting with the
  * Supportland API v1.0
  **************************************/
@@ -21,11 +39,8 @@ require_once(dirname(__FILE__) . '/../../../../wp-load.php');
 /*! @class SP_Transaction
  *
     @author Thomas Schreiber <ubiquill@gmail.com>
-    @author Casey Beach <cbeach@gmail.com>
-
-    @abstract A machine for interfacing with the Supportland API
-    @discussion An SP_Transaction uses the current users credentials to 
-    interact with the Supportland API. For many interactions the user 
+    @author Casey Beach <beachc@gmail.com>
+@abstract A machine for interfacing with the Supportland API @discussion An SP_Transaction uses the current users credentials to interact with the Supportland API. For many interactions the user 
     must be logged in.
  */
 class SP_Transaction
@@ -92,7 +107,7 @@ class SP_Transaction
 
     /*! @function get_wallet
         @abstract returns the contents of a uesrs wallet
-        @author Casey Beach <cbeach@gmail.com>
+        @author Casey Beach <beachc@gmail.com>
         @result Object - A wallet object containing info or an exception if
             the user is not logged in.
      */
@@ -243,7 +258,7 @@ class SP_User
 
     /*! @function get_access_token
         @author Thomas Schreiber <ubiquill@gmail.com>
-        @author Casey Beach <cbeach@gmail.com>
+        @author Casey Beach <beachc@gmail.com>
         @abstract gets the access token
         @result access_token string - Returns the users access_token
      */
@@ -268,7 +283,7 @@ class SP_User
     }
 
     /*! @function reset_access_token
-        @author Casey Beach <cbeach@gmail.com>
+        @author Casey Beach <beachc@gmail.com>
         @abstract resets the access token
         @result 
      */
@@ -277,7 +292,7 @@ class SP_User
     }
 
     /*! @function logout
-        @author Casey Beach <cbeach@gmail.com>
+        @author Casey Beach <beachc@gmail.com>
         @abstract logs a user out
         @result 
      */
