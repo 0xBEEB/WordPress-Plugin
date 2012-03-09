@@ -1,6 +1,4 @@
 <?php
-//require_once(dirname(__FILE__) . '/../../../wp-load.php');
-//require_once(dirname(__FILE__) . '/sp-settings.php');
 require_once('sp-main.php');
 
 function printSearchResults($query) {
@@ -69,7 +67,7 @@ $supportland_search_query = $_GET["q"];
 $supportland_search_query = str_replace(" ", "+", $supportland_search_query);
 //echo $supportland_search_query;
 
-//remove all non alphanumeric characters
+//remove all non alphanumeric characters?
 
 printSearchResults($supportland_search_query);
 

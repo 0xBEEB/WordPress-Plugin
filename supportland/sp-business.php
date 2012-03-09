@@ -58,12 +58,13 @@ $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
                     update_map(<?php echo $sp_business->lat.','.$sp_business->lon.',15';?>);
                 });
             </script>
+            <br />
+            <?php echo 'lat: '.$sp_business->lat.'&nbsp;&nbsp;lon: '.$sp_business->lon;?>
         </div>
         
         <div class="sp_business_view_info">
             <div class="sp_business_name"><a href="#business<?php echo $sp_business->id; ?>" id="sp-bid<?php echo $sp_business->id; ?>"><?php echo $sp_business->name; ?></a></div>
             <div class="sp_business_tag"><?php echo $sp_business->tag; ?></div>
-            <div class="sp_business_hours"><?php echo $sp_business_hours; ?></div>
             <div class="sp_business_address">
                 <?php echo $sp_business->street1; ?><br />
                 <?php 
@@ -73,6 +74,7 @@ $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
                 ?>
                 <?php echo $sp_business->city; ?>, <?php echo $sp_business->state; ?> &nbsp;<?php echo $sp_business->zip; ?>
             </div>
+            <div class="sp_business_hours"><?php echo $sp_business_hours; ?></div>
             <div class="sp_business_description"><?php echo $sp_business->description; ?></div>
             <div class="sp_business_contact"><?php echo $sp_business->phone; ?> &nbsp;|&nbsp; <a href="mailto:<?php echo $sp_business->email; ?>"><?php echo $sp_business->email; ?></a> &nbsp;|&nbsp; <a href="http://<?php echo $sp_business->website; ?>"><?php echo $sp_business->website; ?></a></div>
         </div>

@@ -25,7 +25,7 @@
 .sp_search_result_info, .sp_business_view_info {margin-left:10px;padding-left:110px;}
 
 .sp_business_description, .sp_business_address{margin-top:5px;margin-bottom:5px;}
-.sp_business_hours, .sp_business_address{font-weight:bold;}
+.sp_business_address{font-weight:bold;}
 
 /* Business View*/
 
