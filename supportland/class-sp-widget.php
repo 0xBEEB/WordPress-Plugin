@@ -31,7 +31,7 @@ class SP_Widget extends WP_widget {
             'classname' => 'supportland-widget',
             // Description that appears the widget plugin before being dragged
             //  to widget areas
-            'description' => 'Supportland Wallet Widget, [xxxx]'
+            'description' => 'Adds the functionality of Supportland to your site'
         );
         parent::WP_Widget(
                 'supportland_widget',
