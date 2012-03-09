@@ -60,7 +60,7 @@ class SP_Transaction
         $error = 'Sorry, there seems to be a problem.  Please try again later or contact an administrator.';
 
         if ($this->sp_user->logged_in()) {
-            $url = sp_get_uri() . "business/" . $bid . ".json?access_token=" . $this->sp_user->get_access_token();
+            $url = sp_get_uri() . "business/" . $bid . ".json?access_token=" . $this->sp_user->get_access_token() . "&app_token=".sp_get_app_token();
             $buffer = sp_fetch($url);       //Get data from API
             $json = json_decode($buffer);   //Decode JSON
             if($json) {                     //Something came back from the API
