@@ -1,7 +1,4 @@
 <?php
-
-//require_once(dirname(__FILE__) . '/../../../wp-load.php');
-//require_once(dirname(__FILE__) . '/sp-settings.php');
 require_once('sp-main.php');
 
 function sp_business($bid=6) {
@@ -52,7 +49,7 @@ $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
                 <img src="<?php echo $sp_business->image; ?>" alt="<?php echo $sp_business->name; ?>" height="100" width="100" style="display:inline;" />
         </div>
         
-        <?php /*
+<?php /*
         <div id="map_wrapper" style="float:right;">
             <div id="map" class="sp_map"></div>
             <?php sp_map();?>
@@ -65,8 +62,9 @@ $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
             <br />
             <?php echo 'lat: '.$sp_business->lat.'&nbsp;&nbsp;lon: '.$sp_business->lon;?>
         </div>
-        */
-        ?>
+ * 
+ */ ?>
+
         <div class="sp_business_view_info">
             <div class="sp_business_name"><a href="#business<?php echo $sp_business->id; ?>" id="sp-bid<?php echo $sp_business->id; ?>"><?php echo $sp_business->name; ?></a></div>
             <div class="sp_business_tag"><?php echo $sp_business->tag; ?></div>

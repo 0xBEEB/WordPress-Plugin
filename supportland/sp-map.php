@@ -1,6 +1,4 @@
 <?php
-require_once('sp-main.php');
-
 function sp_map() {
     if(SP_USE_MAP == 'GOOGLE_MAPS')
         sp_google_maps();
@@ -17,12 +15,13 @@ function sp_google_maps() { ?>
             }
         }
         function update_map(latitude, longitude, scale) {
-                map.setCenter(new GLatLng(latitude, longitude),scale);
-                map.setUIToDefault();
+            map.setCenter(new GLatLng(latitude, longitude),scale);
+            map.setUIToDefault();
         }
     </script>
     <?php
 }
+
 function sp_open_street_maps() {?>
 
     <script src="<?php echo SP_PLUGIN_URL?>maps/ulayers/ulayers.js" type="text/javascript"></script>
