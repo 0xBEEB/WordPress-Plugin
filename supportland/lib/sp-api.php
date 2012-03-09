@@ -16,7 +16,7 @@ define("COOKIEPATH", "/");
 // This will need to be changed if you have a non-standard
 // plugin directory
 require_once(dirname(__FILE__) . '/../../../../wp-load.php');
-// require_once(dirname(__FILE__) . '/../sp-settings.php');
+//require_once(dirname(__FILE__) . '/../sp-settings.php');
 
 /*! @class SP_Transaction
  *
@@ -127,7 +127,6 @@ class SP_Transaction
         }
     }
 
-    
     /*! @function search
         @abstract Search for businesses or rewards
         @author Thomas Schreiber <ubiquill@gmail.com>
@@ -162,6 +161,7 @@ class SP_Transaction
             $url .= "&price=" . $opts["price"];
 
         $url .= "&app_token=" . sp_get_app_token();
+
         return sp_fetch($url);
 
     }
@@ -357,8 +357,8 @@ function sp_good_token($sp_token) {
 }
 
 /*! @function sp_get_app_token
- * @author Thomas Schreiber <ubiquill@gmail.com>, modified by David Liang
- * @abstract Returns the app token set in the option table
+ * @author Thomas Schreiber <ubiquill@gmail.com>
+ * @abstract Returns the app token set in the plugin settings
  * @result string - the app's token
  */
 function sp_get_app_token() {
