@@ -61,7 +61,6 @@ class SP_Transaction
 
         if ($this->sp_user->logged_in()) {
             $url = sp_get_uri() . "business/" . $bid . ".json?access_token=" . $this->sp_user->get_access_token();
-            $url .= "&app_token=" . sp_get_app_token();
             $buffer = sp_fetch($url);       //Get data from API
             $json = json_decode($buffer);   //Decode JSON
             if($json) {                     //Something came back from the API
@@ -74,7 +73,20 @@ class SP_Transaction
                 throw new Exception ($error);
             }
         } else {
-            throw new Exception('Not logged in');
+            //throw new Exception('Not logged in');
+            $url = sp_get_uri() . "business/" . $bid . ".json?app_token=".sp_get_app_token();
+            $buffer = sp_fetch($url);       //Get data from API
+            $json = json_decode($buffer);   //Decode JSON
+            if($json) {                     //Something came back from the API
+                if($json->error->message) { //API outputs error, throw it
+                    throw new Exception($json->error->message);
+                } else {                    //If we got here, everything's ok
+                    return $json;
+                }
+            } else {                        //nothing came back from the API
+                throw new Exception ($error);
+            }
+            
         }
     }
 
@@ -127,6 +139,19 @@ class SP_Transaction
         }
     }
 
+    
+    /*! @function get_reward(rewardid, method)
+        @abstract purchases reward for the current user
+        @author Alexis Carlough <alexiscarlough@gmail.com>
+        @result Object - A 'transaction' object containing info on the reward; if method is PUT, reward will be purchased; method GET will simply query info.
+    
+    */
+    public function get_reward($rewardid, $method="GET") {
+        $url = sp_get_uri()."reward/".$rewardid.".json?app_token=".sp_get_app_token()."&access_token=".$this->sp_user->get_access_token();
+        //echo $url;
+        return json_decode(sp_fetch($url, $method));
+        
+    }
     
     /*! @function search
         @abstract Search for businesses or rewards
@@ -289,7 +314,9 @@ function sp_get_uri() {
     @param url string - The url to query
     @result string - The information the server responds with
 */
-function sp_fetch($url) {
+function sp_fetch($url, $method="GET") {
+    $url = $url . "&app_token=" . sp_get_app_token();
+
     // initialize curl call
     $ch = curl_init();
 
@@ -301,6 +328,14 @@ function sp_fetch($url) {
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);  // SSL, Y U NO WORK?
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
     curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/CAcerts/BuiltinObjectToken_GoDaddyClass2CA.crt");
+    
+    if($method == "GET") {
+        curl_setopt($ch, CURLOPT_HTTPGET, true);
+    } else if($method == "PUT") {
+        curl_setopt($ch, CURLOPT_PUT, true);
+    } else if($method == "POST") {
+        curl_setopt($ch, CURLOPT_POST, true);
+    }
 
     // make the request
     $response = curl_exec($ch);
