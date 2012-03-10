@@ -1,9 +1,27 @@
 <?php
 /***************************************
+ * Copyright (C) 2012 Team Do(ugh)nut
+ * This file is part of Supportland Plugin.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Supportland Plugin.  If not, see <http://www.gnu.org/licenses/>.
+ * Released under the GPLv2
+ * See COPYING for more information.
+ **************************************/
+ 
+ /*************************************
  * sp_api.php
  * Thomas Schreiber <ubiquill@gmail.com>
- * Copyright (C) 2012 Supportland
- *
  * Library for interacting with the
  * Supportland API v1.0
  **************************************/
@@ -16,16 +34,13 @@ define("COOKIEPATH", "/");
 // This will need to be changed if you have a non-standard
 // plugin directory
 require_once(dirname(__FILE__) . '/../../../../wp-load.php');
-require_once(dirname(__FILE__) . '/../sp-settings.php');
+// require_once(dirname(__FILE__) . '/../sp-settings.php');
 
 /*! @class SP_Transaction
  *
     @author Thomas Schreiber <ubiquill@gmail.com>
-    @author Casey Beach <cbeach@gmail.com>
-
-    @abstract A machine for interfacing with the Supportland API
-    @discussion An SP_Transaction uses the current users credentials to 
-    interact with the Supportland API. For many interactions the user 
+    @author Casey Beach <beachc@gmail.com>
+@abstract A machine for interfacing with the Supportland API @discussion An SP_Transaction uses the current users credentials to interact with the Supportland API. For many interactions the user 
     must be logged in.
  */
 class SP_Transaction
@@ -60,8 +75,7 @@ class SP_Transaction
         $error = 'Sorry, there seems to be a problem.  Please try again later or contact an administrator.';
 
         if ($this->sp_user->logged_in()) {
-            $url = sp_get_uri() . "business/" . $bid . ".json?access_token=" . $this->sp_user->get_access_token();
-            $url .= "&app_token=" . sp_get_app_token();
+            $url = sp_get_uri() . "business/" . $bid . ".json?access_token=" . $this->sp_user->get_access_token() . "&app_token=".sp_get_app_token();
             $buffer = sp_fetch($url);       //Get data from API
             $json = json_decode($buffer);   //Decode JSON
             if($json) {                     //Something came back from the API
@@ -74,13 +88,26 @@ class SP_Transaction
                 throw new Exception ($error);
             }
         } else {
-            throw new Exception('Not logged in');
+            //throw new Exception('Not logged in');
+            $url = sp_get_uri() . "business/" . $bid . ".json?app_token=".sp_get_app_token();
+            $buffer = sp_fetch($url);       //Get data from API
+            $json = json_decode($buffer);   //Decode JSON
+            if($json) {                     //Something came back from the API
+                if($json->error->message) { //API outputs error, throw it
+                    throw new Exception($json->error->message);
+                } else {                    //If we got here, everything's ok
+                    return $json;
+                }
+            } else {                        //nothing came back from the API
+                throw new Exception ($error);
+            }
+            
         }
     }
 
     /*! @function get_wallet
         @abstract returns the contents of a uesrs wallet
-        @author Casey Beach <cbeach@gmail.com>
+        @author Casey Beach <beachc@gmail.com>
         @result Object - A wallet object containing info or an exception if
             the user is not logged in.
      */
@@ -127,6 +154,20 @@ class SP_Transaction
         }
     }
 
+    
+    /*! @function get_reward(rewardid, method)
+        @abstract purchases reward for the current user
+        @author Alexis Carlough <alexiscarlough@gmail.com>
+        @result Object - A 'transaction' object containing info on the reward; if method is PUT, reward will be purchased; method GET will simply query info.
+    
+    */
+    public function get_reward($rewardid, $method="GET") {
+        $url = sp_get_uri()."reward/".$rewardid.".json?app_token=".sp_get_app_token()."&access_token=".$this->sp_user->get_access_token();
+        //echo $url;
+        return json_decode(sp_fetch($url, $method));
+        
+    }
+    
     /*! @function search
         @abstract Search for businesses or rewards
         @author Thomas Schreiber <ubiquill@gmail.com>
@@ -161,7 +202,6 @@ class SP_Transaction
             $url .= "&price=" . $opts["price"];
 
         $url .= "&app_token=" . sp_get_app_token();
-
         return sp_fetch($url);
 
     }
@@ -218,7 +258,7 @@ class SP_User
 
     /*! @function get_access_token
         @author Thomas Schreiber <ubiquill@gmail.com>
-        @author Casey Beach <cbeach@gmail.com>
+        @author Casey Beach <beachc@gmail.com>
         @abstract gets the access token
         @result access_token string - Returns the users access_token
      */
@@ -243,7 +283,7 @@ class SP_User
     }
 
     /*! @function reset_access_token
-        @author Casey Beach <cbeach@gmail.com>
+        @author Casey Beach <beachc@gmail.com>
         @abstract resets the access token
         @result 
      */
@@ -252,7 +292,7 @@ class SP_User
     }
 
     /*! @function logout
-        @author Casey Beach <cbeach@gmail.com>
+        @author Casey Beach <beachc@gmail.com>
         @abstract logs a user out
         @result 
      */
@@ -289,7 +329,9 @@ function sp_get_uri() {
     @param url string - The url to query
     @result string - The information the server responds with
 */
-function sp_fetch($url) {
+function sp_fetch($url, $method="GET") {
+    $url = $url . "&app_token=" . sp_get_app_token();
+
     // initialize curl call
     $ch = curl_init();
 
@@ -301,6 +343,14 @@ function sp_fetch($url) {
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);  // SSL, Y U NO WORK?
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
     curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "/CAcerts/BuiltinObjectToken_GoDaddyClass2CA.crt");
+    
+    if($method == "GET") {
+        curl_setopt($ch, CURLOPT_HTTPGET, true);
+    } else if($method == "PUT") {
+        curl_setopt($ch, CURLOPT_PUT, true);
+    } else if($method == "POST") {
+        curl_setopt($ch, CURLOPT_POST, true);
+    }
 
     // make the request
     $response = curl_exec($ch);
@@ -357,12 +407,14 @@ function sp_good_token($sp_token) {
 }
 
 /*! @function sp_get_app_token
- * @author Thomas Schreiber <ubiquill@gmail.com>
- * @abstract Returns the app token set in the plugin settings
+ * @author Thomas Schreiber <ubiquill@gmail.com>, modified by David Liang
+ * @abstract Returns the app token set in the option table
  * @result string - the app's token
  */
 function sp_get_app_token() {
-    $plugin_options = get_option('plugin_options');
-    $sp_app_token = $plugin_options['app_token_text_string'];
-    return $sp_app_token;
+    $sp_app_token = get_option('sp_app_token');
+    if (!$sp_app_token)
+        return '';
+    else
+        return $sp_app_token;
 }

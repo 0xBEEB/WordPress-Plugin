@@ -1,136 +1,75 @@
 <?php
-function sp_search() {
-?>
-		<style type="text/css">
- 
-		.background
-		{
-			top:0px;
-			left:0px;
-			width:100%;
-			height:150%;
-			background:#000;
-			opacity: .75;
-			filter:alpha(opacity=75%);
-			z-index:50;
-			display:none;
-			position:absolute;
-		}
- 
- 
-		.sp_search_box
-		{
-			top:70%;
-			left:40%;
-			width:400px;
-			height:200px;
-			background:#ffffff;
-			z-index:51;
-			padding:10px;
-			-webkit-border-radius: 5px;
-			-moz-border-radius: 5px;
-			border-radius: 5px;
-			-moz-box-shadow:0px 0px 5px #444444;
-			-webkit-box-shadow:0px 0px 5px #444444;
-			box-shadow:0px 0px 5px #444444;
-			display:none;
-			position:absolute;
-		}
- 		
- 		/*.sp_search_lightbox {
-			margin:5px;
-			cursor:pointer;
-			font-size:12px;
-			font-weight:bold
-		}
-		*/
-		#sp_search_lightbox {
-			margin:5px;
-			cursor:pointer;
-			font-size:12px;
-			font-weight:bold
-		}
-		
-		#header_line {
-			margin:5px;
-			font-size:12px;
-			font-weight:bold;
-		}
-		
-		.close {
-			position: absolute;
-			top:-20; 
-			right:-20;
-			cursor: pointer;
-			color: white;
-		}
-		
-		
-		label {
-			margin:5px;
-		}
-		input[type="search"] {
-			margin:5px;
-		}
-		input[type="submit"] {
-			margin-right:5px;
-		}
-		#sp_search_store {
-			width: 110px;
-		}
-			
-		#sp_search_store_instantly {
-			width: 200px;
-		}	
-		</style>
- 
-		<script type="text/javascript">
- 
-			$(document).ready(function(){
- 
-				$('.sp_search_lightbox').click(function(){
-					$('.background, .sp_search_box').animate({'opacity':'.50'}, 300, 'linear');
-					$('.sp_search_box').animate({'opacity':'1.00'}, 300, 'linear');
-					$('.background, .sp_search_box').css('display', 'block');
-				});
- 
-				$('.close').click(function(){
-					$('.background, .sp_search_box').animate({'opacity':'0'}, 300, 'linear', function(){
-						$('.background, .sp_search_box').css('display', 'none');
-					});
-				});
- 
-				$('.background').click(function(){
-					$('.background, .sp_search_box').animate({'opacity':'0'}, 300, 'linear', function(){
-						$('.background, .sp_search_box').css('display', 'none');
-					});
-				});
- 
-			});
- 
-		</script>
- 
-	<label for="sp_search_store"> Search local store </label> </br>
-   <div>
-    	<input type="search" name="sp_search_store" id="sp_search_store"/> 
-        <input name="sp_search_submit" type="submit" class="sp_search_lightbox" value="Search" /> 
-    </div>
- 
-	<div class="background"></div>
-	
-	<div class="sp_search_box">
-		
-		<div class="close">
-			[Close]
-		</div>
-		
-		<div>
-			<div id="header_line"> Search your store instantly </div> 
-			<div> <input type="search" name="sp_search_store" id="sp_search_store_instantly"/>  </div> 
-		</div>	
-		 <hr width = 100% >	
-	</div>
- 
-<?}
+/***************************************
+ * Copyright (C) 2012 Team Do(ugh)nut
+ * This file is part of Supportland Plugin.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Supportland Plugin.  If not, see <http://www.gnu.org/licenses/>.
+ * Released under the GPLv2
+ * See COPYING for more information.
+ **************************************/
 
+function sp_search() {
+    ?>
+        <div id="sp_search_wrapper">   
+            <?php /*
+            <input id="sp_search_input" type="text" placeholder="Search for business" />
+            <div>
+                <input type="button" class="sp_btn" id="sp_search_button" value="Search" />
+            </div>
+            
+            */ ?>
+            
+            
+            <input type="text" name="sp_search" id="sp_search" /> 
+            <input type="button" name="sp_search_submit" class="sp_btn" id="sp_search_submit" value="Search" />
+
+            <a id="supportland_search_result" href="#search_result"></a>
+
+            <div style="display:none;" id="sp_buffer"><div id="search_result">sp_buffer</div></div>
+            <div class="supportland_clear"></div>
+
+            <script>
+                $(document).ready(function() {
+                    $('#sp_search_submit').click(function() {
+                        $('a#supportland_search_result').fancybox({
+                            'autoDimensions' : true,
+                            'hideOnOverlayClick' : false,
+                            'hideOnContentClick' : false,
+                            'enableEscapeButton' : false,
+                            'showCloseButton' : true,
+                            'href' : '<?php echo plugins_url(); ?>/supportland/sp-search-results.php?q='+$('#sp_search').val().replace(/\s/g,"+")
+                         }).click();
+                    });
+
+                    $('#sp_search').keypress(function(event) {
+                        if(event.which == 13) {
+                            $('#sp_search_submit').trigger('click');
+                        }
+                    });
+                });
+            </script>
+
+            
+            
+            
+            
+            
+            
+            <div id="sp_search_login">
+                <a>Log in</a> to get a full feature search
+            </div>
+        </div>
+    <?
+}
 ?>

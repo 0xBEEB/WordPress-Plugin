@@ -1,58 +1,116 @@
 <?php
+/***************************************
+ * Copyright (C) 2012 Team Do(ugh)nut
+ * This file is part of Supportland Plugin.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Supportland Plugin.  If not, see <http://www.gnu.org/licenses/>.
+ * Released under the GPLv2
+ * See COPYING for more information.
+ **************************************/
 
-// ----- Need to work on this form in order to get form popup. Will fix later ------//
 function sp_signup_form() {
-?>
-        <div id="dialog-modal" title="Registration Form">
- 	
-    
-    	<div class="registration_form">
-        <h3 style="margin:5px" abbr title="Signing up for a Supportland account will allow you to see your points and claim rewards online!">Account Registration</h3>
-        <div id="formdiv">
-        <label for="fname">First Name:</label> <br />
-        <input type="text" name="fname" value="" id="fname" /><br />
-        <label for="lname">Last Name:</label> <br />
-        <input type="text" name="lname" value="" id="lname" /><br />
-        <label for="email" abbr title="Enter the email address you want us to use to contact you">Email Address:</label> <br />
-        <input type="text" name="email" value="" id="email" /><br />
-        <label for="password" abbr title="Please choose a password">Password:</label> <br />
-        <input type="password" name="password" id="password" /><br />
-        <label for="password2" abbr title="Please enter your password again to make sure there are no typos.">Confirm Password:</label><br />
-        <input type="password" name="password2" id="password2" /><br />
-        <p align="right" > <input type="submit" value="Submit" id="submitReg" /> </p>
-        <div id="formoutReg" style="width:100%;text-align:right;display:none;"></div>
+    ?>
+        <div id="sp_registration_form">
+            <div id="signup_top">Account Registration</div>
+            <div id="registration_form">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="signup_label_div">
+                                <label for="fname">First Name:</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input id="fname" name="fname" value="" type="text" />
+                        </td>
+                        <td>
+                            <div id="fn_error" class="signup_error sp_error">
+                                first name is required
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="signup_label_div">
+                                <label for="lname">Last Name:</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" name="lname" value="" id="lname" />
+                        </td>
+                        <td>
+                            <div id="ln_error" class="signup_error sp_error">
+                                last name is required
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="signup_label_div">
+                                <label for="email">Username(Email):</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" name="email" value="" id="email" />
+                        </td>
+                        <td>
+                            <div id="un_error" class="signup_error sp_error">
+                                must be a full email address
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="signup_label_div">
+                                <label for="password">Password:</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="password" name="password" id="password" />
+                        </td>
+                        <td>
+                            <div id="pw_error" class="signup_error sp_error">
+                                password can not be empty
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="signup_label_div">
+                                <label for="password2">Confirm Password:</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="password" name="password2" id="password2" />
+                        </td>
+                        <td>
+                            <div id="pwc_error" class="signup_error sp_error">
+                                passwords don't match
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div style="text-align: right;">
+                    <span>
+                        <img id="sp_signup_loader" src="wp-content/plugins/supportland/images/ajax-loader.gif" alt="loading..." style="display:none;" />
+                    </span>&nbsp;&nbsp;
+                    <input type="button" value="Submit" class="sp_btn" id="submitReg" />
+                </div><br />
+                <div id="sp_signup_ok"></div>
+                <div id="sp_signup_fail"></div>
+            </div>
         </div>
-
-        <script type="text/JavaScript">  
-            $(document).ready(function(){  
-                $("#submitReg").unbind('click').click(function(){ //unbinding so it doesn't fire twice.  there has to be a better way!!!
-                    $('#lpmError').append('r');
-
-                    if($("#formoutReg").is(":visible")){
-                        $("#formoutReg").toggle(500, function() {
-                            // Animation complete.
-                        })
-                    } 
-
-                    $("#formoutReg").queue(function () {
-                        $(this).load("<?php echo plugins_url(); ?>/supportland/register.php", { fname: $('#fname').val(),
-                            lname: $('#lname').val(), email: $('#email').val(),
-                            password: $('#password').val(),
-                            password2: $('#password2').val() });
-                        $(this).dequeue();
-                    });
-                    
-                     $("#formoutReg").queue(function () {
-                        $(this).delay(500).toggle(500, function() {
-                            // Animation complete.
-                        })
-                        $(this).dequeue();
-                    });
-                });
-            });
-        </script>
-        </div>
-    </div>
-<?}
-
+    <?php
+}
 ?>
