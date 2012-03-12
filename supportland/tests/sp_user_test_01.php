@@ -1,5 +1,23 @@
 <?php
-
+/***************************************
+ * Copyright (C) 2012 Team Do(ugh)nut
+ * This file is part of Supportland Plugin.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Supportland Plugin.  If not, see <http://www.gnu.org/licenses/>.
+ * Released under the GPLv2
+ * See COPYING for more information.
+ **************************************/
 require_once '../lib/sp_api.php';
 require_once 'PHPUnit.php';
 
@@ -42,9 +60,7 @@ class SP_User_Test extends PHPUnit_TestCase
     }
     
     /*************
-    *
     * @dataProvider credential_provider
-    *
     *************/
     function test_user_auth_success($app_token, $user_email, $user_password) {
         $ret_val = array();
@@ -61,13 +77,10 @@ class SP_User_Test extends PHPUnit_TestCase
             $this->$access_token[i][1] = true;
 
         }
-
     }
    
     /*************
-    *
     * @dataProvider access_token_provider
-    *
     *************/
     function test_user_token($token) {
     }

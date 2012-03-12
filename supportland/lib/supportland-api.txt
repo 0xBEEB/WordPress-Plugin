@@ -1,0 +1,210 @@
+Supportland API Documentation
+By Thomas Schreiber <ubiquill@gmail.com>
+Copyright Team Doughnut 2012
+
+The file 'sp-api.php' is used to communicate with the Supportland REST API
+version 1.0, and the Wordpress plugin API.
+
+
+define("SP_API_BASE_URI", "https://api.supportland.com/");
+define("SP_API_VERSION", "1.0");
+define("COOKIEPATH", "/");
+
+
+functions:
+
+sp_get_app_token()
+    Retrieves the application token from the Wordpress database. It returns the
+    app_token as a string.
+
+sp_good_token(acc_token)
+    Checks to see if an acc_token is valid. Returns True if it is valid,
+    otherwise false.
+
+sp_set_cookie(acc_token)
+    Sets a client side cookie with key 'sp_access_token', and sets its value to
+    acc_token with an expiration date of 30 days.
+
+sp_unset_cookie()
+    Expires client side cookie with key 'sp_access_token'.
+
+sp_fetch(url)
+    Uses a curl call to fetch the results from the Supportland API.
+
+sp_get_uri()
+    Returns the base URI for Supportland's REST interface.
+
+
+Classes:
+
+    SP_Transaction:
+        fields:
+            sp_user:
+                The end user who is requesting the transaction.
+
+        methods:
+            get_business(business_id)
+                Returns a PHP object with the following fields:
+                    * metro: the locality of the business
+                    * access_token: user's access_token
+                    * link: URL of this API call
+                    * name: Name of business
+                    * tag: Business type tags
+                    * image: Action shot
+                    * colloquial_area: Colliquial name of neighborhood
+                    * lat: Latitude of location
+                    * lon: Longitude of location
+                    * description: Information about business
+                    * hours: Business hours
+                    * street1: Address line 1
+                    * street2: Address line 2
+                    * city: City of business
+                    * state: State of business
+                    * zip: Zipcode of business
+                    * phone: Phone number
+                    * email: Email address
+                    * website: URL
+                    * inventory:
+                        * punch: a list of punch cards
+                            Each element contains:
+                            * link: URL of this punch card
+                            * id: Unique id of this punch card
+                            * type: Type of element (punch_link)
+                            * title: Title of punch card
+                            * image: Image associated with punch card
+                            * unit: Currency used for cost (punch)
+                            * cost: Number of units to get
+                            * wallet: URL of current user's wallet
+                        * reward: a list of rewards you can get
+                            Each element contains:
+                            * link: URL of this reward
+                            * id: Unique id of this reward
+                            * type: Type of element (reward_link)
+                            * title: Title of reward
+                            * image: Image associated with reward
+                            * unit: Currency used for cost (point)
+                            * cost: Number of units to get
+                            * wallet: URL of current user's wallet
+                        * point: special offers to get points
+                            Each element contains:
+                            * link: URL of this point
+                            * id: Unique id of this point
+                            * type: Type of element (point_link)
+                            * title: Title of reward
+                            * image: Image associated with point
+                            * unit: Currency used for cost (point)
+                            * cost: Number of units spent (usually negative)
+                            * wallet: URL of current user's wallet
+
+            get_wallet():
+                Returns a PHP object with the following fields:
+                  * metro: Locality
+                  * access_token: User's access token
+                  * punch: A list of punches
+                      Each element contains:
+                      * link: URL of this punch
+                      * id: Unique id of punch
+                      * type: Type of element (punch_link)
+                      * title: Title of punch card
+                      * image: Image associated with punch card
+                      * unit: Currency used for cost (punch)
+                      * cost: Number of units to get
+                      * required_condition: Action to get punch
+                      * restrictions: What restrictions apply
+                      * business_links: a list of businesses with this punch
+                        Each element contains:
+                        * link: URL of business
+                        * id: Unique id of business
+                        * type: Type of element (business_link)
+                        * name: Name of business
+                        * image: Thumbnail of business
+                        * lat: Latitude of physical location
+                        * lon: Longitude of physical location
+                        * colloquial_area: Nickname of neighborhood
+                      * wallet:
+                        * quantity: Number of punches left to get
+                        * expires_on: Date punches expire
+                        * elegible_quantity: Number of punch cards per person
+                        * elegible_date: Date at which card holder can get punch
+                    
+
+            get_user_info():
+                Returns a PHP object with the following fields:
+                  * metro: Locality
+                  * access_token: User's Access Token
+                  * link: URL of this API call
+                  * id: User's unique id
+                  * type: Type of element (user)
+                  * name: Public name of user
+                  * member_since: Date of account creation
+                  * points: Number of points user has
+
+            search(query, opts):
+                Returns a PHP object with the search results:
+                * metro: Locality
+                * access_token: The users access token 
+                * link: URL of current search
+                * page_number: Number of pages
+                * page_size: Number of results per page
+                * hit_count: Total number of results
+                * results: Array of results
+                     Each element contains a business link:
+                     * link:
+                     * id:
+                     * type:
+                     * name:
+                     * tag:
+                     * image:
+                     * colloquial_area:
+                     * lat:
+                     * lon:
+                     * description:
+                     * hours:
+                     * street1:
+                     * street2:
+                     * city:
+                     * state:
+                     * zip:
+                     * phone:
+                     * email:
+                     * website:
+                     * inventory: An array of punch_links, reward_links, and
+                                  point_links
+
+
+    SP_User:
+        This creates objects that represent a user.
+
+        Fields:
+
+            access_token: The user's private access token
+
+            user_info: A PHP object of the user's info. Has the following
+            fields:
+              * metro: Locality
+              * access_token: User's Access Token
+              * link: URL of this API call
+              * id: User's unique id
+              * type: Type of element (user)
+              * name: Public name of user
+              * member_since: Date of account creation
+              * points: Number of points user has
+
+        Methods:
+            logged_in():
+                Returns True if the access token cookie is valid, and False
+                otherwise.
+            authenticate(email, password):
+                Retrieves a new access_token from Supportland, and stores it
+                in a client side cookie.
+            get_access_token():
+                Returns the user's access_token.
+            set_access_token():
+                Stores user's access_token.
+            reset_access_token():
+                Retrieves a new access_token.
+            logout():
+                Expires client side cookie, and resets access token on
+                Supportland's side. The new access token is not stored.
+            fetch_user_info():
+                Returns the user_info object.
