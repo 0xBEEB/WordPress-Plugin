@@ -48,11 +48,11 @@ jQuery(document).ready(function($){
         create_qtip('sp_mm_search', 'Find local businesses and the rewards they offer', 'bottom left', 'top center',
             'green', 'mouseover', 'mouseleave');
         // Registration form
-        create_qtip('fname', 'Enter your first name', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
-        create_qtip('lname', 'Enter your last name', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
-        create_qtip('email', 'Enter the email address you want us to use to contact you', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
-        create_qtip('password', 'Please choose a password', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
-        create_qtip('password2', 'Please enter your password again to make sure there are no typos', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
+        create_qtip('sp_fname', 'Enter your first name', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
+        create_qtip('sp_lname', 'Enter your last name', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
+        create_qtip('sp_email', 'Enter the email address you want us to use to contact you', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
+        create_qtip('sp_password', 'Please choose a password', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
+        create_qtip('sp_password2', 'Please enter your password again to make sure there are no typos', 'bottom left', 'top right', 'green', 'focus', 'unfocus focusout');
     }
     
     function create_qtip(target_id, message, my_pos, at_pos, color, show_e, hide_e) {
@@ -243,65 +243,65 @@ jQuery(document).ready(function($){
     
     function do_registration() {
         show_signup_loader();
-        var fn = $("#fname").val();
+        var fn = $("#sp_fname").val();
         //////// validation
         // first name
         if (fn == '') {
-            $("#fname").css('border', '2px solid #FF4545');
+            $("#sp_fname").css('border', '2px solid #FF4545');
             $("#fn_error").css('visibility', 'visible');
             hide_signup_loader();
             return false;
         }
         else {
-            $("#fname").css('border', '1px solid #DDDDDD');
+            $("#sp_fname").css('border', '1px solid #DDDDDD');
             $("#fn_error").css('visibility', 'hidden');
         }            
         // last name
-        var ln = $("#lname").val();
+        var ln = $("#sp_lname").val();
         if (ln == '') {
-            $("#lname").css('border', '2px solid #FF4545');
+            $("#sp_lname").css('border', '2px solid #FF4545');
             $("#ln_error").css('visibility', 'visible');
             hide_signup_loader();
             return false;
         }
         else {
-            $("#lname").css('border', '1px solid #DDDDDD');
+            $("#sp_lname").css('border', '1px solid #DDDDDD');
             $("#ln_error").css('visibility', 'hidden');
         }
         // username (email)
-        var email = $("#email").val();
+        var email = $("#sp_email").val();
         if (!is_valid_email(email)){
-            $("#email").css('border', '2px solid #FF4545');
+            $("#sp_email").css('border', '2px solid #FF4545');
             $("#un_error").css('visibility', 'visible');
             hide_signup_loader();
             return false;
         }
         else {
-            $("#email").css('border', '1px solid #DDDDDD');
+            $("#sp_email").css('border', '1px solid #DDDDDD');
             $("#un_error").css('visibility', 'hidden');
         }
         // password
-        var pw = $("#password").val();
+        var pw = $("#sp_password").val();
         if (pw == '') {
-            $("#password").css('border', '2px solid #FF4545');
+            $("#sp_password").css('border', '2px solid #FF4545');
             $("#pw_error").css('visibility', 'visible');
             hide_signup_loader();
             return false;
         }
         else {
-            $("#password").css('border', '1px solid #DDDDDD');
+            $("#sp_password").css('border', '1px solid #DDDDDD');
             $("#pw_error").css('visibility', 'hidden');
         }
         // confirm password
-        var pw2 = $("#password2").val();
+        var pw2 = $("#sp_password2").val();
         if (pw != pw2) {
-            $("#password2").css('border', '2px solid #FF4545');
+            $("#sp_password2").css('border', '2px solid #FF4545');
             $("#pwc_error").css('visibility', 'visible');
             hide_signup_loader();
             return false;
         }
         else {
-            $("#password2").css('border', '1px solid #DDDDDD');
+            $("#sp_password2").css('border', '1px solid #DDDDDD');
             $("#pwc_error").css('visibility', 'hidden');
         }
         

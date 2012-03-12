@@ -28,11 +28,11 @@ function sp_signup_form() {
                     <tr>
                         <td>
                             <div class="signup_label_div">
-                                <label for="fname">First Name:</label>
+                                <label for="sp_fname">First Name:</label>
                             </div>
                         </td>
                         <td>
-                            <input id="fname" name="fname" value="" type="text" />
+                            <input id="sp_fname" name="sp_fname" value="" type="text" />
                         </td>
                         <td>
                             <div id="fn_error" class="signup_error sp_error">
@@ -43,11 +43,11 @@ function sp_signup_form() {
                     <tr>
                         <td>
                             <div class="signup_label_div">
-                                <label for="lname">Last Name:</label>
+                                <label for="sp_lname">Last Name:</label>
                             </div>
                         </td>
                         <td>
-                            <input type="text" name="lname" value="" id="lname" />
+                            <input type="text" name="sp_lname" value="" id="sp_lname" />
                         </td>
                         <td>
                             <div id="ln_error" class="signup_error sp_error">
@@ -58,11 +58,11 @@ function sp_signup_form() {
                     <tr>
                         <td>
                             <div class="signup_label_div">
-                                <label for="email">Username(Email):</label>
+                                <label for="sp_email">Username(Email):</label>
                             </div>
                         </td>
                         <td>
-                            <input type="text" name="email" value="" id="email" />
+                            <input type="text" name="sp_email" value="" id="sp_email" />
                         </td>
                         <td>
                             <div id="un_error" class="signup_error sp_error">
@@ -73,26 +73,26 @@ function sp_signup_form() {
                     <tr>
                         <td>
                             <div class="signup_label_div">
-                                <label for="password">Password:</label>
+                                <label for="sp_password">Password:</label>
                             </div>
                         </td>
                         <td>
-                            <input type="password" name="password" id="password" />
+                            <input type="password" name="sp_password" id="sp_password" />
                         </td>
                         <td>
                             <div id="pw_error" class="signup_error sp_error">
-                                password can not be empty
+                                Password can not be empty
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <div class="signup_label_div">
-                                <label for="password2">Confirm Password:</label>
+                                <label for="sp_password2">Confirm Password:</label>
                             </div>
                         </td>
                         <td>
-                            <input type="password" name="password2" id="password2" />
+                            <input type="password" name="sp_password2" id="sp_password2" />
                         </td>
                         <td>
                             <div id="pwc_error" class="signup_error sp_error">
