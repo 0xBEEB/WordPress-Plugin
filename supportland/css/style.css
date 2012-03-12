@@ -27,11 +27,48 @@
 }
 
 /* the outer div of the widget */
-#sp_wrapper {
+
+
+#sp_wrapper_theme_id_01 {
     display: block;
     margin-bottom: 20px;
     background: none repeat scroll 0 0 #FDFDFD;
     border: 1px solid #FDFDFD;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 2px 4px 5px #888888;
+    color: #000000;
+    cursor: text;
+    display: block;
+    padding: 5px;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+    z-index: 10;
+}
+
+
+#sp_wrapper_theme_id_02 {
+    display: block;
+    margin-bottom: 20px;
+    background: none repeat scroll 0 0 #FFCCFF;
+    border: 1px solid #FFCCFF;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 2px 4px 5px #888888;
+    color: #000000;
+    cursor: text;
+    display: block;
+    padding: 5px;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+    z-index: 10;
+}
+
+#sp_wrapper_theme_id_03 {
+    display: block;
+    margin-bottom: 20px;
+    background: none repeat scroll 0 0 #EEEEEE;
+    border: 1px solid #EEEEEE;
     border-radius: 5px 5px 5px 5px;
     box-shadow: 2px 4px 5px #888888;
     color: #000000;
@@ -67,6 +104,7 @@
     border-radius: 10px;
     -moz-border-radius: 10px;
     webkit-border-radius: 10px;
+   /* background-color: yellow; */
 }
 
 #sp_login_form {
