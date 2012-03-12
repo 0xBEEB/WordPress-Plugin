@@ -311,11 +311,11 @@ jQuery(document).ready(function($){
             dataType: "json",
             url: "wp-content/plugins/supportland/lib/sp-register.php",
             data: {
-                fname: fn,
-                lname: ln,
-                email: email,
-                password: pw,
-                password2: pw2
+                sp_fname: fn,
+                sp_lname: ln,
+                sp_email: email,
+                sp_password: pw,
+                sp_password2: pw2
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 if(jqXHR.status == 200) {
