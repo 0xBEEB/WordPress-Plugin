@@ -39,7 +39,7 @@
 Plugin Name: Supportland Widget
 Plugin URI: http://www.github.com/supportland/
 Description: A widget that deploys the functionality of supportland.com on a WordPress website.
-Version: 0.2
+Version: 0.2 
 Author: Do(ugh)nut Team
 Author URI: http://www.github.com/supportland/
 License: GPLv2 or later
@@ -50,7 +50,7 @@ require_once 'class-sp-widget.php';     // SP_Widget class file
 require_once 'sp-search.php';
 require_once 'sp-get-reward.php';
 require_once 'sp-map.php';
-
+require_once 'sp-settings.php';
 /// Register the widget
 function plugin_register_widgets() {
     register_widget('SP_Widget');

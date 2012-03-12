@@ -20,6 +20,7 @@
  **************************************/
 
 function sp_search() {
+
     ?>
         <div id="sp_search_wrapper">   
             <?php /*
@@ -60,16 +61,18 @@ function sp_search() {
                 });
             </script>
 
-            
-            
-            
-            
-            
-            
-            <div id="sp_search_login">
-                <a>Log in</a> to get a full feature search
-            </div>
+            <?php sp_search_login(); ?>
+
         </div>
     <?
+}
+
+function sp_search_login() {
+	$sp_user = new SP_User();
+	if($sp_user->logged_in() == false) { ?>
+	<div id="sp_search_login">
+    	<a>Log in</a> to get a full feature search
+    </div>
+	<? }
 }
 ?>
