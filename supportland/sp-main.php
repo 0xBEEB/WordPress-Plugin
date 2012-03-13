@@ -57,11 +57,15 @@ function plugin_register_widgets() {
 }
 add_action('widgets_init', 'plugin_register_widgets');
 
-// Load CSS file
+// Load CSS file:
+// I made a change of reading css file, by reading the name of css file.
+// Please revise!!!!
 function plugin_load_css() {
+	$plugin_options = get_option("theme_options");
+    $theme_id = $plugin_options["style_id"];
     $css_url = path_join(WP_PLUGIN_URL, 
             basename(dirname(__FILE__)) . "/css/");
-    wp_register_style('supportland-widget', $css_url.'style.css');
+    wp_register_style('supportland-widget', $css_url.$theme_id);
     wp_enqueue_style('supportland-widget');
     // load fancybox css
     $fancy_url = path_join(WP_PLUGIN_URL,
