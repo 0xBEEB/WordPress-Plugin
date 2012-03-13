@@ -18,7 +18,8 @@
  * Released under the GPLv2
  * See COPYING for more information.
  **************************************/
-
+define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
+define("SP_USE_MAP", 'OPEN_STREET_MAPS');
 function sp_map() {
     if(SP_USE_MAP == 'GOOGLE_MAPS')
         sp_google_maps();
@@ -46,17 +47,15 @@ function sp_open_street_maps() {?>
 
     <script src="<?php echo SP_PLUGIN_URL?>maps/ulayers/ulayers.js" type="text/javascript"></script>
     <script type="text/javascript">
-        // <![CDATA[
         var map;
         function sp_init_map() {
             map = new uLayers.Map('map', uLayers.OSM);
         }
-        function update_map(latitude, longitude, scale) {
+        function sp_update_map(latitude, longitude, scale) {
             map.setOrigin({lat: latitude, lon: longitude}, scale);
             map.addMarker({lat: latitude, lon: longitude});
             map.updateMap();
         }
-        // ]]>
     </script>
 <?php
 }
