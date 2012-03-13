@@ -88,34 +88,6 @@ function sp_display_wallet_menu($wallet) {
         </div>
     <?php
 }
-/*
-function sp_display_search_menu($sp_business) { ?>
-        <div id="sp_mm_search">
-            <div class="spMenuLink">
-                <span class="sp_plusMinusCircle">
-                    <span class="sp_plusMinusHBar"></span>
-                    <span class="sp_plusMinusVBar"></span>
-                </span>
-                <a id="sp_mm_search">Search</a>
-            </div>
-            <div class="sp_Result" style="display:none;">
-                <a id="inline" href="#data">Display the search data</a>
-                <div style="display:none;">
-                    <div id="data">
-                        <div id="map" class="sp_map"></div>
-                        <div class="sp_business_results">
-                            <img src="<?php echo $sp_business->image; ?>" /><br/>
-                            <strong>Business:</strong><?php echo $sp_business->name; ?><br/>
-                            <strong>Description:</strong><?php echo $sp_business->description; ?><br/>
-                            <strong>Hours:</strong><?php echo $sp_business->hours; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php
-}
-*/
 
 function sp_wallet_item() {
     $sp_user = new SP_User();

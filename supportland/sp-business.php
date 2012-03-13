@@ -69,8 +69,8 @@ $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
         </div>
         
 <?php /*
-        <div id="map_wrapper" style="float:right;">
-            <div id="map" class="sp_map"></div>
+        <div id="sp_map_wrapper" style="float:right;">
+            <div id="sp_map" class="sp_map"></div>
             <?php sp_map();?>
             <script>
                 $(document).ready(function() {
