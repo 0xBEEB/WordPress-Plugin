@@ -31,7 +31,7 @@ function sp_mainMenu() {
                 sp_search();
                 echo sp_display_nav_menu($user_info);
                 echo sp_display_wallet_menu($wallet);
-                echo sp_display_search_menu($sp_business);
+                //echo sp_display_search_menu($sp_business);
             ?>
         </div>
     <?php
@@ -88,7 +88,7 @@ function sp_display_wallet_menu($wallet) {
         </div>
     <?php
 }
-
+/*
 function sp_display_search_menu($sp_business) { ?>
         <div id="sp_mm_search">
             <div class="spMenuLink">
@@ -115,6 +115,7 @@ function sp_display_search_menu($sp_business) { ?>
         </div>
     <?php
 }
+*/
 
 function sp_wallet_item() {
     $sp_user = new SP_User();

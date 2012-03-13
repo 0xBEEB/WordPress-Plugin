@@ -19,7 +19,7 @@
  * See COPYING for more information.
  **************************************/
 
-require_once '../lib/sp_api.php';
+require_once '../lib/sp-api.php';
 require_once 'PHPUnit.php';
 
 class SP_Transaction_Test extends PHPUnit_TestCase
@@ -62,6 +62,22 @@ class SP_Transaction_Test extends PHPUnit_TestCase
         $response = $this->handle->get_wallet();
         $result = $response->id;
         $expected = '150472';
+        $this->assertTrue($result == $expected);
+    }
+    
+    function test_get_reward() {
+        $rid = 1730; //team doughnut test reward
+        $response = $this->handle->get_reward($rid);
+        $result = $response->inventory_item->title;
+        $expected = 'Test';
+        $this->assertTrue($result == $expected);
+    }
+    
+    function test_search() {
+        $query = "coffee";
+        $response = $this->handle->search($query);
+        $result = isset($response->results);
+        $expected = TRUE;
         $this->assertTrue($result == $expected);
     }
 }
