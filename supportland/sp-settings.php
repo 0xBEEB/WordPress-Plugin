@@ -1,28 +1,11 @@
 <?php
-/***************************************
- * Copyright (C) 2012 Team Do(ugh)nut
- * This file is part of Supportland Plugin.
- *
- * Foobar is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Foobar is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Supportland Plugin.  If not, see <http://www.gnu.org/licenses/>.
- * Released under the GPLv2
- * See COPYING for more information.
- **************************************/
-
 /*******************************************************************************
  * supportland/supportland-settings.php
+ * Copyright (c) 2012 Do(ugh)nut Team
+ * Developed for Supportland - http://www.supportland.com
  ******************************************************************************/
 
+//http://codex.wordpress.org/Creating_Options_Pages
 //Hooks, Actions, & Filters
 register_activation_hook(__FILE__, 'sp_run_at_activation');
 add_action('admin_init', 'sp_settings_init' );
@@ -35,12 +18,31 @@ function sp_run_at_activation() {
 
 //Add the settings section and its fields
 function sp_settings_init(){
-    register_setting('plugin_options', 'plugin_options', 'plugin_options_validate' );
-    add_settings_section('main_section', 'Main Settings', 'sp_section_text', __FILE__);
-    add_settings_field('plugin_text_string', 'App Token', 'sp_setting_string', __FILE__, 'main_section');
+    register_mysettings();
+	add_all_settings_field();
+	add_all_settings_section();
+}
+
+// Register Settings
+function register_mysettings() {
+	//register_setting( $option_group, $option_name, $sanitize_callback );
+	 register_setting('plugin_options', 'plugin_options', 'plugin_options_validate' ); 
+	 register_setting('plugin_options', 'theme_options');	 
+}
+
+function add_all_settings_section() {
+	//add_settings_section( $id, $title, $callback, $page ); 
+	add_settings_section('main_section', 'Main Settings', 'sp_section_text', __FILE__);
+}
+
+function add_all_settings_field() {
+	//add_settings_field( $id, $title, $callback, $page, $section, $args );
+	add_settings_field('plugin_text_string', 'App Token', 'sp_setting_string', __FILE__, 'main_section');  
+	add_settings_field('plugin_theme_id', 'Theme Chosen', 'sp_setting_theme', __FILE__, 'main_section');
 }
 
 //Add page under settings menu
+// add_options_page('title', 'name plugin', 'administrator', __FILE__, 'php function to call')
 function sp_add_settings_page() {
     add_options_page('Supportland Plugin Settings', 'Supportland Plugin', 'administrator', __FILE__, 'sp_settings_page');
 }
@@ -62,10 +64,61 @@ function  sp_section_text() {
 <?
 }
 
+
 //Text box callback
 function sp_setting_string() {
     $options = get_option('plugin_options');
     echo "<input id='plugin_text_string' name='plugin_options[app_token_text_string]' size='40' type='text' value='{$options['app_token_text_string']}' /> (required)";
+}
+
+function sp_setting_theme() {
+	$options = get_option('theme_options');
+	
+	?> 
+	<div>
+		<div> 
+			<input id="plugin_theme_id" name="theme_options[theme_id]" type=radio value="theme_id_01" <? radio_theme_id_1_checked(); $option['theme_id']= "theme_id_01"; ?> /> White (Default) 
+		</div> 
+		<div> 
+			<input id="plugin_theme_id" name="theme_options[theme_id]" type=radio value="theme_id_02" <? radio_theme_id_2_checked(); $option['theme_id']= "theme_id_02"; ?> /> Pink
+		</div>	
+		<div> 
+			<input id="plugin_theme_id" name="theme_options[theme_id]" type=radio value="theme_id_03" <? radio_theme_id_3_checked(); $option['theme_id']= "theme_id_03"; ?> /> Grey
+		</div>
+	</div>
+	 <?	
+}
+
+
+// Check if the radio of theme_1 is checked.
+function radio_theme_id_1_checked() {
+	$options = get_option('theme_options');
+	if($options['theme_id'] == 'theme_id_01') {
+		echo "checked";
+	}
+	else {
+		echo "";
+	}
+}
+// Check if the radio of theme_2 is checked.
+function radio_theme_id_2_checked() {
+	$options = get_option('theme_options');
+	if($options['theme_id'] == 'theme_id_02') {
+		echo "checked";
+	}
+	else {
+		echo "";
+	}
+}
+// Check if the radio of theme_3 is checked.
+function radio_theme_id_3_checked() {
+	$options = get_option('theme_options');
+	if($options['theme_id'] == 'theme_id_03') {
+		echo "checked";
+	}
+	else {
+		echo "";
+	}
 }
 
 //Display the settings page

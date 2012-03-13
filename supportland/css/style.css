@@ -1,3 +1,22 @@
+/***************************************
+ * Copyright (C) 2012 Team Do(ugh)nut
+ * This file is part of Supportland Plugin.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Supportland Plugin.  If not, see <http://www.gnu.org/licenses/>.
+ * Released under the GPLv2
+ * See COPYING for more information.
+ **************************************/
 
 /* general classes */
 .title_font {
@@ -8,11 +27,48 @@
 }
 
 /* the outer div of the widget */
-#sp_wrapper {
+
+
+#sp_wrapper_theme_id_01 {
     display: block;
     margin-bottom: 20px;
     background: none repeat scroll 0 0 #FDFDFD;
-    border: 1px solid #FDFDFD;
+    border: 1px solid #EEEEEE;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 2px 4px 5px #888888;
+    color: #000000;
+    cursor: text;
+    display: block;
+    padding: 5px;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+    z-index: 10;
+}
+
+
+#sp_wrapper_theme_id_02 {
+    display: block;
+    margin-bottom: 20px;
+    background: none repeat scroll 0 0 #FFCCFF;
+    border: 1px solid #FFCCFF;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 2px 4px 5px #888888;
+    color: #000000;
+    cursor: text;
+    display: block;
+    padding: 5px;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+    z-index: 10;
+}
+
+#sp_wrapper_theme_id_03 {
+    display: block;
+    margin-bottom: 20px;
+    background: none repeat scroll 0 0 #EEEEEE;
+    border: 1px solid #EEEEEE;
     border-radius: 5px 5px 5px 5px;
     box-shadow: 2px 4px 5px #888888;
     color: #000000;
@@ -41,6 +97,7 @@
     font-weight: bold;
 }
 
+
 /* the wrapper of the login form and the main menu form*/
 #sp_login_wrapper, #sp_mm_wrapper {
     margin: 5px;
@@ -48,6 +105,7 @@
     border-radius: 10px;
     -moz-border-radius: 10px;
     webkit-border-radius: 10px;
+   /* background-color: yellow; */
 }
 
 #sp_login_form {
@@ -343,11 +401,15 @@
 
 #sp_user_info fieldset {border:1px solid black;padding:1em;font-size:0.9em;}
 
-#sp_logo{display:inline-block;vertical-align:middle;height:19px;width:24px;margin-right:4px;
-                  background:url('../images/supportland_s_logo_sm.png') no-repeat;}
 
 /* Search */
-#sp_search {clear:both;}
+#sp_search {
+    clear:both;
+    padding: 2px;
+    height: 14px;
+    font-size: 12px;
+    width: 93%;
+}
 #sp_search_submit{}
 
 
@@ -377,4 +439,4 @@
 .sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
 .sp_business_results{margin-right: 350px;}
 
-.sp_business_progress{border-style:solid;border-width:1px;border-color:gray;padding:10px;width:300px;}
+.sp_business_progress{border-style:solid;border-width:1px;border-color:black;padding:11px;}

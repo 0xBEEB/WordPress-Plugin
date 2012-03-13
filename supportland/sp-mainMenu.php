@@ -33,7 +33,7 @@ function sp_mainMenu() {
                 sp_search();
                 echo sp_display_nav_menu($user_info);
                 echo sp_display_wallet_menu($wallet);
-                echo sp_display_search_menu($sp_business);
+                //echo sp_display_search_menu($sp_business);
             ?>
         </div>
     <?php
@@ -118,7 +118,6 @@ function sp_display_search_menu($sp_business) { ?>
     <?php
 }
 
-        
 function sp_user_info() {
     $sp_user = new SP_User();
     $sp_trans = new SP_Transaction($sp_user);

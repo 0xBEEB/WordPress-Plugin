@@ -28,11 +28,11 @@
  **************************************/
     require_once 'sp-api.php';
 
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $password2 = $_POST['password2'];
+    $fname = $_POST['sp_fname'];
+    $lname = $_POST['sp_lname'];
+    $email = $_POST['sp_email'];
+    $password = $_POST['sp_password'];
+    $password2 = $_POST['sp_password2'];
     
     $url = 'https://api.supportland.com/1.0/user/registration/'.$email.'/'.$password
         .'/'.$password2.'/'.$fname.'/'.$lname.'?app_token='.  sp_get_app_token();

@@ -28,3 +28,89 @@ Centeral library for handling API. User authentication and session handling.
 Initial iteration of main widget. Main widget now has user info and wallet
 views. Plugin settings page for storing app_token. All hard coded tokens
 have been removed from code base. Unit tests.
+
+
+--------------------------------------------------------------------------------
+File Manifest:
+
+COPYING                                             License Information
+README                                              This File
+README.git_hints                                    Git Workflow Instructions
+supportland/                                        WordPress Plugin Directory
+    class-sp-widget.php
+    css/                                            CSS Style Files
+        jquery-ui-1.7.3.custom.css
+        style.css
+    documentations/                                 User Documentation
+        install-guide
+    fancybox/                                       Fancybox Files
+        blank.gif
+        fancybox.png
+        fancybox-x.png
+        fancybox-y.png
+        fancy_close.png
+        fancy_loading.png
+        fancy_nav_left.png
+        fancy_nav_right.png
+        fancy_shadow_e.png
+        fancy_shadow_ne.png
+        fancy_shadow_n.png
+        fancy_shadow_nw.png
+        fancy_shadow_se.png
+        fancy_shadow_s.png
+        fancy_shadow_sw.png
+        fancy_shadow_w.png
+        fancy_title_left.png
+        fancy_title_main.png
+        fancy_title_over.png
+        fancy_title_right.png
+        jquery.easing-1.3.pack.js
+        jquery.fancybox-1.3.4.css
+        jquery.fancybox-1.3.4.js
+        jquery.fancybox-1.3.4.pack.js
+        jquery.mousewheel-3.0.4.pack.js
+    images/                                         Plugin Images
+        ajax-loader.gif
+        arrow_down.png
+        arrow_up.png
+        avatar.png
+        empty_punch.png
+        punched_punch.png
+        signup_error.png
+        signup_ok.png
+        supportland_s_logo_sm.png
+    js/                                             External JavaScript
+        qtip2
+        sp.js
+    lib/
+        CAcerts/                                    SSL Certificates
+            BuiltinObjectToken_GoDaddyClass2CA.crt
+        sp-api.php
+        sp-get-wallet.php
+        sp-logout.php
+        sp-register.php
+        sp-user-auth.php
+        supportland-api.txt
+    maps/                                           Embedded Map Libraries
+        ulayers/
+            COPYING
+            README
+            test.html
+            ulayers.js
+    register.php                                    Register A User
+    sp-business.php                                 Business View
+    sp-forgot-password.php                          Lost Password View
+    sp-get-reward.php                               Add Reward to User's Wallet
+    sp-login.php                                    User Login
+    sp-mainMenu.php                                 Main Widget Controller Ext.
+    sp-main.php                                     Main Widget Controller
+    sp-map.php                                      Embedded Map Controller
+    sp-search.php                                   Search Controller
+    sp-search-results.php                           Search Results View
+    sp-settings.php                                 Settings Model
+    sp-signup-form.php                              Signup Form View
+    tests/                                          Unit Tests
+        sp_transaction_test_01.php
+        sp_user_test_01.php
+        transactiontest.php
+        usertest.php
