@@ -1,0 +1,399 @@
+/***************************************
+ * Copyright (C) 2012 Team Do(ugh)nut
+ * This file is part of Supportland Plugin.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Supportland Plugin.  If not, see <http://www.gnu.org/licenses/>.
+ * Released under the GPLv2
+ * See COPYING for more information.
+ **************************************/
+
+/* general classes */
+.title_font {
+    font-family: Century Gothic, sans-serif;
+    font-size: 14px;
+    color: #333333;
+    font-weight: 600;
+}
+
+/* the outer div of the widget */
+
+#sp_main_wrapper {
+    display: block;
+    margin-bottom: 20px;
+    background: none repeat scroll 0 0 #EEEEEE;
+    border: 1px solid #EEEEEE;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 2px 4px 5px #888888;
+    color: #000000;
+    cursor: text;
+    display: block;
+    padding: 5px;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+    z-index: 10;
+}
+
+/* the container of the logo area */
+#sp_top {
+    padding: 8px 0;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+/* the supportland logo anchor*/
+#sp_logo {
+    display: inline-block;
+    background-image: url(../images/supportland_s_logo_sm.png);
+    background-repeat: no-repeat;
+    height: 20px;
+    padding-left: 30px;
+    font-weight: bold;
+}
+
+/* the wrapper of the login form and the main menu form*/
+#sp_login_wrapper, #sp_mm_wrapper {
+    margin: 5px;
+    width: 100%;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    webkit-border-radius: 10px;
+   /* background-color: yellow; */
+}
+
+#sp_login_form {
+    font-size: 97%;
+    margin: 2px 10px 9px 10px;
+}
+
+#sp_login_form table {
+    line-height: 190%;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+#sp_login_form div {
+    text-align: right;
+}
+
+#sp_login_email, #sp_login_password {
+    padding: 2px;
+    height: 14px;
+    font-size: 12px;
+    width: 93%;
+}
+
+/* login area submit button */
+.sp_btn {
+    cursor:pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #050505;
+    padding: 2px 12px;
+    background: -moz-linear-gradient(
+            top,
+            #ffffff 0%,
+            #ebebeb 50%,
+            #dbdbdb 50%,
+            #d9d9d9);
+    background: -webkit-gradient(
+            linear, left top, left bottom, 
+            from(#ffffff),
+            color-stop(0.50, #ebebeb),
+            color-stop(0.50, #dbdbdb),
+            to(#d9d9d9));
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #B3B3B3;
+    text-shadow:
+            0px -1px 0px rgba(000,000,000,0.2),
+            0px 1px 0px rgba(255,255,255,1);
+}
+
+.sp_btn:hover {
+    border: 1px solid #949494;
+    -moz-box-shadow:
+            0px 2px 3px rgba(000,000,000,0.5),
+            inset 0px 0px 2px rgba(255,255,255,1);
+    -webkit-box-shadow:
+            0px 2px 3px rgba(000,000,000,0.5),
+            inset 0px 0px 2px rgba(255,255,255,1);
+    box-shadow:
+            0px 2px 3px rgba(000,000,000,0.5),
+            inset 0px 0px 2px rgba(255,255,255,1);
+}
+
+/* login other links like forgot password, register, etc*/
+#sp_login_otherlinks {
+    margin-right: 8px;
+}
+
+#sp_login_otherlinks ul {
+    list-style: none outside none;
+    border-top: 1px solid #DDDDDD;
+    margin: 0;
+    padding: 0;
+}
+
+#sp_login_otherlinks ul li {
+    padding: 4px 0;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+#sp_login_search {
+    background-image: url(../images/arrow_up.png);
+    background-repeat: no-repeat;
+    padding-left: 15px;
+    background-position: left center;
+}
+
+/******************** sp-mainmenu area css ********************************/
+#sp_mm_nav {
+    display: block;
+    text-align: right;
+    margin-right: 10px;
+}
+
+#sp_mm_user_info {
+    font-size: 10px;
+    border-bottom: 1px dashed #DDDDDD;
+    border-top: 1px dashed #DDDDDD;
+    margin-right: 10px;
+}
+
+#sp_mm_user_info table td {
+    vertical-align: middle;
+}
+
+/* user points label*/
+#sp_mm_user_point {
+    font-size: 16px;
+    font-weight: bold;
+    color: #90D93F;
+}
+
+#sp_mm_logout, #sp_mm_profile {
+    cursor: pointer;
+    font-size: 9px;
+    margin: 0 2px;
+}
+
+#sp_mm_logout:hover, #sp_mm_profile:hover {
+    font-size: 10px;
+}
+
+.spMenuLink {
+    padding: 2px 3px 3px 3px;
+    cursor: pointer;
+    line-height: 1.5em;
+}
+
+.spMenuLink:hover {
+    background-color: #eee;
+}
+
+.sp_plusMinusCircle {
+    bottom: -3px;
+    background-color: #a21;
+    height: 16px;
+    width: 16px;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    position: relative;
+    display: inline-block;
+}
+
+.sp_plusMinusHBar {
+    background-color: #fff;
+    height: 2px;
+    width: 8px;
+    position: absolute;
+    top: 7px;
+    left: 4px;
+}
+
+.sp_plusMinusVBar {
+    background-color: #fff;
+    height: 8px;
+    width: 2px;
+    position: absolute;
+    top: 4px;
+    left: 7px;
+}
+
+.sp_Result {
+    margin-left: 11px;
+    padding-left: 11px;
+    border-left: 1px dashed #ccc;
+}
+
+.sp_punch_card_display {
+    margin-left: 11px;
+    padding-left: 11px;
+}
+
+/***************** registration form ********************************/
+#signup_top {
+    margin-bottom: 1em;
+    text-align: center;
+    font-size: 12pt;
+    color: #222;
+    line-height: 1.6em;
+    font-weight: bold;
+}
+
+#registration_form {
+    margin: 10px;
+}
+
+#registration_form table {
+    width: 470px;
+}
+
+#registration_form table td {
+    vertical-align: middle;
+    color: #666666;
+    padding: 3px 0 3px 5px;
+}
+
+#registration_form table input {
+    width: 200px;
+}
+
+.signup_label_div {
+    padding-top: 9px;
+    text-align: right;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.signup_error {
+    visibility: hidden;
+}
+
+#sp_signup_ok {
+    background-image: url(../images/signup_ok.png);
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    height: 32px;
+    vertical-align: middle;
+    display: none;
+    font-size: 11px;
+}
+
+#sp_signup_fail {
+    background-image: url(../images/signup_error.png);
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    height: 32px;
+    vertical-align: middle;
+    display: none;
+    font-size: 11px;
+}
+
+/************************** search form **********************/
+#sp_search_wrapper {
+    margin: 5px;
+    width: 95%;
+}
+
+#sp_search_wrapper div {
+    text-align: right;
+}
+
+#sp_search_input {
+    width: 93%;
+    font-size: 13px;
+    margin: 10px 0;
+}
+
+#sp_search_login {
+    margin: 20px 0;
+}
+
+#sp_login_search a, #sp_search_login a {
+    cursor: pointer;
+}
+
+/* change default tooltip size */
+.ui-tooltip-green .ui-tooltip-content {
+    font-size: 10px;
+}
+
+/* genius error class */
+.sp_error {
+    color: #FF4545;
+    font-size: 10px;
+}
+
+.sp_login_error {
+    color: white;
+    background-color: #FF4545;
+}
+
+/* the error from missing app token */
+#sp_app_error {
+    color: red;
+    padding: 10px 0;
+}
+
+
+
+
+
+
+
+.clear{clear:both;}
+
+#sp_wrapper{background-color:#f4f4f4;padding:8px;}
+#sp_wrapper hr{margin:2px;}
+#sp_wrapper input[type="text"]{height:14px;width:95%;font-size:12px;padding:3px;}
+#sp_wrapper input[type="password"]{height:14px;width:95%;font-size:12px;padding:3px;}
+.sp_clear{clear:both;}
+
+#sp_user_info fieldset {border:1px solid black;padding:1em;font-size:0.9em;}
+
+#sp_logo{display:inline-block;vertical-align:middle;height:19px;width:24px;margin-right:4px;
+                  background:url('../images/supportland_s_logo_sm.png') no-repeat;}
+
+/* Search */
+#sp_search {clear:both;}
+#sp_search_submit{}
+
+
+
+
+/* Search Results */
+.sp_business_name{font-weight:bold;font-size:18px;}
+.sp_business_tag{color:#aaa;}
+.sp_search_result_image, .sp_business_view_image {float:left;margin:8px;width:100px;height:100px;}
+.sp_search_result_info, .sp_business_view_info {margin-left:10px;padding-left:110px;}
+
+.sp_business_description, .sp_business_address{margin-top:5px;margin-bottom:5px;}
+.sp_business_address{font-weight:bold;}
+
+/* Business View*/
+
+
+/* map */
+.sp_map{border:1px solid black;width:300px;height:240px;}
+
+.spMenuLink{padding:2px 3px 3px 3px;cursor:pointer;line-height:1.5em;}
+.spMenuLink:hover{background-color:#eee;}
+#spResult1,#spResult2,#spResult3{display:none;}
+.sp_plusMinusCircle{bottom:-3px;background-color:#a21;height:16px;width:16px;border-radius: 8px;-moz-border-radius:8px;position:relative;display:inline-block;}
+.sp_plusMinusHBar{background-color:#fff;height:2px;width:8px;position:absolute;top:7px;left:4px;}
+.sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
+.sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
+.sp_business_results{margin-right: 350px;}

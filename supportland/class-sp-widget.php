@@ -43,10 +43,8 @@ class SP_Widget extends WP_widget {
     //      $args - arguments from the theme
     //      $instance - the instance of the class
     function widget($args, $instance) {
-    	$plugin_options = get_option("theme_options");
-    	$theme_id = $plugin_options["theme_id"];
         ?>
-            <div id="<?php echo "sp_wrapper_".$theme_id;?>">
+            <div id="sp_main_wrapper">
                 <div id="sp_top">
                     <a id="sp_logo" href="http://supportland.com/">Supportland Widget</a>
                 </div>
