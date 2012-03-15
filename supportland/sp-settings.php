@@ -73,17 +73,17 @@ function sp_setting_string() {
 
 function sp_setting_theme() {
 	$options = get_option('theme_options');
-	
+	$option['style_id']= 'style_white';
 	?> 
 	<div>
 		<div> 
-			<input id="plugin_theme_id" name="theme_options[theme_id]" type=radio value="theme_id_01" <? radio_theme_id_1_checked(); $option['theme_id']= "theme_id_01"; ?> /> White (Default) 
+			<input id="plugin_theme_id" name="theme_options[style_id]" type=radio value="style_white" <? radio_theme_id_1_checked(); $option['style_id']= 'style_white'; ?> /> White (Default) 
 		</div> 
 		<div> 
-			<input id="plugin_theme_id" name="theme_options[theme_id]" type=radio value="theme_id_02" <? radio_theme_id_2_checked(); $option['theme_id']= "theme_id_02"; ?> /> Pink
+			<input id="plugin_theme_id" name="theme_options[style_id]" type=radio value="style_pink" <? radio_theme_id_2_checked(); $option['style_id']= 'style_pink'; ?> /> Pink
 		</div>	
 		<div> 
-			<input id="plugin_theme_id" name="theme_options[theme_id]" type=radio value="theme_id_03" <? radio_theme_id_3_checked(); $option['theme_id']= "theme_id_03"; ?> /> Grey
+			<input id="plugin_theme_id" name="theme_options[style_id]" type=radio value="style_grey" <? radio_theme_id_3_checked(); $option['style_id']= 'style_grey'; ?> /> Grey
 		</div>
 	</div>
 	 <?	
@@ -93,7 +93,7 @@ function sp_setting_theme() {
 // Check if the radio of theme_1 is checked.
 function radio_theme_id_1_checked() {
 	$options = get_option('theme_options');
-	if($options['theme_id'] == 'theme_id_01') {
+	if($options['style_id'] == 'style_white') {
 		echo "checked";
 	}
 	else {
@@ -103,7 +103,7 @@ function radio_theme_id_1_checked() {
 // Check if the radio of theme_2 is checked.
 function radio_theme_id_2_checked() {
 	$options = get_option('theme_options');
-	if($options['theme_id'] == 'theme_id_02') {
+	if($options['style_id'] == 'style_pink') {
 		echo "checked";
 	}
 	else {
@@ -113,7 +113,7 @@ function radio_theme_id_2_checked() {
 // Check if the radio of theme_3 is checked.
 function radio_theme_id_3_checked() {
 	$options = get_option('theme_options');
-	if($options['theme_id'] == 'theme_id_03') {
+	if($options['style_id'] == 'style_grey') {
 		echo "checked";
 	}
 	else {
