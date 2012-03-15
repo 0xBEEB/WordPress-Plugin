@@ -428,7 +428,7 @@
 
 
 /* map */
-.sp_map{border:1px solid black;width:300px;height:240px;}
+.sp_map{border:1px solid black;width:300px;height:240px;float:right;float:top;}
 
 .spMenuLink{padding:2px 3px 3px 3px;cursor:pointer;line-height:1.5em;}
 .spMenuLink:hover{background-color:#eee;}
@@ -438,3 +438,5 @@
 .sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
 .sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
 .sp_business_results{margin-right: 350px;}
+
+.sp_business_progress{border-style:solid;border-width:1px;border-color:black;padding:11px;}

@@ -19,6 +19,8 @@
  * See COPYING for more information.
  **************************************/
 
+require_once 'sp-wallet.php';
+
 define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
 
 function sp_mainMenu() {
@@ -82,26 +84,40 @@ function sp_display_wallet_menu($wallet) {
                 <label id="sp_wallet_earned">Points Earned: </label><?php echo($wallet->points); ?> points <br />
                 <label id="sp_wallet_punch">Punch Cards: </label>
                 <div class="sp_punch_card_display">
-                    <?php sp_print_punches($wallet->punch); ?>
+                    <?php sp_print_punch_buttons(); ?>
                 </div>
             </div>
         </div>
     <?php
 }
 
-function sp_wallet_item() {
-    $sp_user = new SP_User();
-    $sp_trans = new SP_Transaction($sp_user);
-    try {
-        $wallet = $sp_trans->get_wallet();
-        $wallet = json_decode($wallet);
-        return $wallet;
-    } catch (Exception $e) {
-        echo "Exception: " . $e->getMessage();
-        return;
-    }
+function sp_display_search_menu($sp_business) { ?>
+        <div id="sp_mm_search">
+            <div class="spMenuLink">
+                <span class="sp_plusMinusCircle">
+                    <span class="sp_plusMinusHBar"></span>
+                    <span class="sp_plusMinusVBar"></span>
+                </span>
+                <a id="sp_mm_search">Search</a>
+            </div>
+            <div class="sp_Result" style="display:none;">
+                <a id="inline" href="#data">Display the search data</a>
+                <div style="display:none;">
+                    <div id="data">
+                        <div id="map" class="sp_map"></div>
+                        <div class="sp_business_results">
+                            <img src="<?php echo $sp_business->image; ?>" /><br/>
+                            <strong>Business:</strong><?php echo $sp_business->name; ?><br/>
+                            <strong>Description:</strong><?php echo $sp_business->description; ?><br/>
+                            <strong>Hours:</strong><?php echo $sp_business->hours; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
 }
-        
+
 function sp_user_info() {
     $sp_user = new SP_User();
     $sp_trans = new SP_Transaction($sp_user);
@@ -114,21 +130,4 @@ function sp_user_info() {
     }
 }
 
-function sp_print_punches($wallet_info) {
-    $punch_card = "";
-    $total_punches = 5;
-    $acquired_punches = intval($wallet_info->wallet->punch[0]->status);
-    ?>
-        <div id="sp_punches_area">
-            <?php for($i=0; $i<count($wallet_info->wallet->punch);$i++) {?>
-            <span><?php echo($wallet_info->wallet->punch[$i]->title); ?></span><br />
-                <?php for($j=0; $j<$total_punches; $j++) {?>
-                    <img alt='<?php echo($wallet_info->wallet->punch[i]->title); ?>'
-                         src='wp-content/plugins/supportland/images/
-                            <?php if($j<$total_punches) echo('punched');else echo('empty');?>_punch.png' />
-                <?php }?>
-            <?php }?>
-        </div>
-    <?php
-}   
 ?>

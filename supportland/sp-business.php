@@ -19,6 +19,8 @@
  * See COPYING for more information.
  **************************************/
 require_once('sp-main.php');
+require_once('sp-map.php');
+require_once('sp-wallet.php');
 
 function sp_business($bid=6) {
     $sp_user = new SP_User();
@@ -45,6 +47,7 @@ $sp_rewards_array = sp_get_rewards($sp_business);
 $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
 
 ?>
+    <?php sp_map();?>
     <a href="#lpm" id="sp_back_link">&laquo; Back</a>
     <script>
         $(document).ready(function() {
@@ -60,6 +63,8 @@ $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
                 }).click();
                 
             });
+//            sp_init_map();
+//            sp_update_map(45.490505,-122.637313,15);
         });
     </script>
 
@@ -68,23 +73,22 @@ $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
                 <img src="<?php echo $sp_business->image; ?>" alt="<?php echo $sp_business->name; ?>" height="100" width="100" style="display:inline;" />
         </div>
         
-<?php /*
-        <div id="sp_map_wrapper" style="float:right;">
-            <div id="sp_map" class="sp_map"></div>
+        <div id="map_wrapper" style="float:right;">
+            <div id="map" class="sp_map"></div>
             <?php sp_map();?>
             <script>
                 $(document).ready(function() {
                     sp_init_map();
-                    update_map(<?php echo $sp_business->lat.','.$sp_business->lon.',15';?>);
+                    sp_update_map(<?php echo $sp_business->lat.','.$sp_business->lon.',15';?>);
                 });
             </script>
             <br />
             <?php echo 'lat: '.$sp_business->lat.'&nbsp;&nbsp;lon: '.$sp_business->lon;?>
         </div>
  * 
- */ ?>
 
         <div class="sp_business_view_info">
+<?php//            <div class="sp_map" id="map"></div>?>
             <div class="sp_business_name"><a href="#business<?php echo $sp_business->id; ?>" id="sp-bid<?php echo $sp_business->id; ?>"><?php echo $sp_business->name; ?></a></div>
             <div class="sp_business_tag"><?php echo $sp_business->tag; ?></div>
             <div class="sp_business_address">
@@ -103,11 +107,17 @@ $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
         <div class="clear"></div>
 
 <hr />
-<div>Rewards</div>
+<table>
+<?php
+echo sp_print_business_progress_bars($sp_business);
+
+?><div class="sp_business_progress" style="float:left"> 
+<span style="background:white;position:relative;top:-25px">Rewards</span></br>
+
 <?php
 for($i=0; $i<count($sp_rewards_array[0]); $i++) { ?>
     <?php echo $sp_rewards_array[0][$i]->title ?> (<?php echo $sp_rewards_array[0][$i]->cost; ?> points) &mdash; <a id="sp_get_reward_<?php echo $sp_rewards_array[0][$i]->id; ?>" href="#reward<?php echo $sp_rewards_array[0][$i]->id; ?>">Get It!</a><br />
-    <div id="sp_reward_output_<?php echo $sp_rewards_array[0][$i]->id; ?>"></div>
+    <div id="sp_eward_output_<?php echo $sp_rewards_array[0][$i]->id; ?>"></div>
     <script>
         $(document).ready(function() {
             $('a#sp_get_reward_<?php echo $sp_rewards_array[0][$i]->id; ?>').click(function() {
@@ -117,5 +127,9 @@ for($i=0; $i<count($sp_rewards_array[0]); $i++) { ?>
     </script>
 <?php
 }
+?>
+</div>
+</table>
+<?php
 
 ?>
