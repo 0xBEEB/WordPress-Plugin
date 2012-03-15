@@ -3,12 +3,12 @@
  * Copyright (C) 2012 Team Do(ugh)nut
  * This file is part of Supportland Plugin.
  *
- * Foobar is free software: you can redistribute it and/or modify
+ * Supportland Plugin is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Foobar is distributed in the hope that it will be useful,
+ * Supportland Plugin is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -43,10 +43,8 @@ class SP_Widget extends WP_widget {
     //      $args - arguments from the theme
     //      $instance - the instance of the class
     function widget($args, $instance) {
-    	$plugin_options = get_option("theme_options");
-    	$theme_id = $plugin_options["theme_id"];
         ?>
-            <div id="<?php echo "sp_wrapper_".$theme_id;?>">
+            <div id="sp_main_wrapper">
                 <div id="sp_top">
                     <a id="sp_logo" href="http://supportland.com/">Supportland Widget</a>
                 </div>
