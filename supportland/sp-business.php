@@ -84,7 +84,6 @@ $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
             </script>
             <br />
         </div>
- * 
 
         <div class="sp_business_view_info">
 <?php//            <div class="sp_map" id="map"></div>?>
