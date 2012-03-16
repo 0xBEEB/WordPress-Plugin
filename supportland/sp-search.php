@@ -32,8 +32,10 @@ function sp_search() {
             */ ?>
             
             
-            <input type="text" name="sp_search" id="sp_search" /> 
-            <input type="button" name="sp_search_submit" class="sp_btn" id="sp_search_submit" value="Search" />
+            <input type="text" name="sp_search" id="sp_search" style="width:90%"/> 
+            <input type="button" name="sp_search_submit" class="sp_btn" id="sp_search_submit" value="Search" style="float:right; margin-right:10px; margin-top:3px;">
+            </br>
+            </br>
 
             <a id="supportland_search_result" href="#search_result"></a>
 
