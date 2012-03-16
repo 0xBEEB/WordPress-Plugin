@@ -31,6 +31,19 @@ Initial iteration of main widget. Main widget now has user info and wallet
 views. Plugin settings page for storing app_token. All hard coded tokens
 have been removed from code base. Unit tests.
 
+--------------------------------------------------------------------------------
+Fix for twentyeleven theme
+
+In the default wordpress theme, twentyeleven, there is a known bug where the
+z-index is set too high. The developers of that theme have decided to wait for
+the twentythirteen release to fix it. You can patch your theme by changing the
+z-index value of the Branding class in the style.css file to 999. Alternatively,
+you can replace that file with the style.css in the twentyeleven-theme-fix
+directory.
+
+If you do not patch the theme some elements of the plugin may appear behind the
+WordPress Branding element. 
+
 
 --------------------------------------------------------------------------------
 File Manifest:
