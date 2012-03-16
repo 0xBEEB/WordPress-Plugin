@@ -121,9 +121,11 @@ function sp_print_business_progress_bars($sp_business_item) {
     return $business_progress;
 }
 function sp_item_in_wallet($inventory_item, $id) {
-        foreach($inventory_item as $value){
-            if(intval($value->id) == intval($id)){
-                return true;
+        if(is_array($inventory_item)) {
+            foreach($inventory_item as $value){
+                if(intval($value->id) == intval($id)){
+                    return true;
+                }
             }
         }
         return false;
