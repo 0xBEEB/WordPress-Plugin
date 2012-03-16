@@ -83,7 +83,7 @@ $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
                 });
             </script>
             <br />
-            <?php echo 'lat: '.$sp_business->lat.'&nbsp;&nbsp;lon: '.$sp_business->lon;?>
+            <?php echo 'lat: '.$sp_business->lat.'&nbsp;&nbsp;lon: '.$sp_business->lon.'<br/><div id="test-div"></div>';?>
         </div>
  * 
 

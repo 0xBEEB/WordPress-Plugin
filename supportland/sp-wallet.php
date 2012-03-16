@@ -4,6 +4,7 @@ require_once 'sp-wallet.php';
 define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
 ?>
 <link href="<?php echo SP_PLUGIN_URL?>css/sp-progress-bar.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo SP_PLUGIN_URL?>css/style_white.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="<?php echo SP_PLUGIN_URL?>css/buttons.css" media="screen" rel="stylesheet" type="text/css" />
 <?php
 function sp_wallet_item() {
@@ -60,37 +61,39 @@ function sp_print_business_progress_bars($sp_business_item) {
     $sp_wallet_item = sp_wallet_item();
     $business_progress = '<div class="sp_business_progress" style="float:right"><span style="background:white;position:relative;top:-25px">Punch Cards</span></br>';
     $business_punch_ids = array();
-    foreach($sp_wallet_item->punch as $value) {
-        $sp_total_punches = intval($value->cost); 
-        $sp_acquired_punches = intval($value->wallet->quantity);
-        $percent_done = (floatval((floatval($sp_acquired_punches) / floatval($sp_total_punches))*100));
-        if (sp_item_in_wallet($sp_business_item->inventory->punch, $value->id )) {
-            $business_progress .= $value->title.'</br><div class="ui-progress-bar ui-container" id="progress_bar">
-                                        <div class="ui-progress" style="width: '.$percent_done.'%;">
-                                            <span class="ui-label" style="display:none;">
-                                                Loading Resources
-                                                <b class="value">'.$percent_done.'%</b>
-                                            </span>
-                                        </div>
-                                    </div>';
-            $business_punch_ids[$value->id] = $value->id;
+    if(is_array($sp_wallet_item->punch)){
+        foreach($sp_wallet_item->punch as $value) {
+            $sp_total_punches = intval($value->cost); 
+            $sp_acquired_punches = intval($value->wallet->quantity);
+            $percent_done = (floatval((floatval($sp_acquired_punches) / floatval($sp_total_punches))*100));
+            if (sp_item_in_wallet($sp_business_item->inventory->punch, $value->id )) {
+                $business_progress .= $value->title.'</br><div class="ui-progress-bar ui-container" id="progress_bar">
+                                            <div class="ui-progress" style="width: '.$percent_done.'%;">
+                                                <span class="ui-label" style="display:none;">
+                                                    Loading Resources
+                                                    <b class="value">'.$percent_done.'%</b>
+                                                </span>
+                                            </div>
+                                        </div>';
+                $business_punch_ids[$value->id] = $value->id;
+            }
         }
     }
-     
-    foreach($sp_business_item->inventory->punch as $value) {
-        if (!sp_item_in_wallet($sp_wallet_item->punch, $value->id)) {
-            $business_progress .= $value->title.'</br><div class="ui-progress-bar ui-container" id="progress_bar">
-                                        <div class="ui-progress" style="width: '.$percent_done.'%;">
-                                            <span class="ui-label" style="display:none;">
-                                                Loading Resources
-                                                <b class="value">'.$percent_done.'%</b>
-                                            </span>
-                                        </div>
-                                    </div>';
-            $business_punch_ids[$value->id] = $value->id;
+    if(is_array($sp_business_item->inventory->punch)) {
+        foreach($sp_business_item->inventory->punch as $value) {
+            if (!sp_item_in_wallet($sp_wallet_item->punch, $value->id)) {
+                $business_progress .= $value->title.'</br><div class="ui-progress-bar ui-container" id="progress_bar">
+                                            <div class="ui-progress-gray" style="width: 100%;">
+                                                <span class="ui-label" style="display:none;">
+                                                    Loading Resources
+                                                    <b class="value">100%</b>
+                                                </span>
+                                            </div>
+                                        </div>';
+                $business_punch_ids[$value->id] = $value->id;
+            }
         }
     }
-    
     $business_progress .= '</div></br>';
 /*    
     $business_progress .= '<div class="sp_business_progress">';

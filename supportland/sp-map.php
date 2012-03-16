@@ -35,7 +35,7 @@ function sp_google_maps() { ?>
                 var map = new GMap2(document.getElementById("map"));
             }
         }
-        function update_map(latitude, longitude, scale) {
+        function sp_update_map(latitude, longitude, scale) {
             map.setCenter(new GLatLng(latitude, longitude),scale);
             map.setUIToDefault();
         }
