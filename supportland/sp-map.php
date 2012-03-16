@@ -53,7 +53,7 @@ function sp_open_street_maps() {?>
         }
         function sp_update_map(latitude, longitude, scale) {
             map.setOrigin({lat: latitude, lon: longitude}, scale);
-            map.addMarker({lat: latitude, lon: longitude});
+            //map.addMarker({lat: latitude, lon: longitude});
             map.updateMap();
         }
     </script>
