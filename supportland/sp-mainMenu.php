@@ -80,9 +80,9 @@ function sp_display_wallet_menu($wallet) {
                 <a>Wallet</a>
             </div>
             <div class="sp_Result" style="display:none;">
-                <label id="sp_wallet_reward">Rewards: </label><?php echo($wallet->rewards); ?> <br />
+              <? /* <label id="sp_wallet_reward">Rewards: </label><?php echo($wallet->rewards); ?> <br />
                 <label id="sp_wallet_earned">Points Earned: </label><?php echo($wallet->points); ?> points <br />
-                <label id="sp_wallet_punch">Punch Cards: </label>
+                <label id="sp_wallet_punch">Punch Cards: </label> */ ?>
                 <div class="sp_punch_card_display">
                     <?php sp_print_punch_buttons(); ?>
                 </div>
