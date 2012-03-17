@@ -23,18 +23,46 @@ function sp_print_punch_buttons() {
     $sp_wallet_info = sp_wallet_item();
     $punch_buttons = "";
     $punch_buttons_array = array();
+    $reward_buttons_array = array();
     for($i = 0; $i < count($sp_wallet_info->punch); $i++) {
         $business_id = $sp_wallet_info->punch[$i]->business_links[0]->id;
         $business_name = $sp_wallet_info->punch[$i]->business_links[0]->name;
         $punch_buttons_array[$business_id] =  '<span><a href="#business'.$business_id.'" id="sp-bid'.$business_id.'">'.$business_name.'</a></span><br />';    
     }
+
     
     for($i = 0; $i < count($sp_wallet_info->reward); $i++) {
         $business_id = $sp_wallet_info->reward[$i]->business_links[0]->id;
         $business_name = $sp_wallet_info->reward[$i]->business_links[0]->name;
-        $punch_buttons_array[$business_id] =  '<span><a href="#business'.$business_id.'" id="sp-bid'.$business_id.'">'.$business_name.'</a></span><br />';
+        $reward_buttons_array[$business_id] =  '<span><a href="#business'.$business_id.'" id="sp-bid'.$business_id.'">'.$business_name.'</a></span><br />';
     }
+
+    echo "Punch Cards: </br>";
+
     foreach($punch_buttons_array as $key=>$value) {
+        echo $value;
+        ?>
+        <script>
+            $(document).ready(function() {
+                $('a#sp-bid<?php echo $key; ?>').click(function() {
+                    $('#sp_buffer').text('<?php echo $query; ?>');
+                    $('a#supportland_search_result').fancybox({
+                        'autoDimensions' : true,
+                        'hideOnOverlayClick' : false,
+                        'hideOnContentClick' : false,
+                        'enableEscapeButton' : false,
+                        'showCloseButton' : true,
+                        'href' : '<?php echo plugins_url(); ?>/supportland/sp-business.php?bid=<?php print $key; ?>'
+                    }).click();
+                });
+            });
+        </script>
+        <?php
+    }
+
+    echo "Rewards: ";
+
+    foreach($reward_buttons_array as $key=>$value) {
         echo $value;
         ?>
         <script>

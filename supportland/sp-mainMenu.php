@@ -80,7 +80,6 @@ function sp_display_wallet_menu($wallet) {
                 <a>Wallet</a>
             </div>
             <div class="sp_Result" style="display:none;">
-                <label id="sp_wallet_punch">Punch Cards: </label>
                 <div class="sp_punch_card_display">
                     <?php sp_print_punch_buttons(); ?>
                 </div>
