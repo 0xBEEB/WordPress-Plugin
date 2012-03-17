@@ -1,6 +1,4 @@
 <?php
-//lpm
-
 require_once 'sp-wallet.php';
 define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
 ?>
