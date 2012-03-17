@@ -48,7 +48,7 @@ $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
 
 ?>
 
-    <a href="back" id="sp_back_link">&laquo; Back</a>
+    <a href="#lpm" id="sp_back_link">&laquo; Back</a>
     <script>
         $(document).ready(function() {
             $('a#sp_back_link').click(function() {
