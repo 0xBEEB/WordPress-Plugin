@@ -111,6 +111,7 @@ function sp_print_business_progress_bars($sp_business_item) {
     }
     if(is_array($sp_business_item->inventory->punch)) {
         foreach($sp_business_item->inventory->punch as $value) {
+            $sp_total_punches = intval($value->cost); 
             if (!sp_item_in_wallet($sp_wallet_item->punch, $value->id)) {
                 $business_progress .= $value->title.'</br><div class="ui-progress-bar ui-container" id="progress_bar">
                                             <div class="ui-progress-gray" style="width: 100%;">
