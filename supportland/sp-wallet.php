@@ -72,11 +72,11 @@ function sp_print_business_progress_bars($sp_business_item) {
                 $business_progress .= $value->title.'</br><div class="ui-progress-bar ui-container" id="progress_bar">
                                             <div class="ui-progress" style="width: '.$percent_done.'%;">
                                                 <span class="ui-label" style="display:none;">
-                                                    Loading Resources
                                                     <b class="value">'.$percent_done.'%</b>
                                                 </span>
                                             </div>
                                         </div>';
+                $business_progress .= ($sp_total_punches - $sp_acquired_punches) . ' left to go!';
                 $business_punch_ids[$value->id] = $value->id;
             }
         }
@@ -87,11 +87,11 @@ function sp_print_business_progress_bars($sp_business_item) {
                 $business_progress .= $value->title.'</br><div class="ui-progress-bar ui-container" id="progress_bar">
                                             <div class="ui-progress-gray" style="width: 100%;">
                                                 <span class="ui-label" style="display:none;">
-                                                    Loading Resources
                                                     <b class="value">100%</b>
                                                 </span>
                                             </div>
                                         </div>';
+                $business_progress .= $sp_total_punches . ' left to go!';
                 $business_punch_ids[$value->id] = $value->id;
             }
         }

@@ -121,7 +121,7 @@ if(count($sp_business->inventory->reward) > 0 || sp_item_in_wallet($sp_wallet->r
 <?php
 for($i=0; $i<count($sp_rewards_array); $i++) { ?>
     <?php echo $sp_rewards_array[$i]->title ?> (<?php echo $sp_rewards_array[$i]->cost; ?> points) &mdash; <a id="sp_get_reward_<?php echo $sp_rewards_array[$i]->id; ?>" href="#reward<?php echo $sp_rewards_array[$i]->id; ?>">Get It!</a>  
-    You have <? if(isset($sp_rewards_array[$i]->wallet->quantity)) { echo $sp_rewards_array[$i]->wallet->quantity;} else { echo "0";}?> currently! <br />
+    <? if(isset($sp_rewards_array[$i]->wallet->quantity)) { echo 'You have ' . $sp_rewards_array[$i]->wallet->quantity . ' currently!';} else { echo "Get this reward today!";}?> <br />
     <div id="sp_reward_output_<?php echo $sp_rewards_array[$i]->id; ?>"></div>
     <script>
         $(document).ready(function() {
