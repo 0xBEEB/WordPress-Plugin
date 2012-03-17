@@ -163,7 +163,7 @@ class SP_Transaction
     */
     public function get_reward($rewardid, $method="GET") {
         $url = sp_get_uri()."reward/".$rewardid.".json?app_token=".sp_get_app_token()."&access_token=".$this->sp_user->get_access_token();
-        //echo $url;
+        echo $url;
         return json_decode(sp_fetch($url, $method));
         
     }

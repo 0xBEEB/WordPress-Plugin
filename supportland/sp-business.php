@@ -115,7 +115,7 @@ echo sp_print_business_progress_bars($sp_business);
 <?php
 for($i=0; $i<count($sp_rewards_array[0]); $i++) { ?>
     <?php echo $sp_rewards_array[0][$i]->title ?> (<?php echo $sp_rewards_array[0][$i]->cost; ?> points) &mdash; <a id="sp_get_reward_<?php echo $sp_rewards_array[0][$i]->id; ?>" href="#reward<?php echo $sp_rewards_array[0][$i]->id; ?>">Get It!</a><br />
-    <div id="sp_eward_output_<?php echo $sp_rewards_array[0][$i]->id; ?>"></div>
+    <div id="sp_reward_output_<?php echo $sp_rewards_array[0][$i]->id; ?>"></div>
     <script>
         $(document).ready(function() {
             $('a#sp_get_reward_<?php echo $sp_rewards_array[0][$i]->id; ?>').click(function() {

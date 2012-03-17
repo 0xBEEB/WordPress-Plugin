@@ -8,7 +8,7 @@ if(!isset($rid) || $rid==''){
     echo "Error: no rewards ID supplied.";
     exit;
 }
-
+echo "get-it.php called </br>";
 echo sp_purchase_reward($rid);
 
 ?>
