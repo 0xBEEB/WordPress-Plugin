@@ -38,7 +38,7 @@ function sp_print_punch_buttons() {
         $reward_buttons_array[$business_id] =  '<span><a href="#business'.$business_id.'" id="sp-bid'.$business_id.'">'.$business_name.'</a></span><br />';
     }
 
-    echo "Punch Cards: </br>";
+    echo "Punch Cards: <br />";
 
     foreach($punch_buttons_array as $key=>$value) {
         echo $value;
@@ -89,7 +89,7 @@ function sp_print_business_progress_bars($sp_business_item) {
     $sp_wallet_item = sp_wallet_item();
     $business_punch_ids = array();
     if(count($sp_business_item->inventory->punch) > 0 || sp_item_in_wallet($sp_wallet->punch, $sp_business_item->id)){
-        $business_progress = '<div class="sp_business_progress" style="float:right;"><span style="background:white;position:relative;top:-25px;">Punch Cards</span><br />';
+        $business_progress = '<div class="sp_business_progress" style="float:right;"><span style="background:white;position:relative;"><strong>Punch Cards</strong></span><br />';
         $business_progress .= count($sp_business_item->inventory->punch).' '.sp_item_in_wallet($sp_wallet->punch, $sp_business_item->id);
     }
     if(is_array($sp_wallet_item->punch)){

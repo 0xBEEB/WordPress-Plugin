@@ -109,14 +109,14 @@ $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
     $sp_wallet_item = sp_wallet_item();
 ?>
 <div>
-<span>
+
 <?php
 echo sp_print_business_progress_bars($sp_business);
 
 if(count($sp_business->inventory->reward) > 0 || sp_item_in_wallet($sp_wallet->reward, $sp_business->id)){
 ?>
 <div class="sp_business_progress" style="float:left"> 
-<span style="background:white;position:relative;top:-25px">Rewards</span></br>
+<span style="background:white;position:relative;"><strong>Rewards</strong></span><br />
 
 <?php
 for($i=0; $i<count($sp_rewards_array); $i++) { ?>
@@ -134,7 +134,7 @@ for($i=0; $i<count($sp_rewards_array); $i++) { ?>
 }
 ?>
 </div>
-</span>
+
 </div>
 <?php
 }
