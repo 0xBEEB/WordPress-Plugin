@@ -22,7 +22,6 @@
     require_once 'lib/sp-api.php';
     
     function sp_purchase_reward($reward_id) {
-        echo "Purchase reward called <br />";
         
         $sp_user = new SP_User();
         $sp_trans = new SP_Transaction($sp_user);
