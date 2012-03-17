@@ -72,7 +72,7 @@ function display_login_otherlinks() {
         <div id="sp_login_otherlinks">
             <ul>
                 <li>
-                    <a href="http://supportland.com/">Forgot your password?</a>
+                    <a href="http://supportland.com/login/request/">Forgot your password?</a>
                 </li>
                 <li>
                     <a id="sp_register_anchor" href="#sp_registration_form">Register</a>
