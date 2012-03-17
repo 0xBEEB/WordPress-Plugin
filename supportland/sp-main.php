@@ -56,6 +56,11 @@ function plugin_register_widgets() {
     register_widget('SP_Widget');
 }
 add_action('widgets_init', 'plugin_register_widgets');
+function default_widget_theme() {
+	$options = get_option('theme_options');
+	$option['style_id']= 'style_white';
+}
+add_action('widgets_init','default_widget_theme');
 
 // Load CSS file:
 // I made a change of reading css file, by reading the name of css file.
