@@ -1,4 +1,5 @@
 <?php
+//lpm
 
 require_once 'sp-wallet.php';
 define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
@@ -14,7 +15,7 @@ function sp_wallet_item() {
         $wallet = json_decode($wallet);
         return $wallet;
     } catch (Exception $e) {
-        echo "Exception: " . $e->getMessage();
+        //echo "Exception: " . $e->getMessage();
         return;
     }
 }
@@ -88,7 +89,7 @@ function sp_print_business_progress_bars($sp_business_item) {
     $sp_wallet_item = sp_wallet_item();
     $business_punch_ids = array();
     if(count($sp_business_item->inventory->punch) > 0 || sp_item_in_wallet($sp_wallet->punch, $sp_business_item->id)){
-        $business_progress = '<div class="sp_business_progress" style="float:right"><span style="background:white;position:relative;top:-25px">Punch Cards</span></br>';
+        $business_progress = '<div class="sp_business_progress" style="float:right;"><span style="background:white;position:relative;top:-25px;">Punch Cards</span><br />';
         $business_progress .= count($sp_business_item->inventory->punch).' '.sp_item_in_wallet($sp_wallet->punch, $sp_business_item->id);
     }
     if(is_array($sp_wallet_item->punch)){
@@ -97,10 +98,10 @@ function sp_print_business_progress_bars($sp_business_item) {
             $sp_acquired_punches = intval($value->wallet->quantity);
             $percent_done = (floatval((floatval($sp_acquired_punches) / floatval($sp_total_punches))*100));
             if (sp_item_in_wallet($sp_business_item->inventory->punch, $value->id )) {
-                $business_progress .= $value->title.'</br><div class="ui-progress-bar ui-container" id="progress_bar">
+                $business_progress .= $value->title.'<br /><div class="ui-progress-bar ui-container" id="progress_bar">
                                             <div class="ui-progress" style="width: '.$percent_done.'%;">
                                                 <span class="ui-label" style="display:none;">
-                                                    <b class="value">'.$percent_done.'%</b>
+                                                    <b class="value">'.$percent_done.'%<br />
                                                 </span>
                                             </div>
                                         </div>';
@@ -112,10 +113,10 @@ function sp_print_business_progress_bars($sp_business_item) {
     if(is_array($sp_business_item->inventory->punch)) {
         foreach($sp_business_item->inventory->punch as $value) {
             if (!sp_item_in_wallet($sp_wallet_item->punch, $value->id)) {
-                $business_progress .= $value->title.'</br><div class="ui-progress-bar ui-container" id="progress_bar">
+                $business_progress .= $value->title.'<div class="ui-progress-bar ui-container" id="progress_bar">
                                             <div class="ui-progress-gray" style="width: 100%;">
                                                 <span class="ui-label" style="display:none;">
-                                                    <b class="value">100%</b>
+                                                    <strong class="value">100%</strong>
                                                 </span>
                                             </div>
                                         </div>';
@@ -124,7 +125,7 @@ function sp_print_business_progress_bars($sp_business_item) {
             }
         }
     }
-    if(count($sp_wallet_item->punch) > 0 || sp_item_in_wallet($sp_wallet->punch, $sp_business_item->id)){
+    if(count($sp_business_item->inventory->punch) > 0 || sp_item_in_wallet($sp_wallet->punch, $sp_business_item->id)){
         $business_progress .= '</div>';
     }
     return $business_progress;

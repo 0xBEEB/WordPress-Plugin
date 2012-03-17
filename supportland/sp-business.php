@@ -30,7 +30,7 @@ function sp_business($bid=6) {
         $business = $sp_trans->get_business($bid);
         return $business;
     } catch (Exception $e) {
-        echo "Exception: " . $e->get_message();
+        //echo "Exception: " . $e->get_message();
         if($e->get_message() == 'Not logged in')
             sp_login.php();
         return;
@@ -47,7 +47,7 @@ $sp_rewards_array = sp_get_rewards($sp_business);
 $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
 
 ?>
-    <?php sp_map();?>
+
     <a href="#lpm" id="sp_back_link">&laquo; Back</a>
     <script>
         $(document).ready(function() {
@@ -86,7 +86,7 @@ $sp_business_hours = str_replace(";","<br />",$sp_business->hours);
         </div>
 
         <div class="sp_business_view_info">
-<?php//            <div class="sp_map" id="map"></div>?>
+
             <div class="sp_business_name"><a href="#business<?php echo $sp_business->id; ?>" id="sp-bid<?php echo $sp_business->id; ?>"><?php echo $sp_business->name; ?></a></div>
             <div class="sp_business_tag"><?php echo $sp_business->tag; ?></div>
             <div class="sp_business_address">
