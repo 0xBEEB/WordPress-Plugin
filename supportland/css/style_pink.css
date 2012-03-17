@@ -398,3 +398,4 @@
 .sp_plusMinusVBar{background-color:#fff;height:8px;width:2px;position:absolute;top:4px;left:7px;}
 .sp_Result{margin-left:11px;padding-left:11px;border-left:1px dashed #ccc;} 
 .sp_business_results{margin-right: 350px;}
+.sp_business_progress{border-style:solid;border-width:1px;border-color:black;padding:11px;}

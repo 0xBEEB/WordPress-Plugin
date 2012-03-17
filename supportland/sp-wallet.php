@@ -4,7 +4,6 @@ require_once 'sp-wallet.php';
 define("SP_PLUGIN_URL", plugin_dir_url(__FILE__));
 ?>
 <link href="<?php echo SP_PLUGIN_URL?>css/sp-progress-bar.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="<?php echo SP_PLUGIN_URL?>css/style_white.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="<?php echo SP_PLUGIN_URL?>css/buttons.css" media="screen" rel="stylesheet" type="text/css" />
 <?php
 function sp_wallet_item() {
@@ -59,8 +58,11 @@ function sp_print_punch_buttons() {
 
 function sp_print_business_progress_bars($sp_business_item) {
     $sp_wallet_item = sp_wallet_item();
-    $business_progress = '<div class="sp_business_progress" style="float:right"><span style="background:white;position:relative;top:-25px">Punch Cards</span></br>';
     $business_punch_ids = array();
+    if(count($sp_business_item->inventory->punch) > 0 || sp_item_in_wallet($sp_wallet->punch, $sp_business_item->id)){
+        $business_progress = '<div class="sp_business_progress" style="float:right"><span style="background:white;position:relative;top:-25px">Punch Cards</span></br>';
+        $business_progress .= count($sp_business_item->inventory->punch).' '.sp_item_in_wallet($sp_wallet->punch, $sp_business_item->id);
+    }
     if(is_array($sp_wallet_item->punch)){
         foreach($sp_wallet_item->punch as $value) {
             $sp_total_punches = intval($value->cost); 
@@ -94,30 +96,9 @@ function sp_print_business_progress_bars($sp_business_item) {
             }
         }
     }
-    $business_progress .= '</div></br>';
-/*    
-    $business_progress .= '<div class="sp_business_progress">';
-    $business_reward_ids = array();
-    foreach($sp_wallet_item->reward as $value) {
-        if (sp_item_in_wallet($value, $sp_wallet_item->reward)) {
-            $business_progress .= $value->title.'</br><div class="ui-progress-bar ui-container" id="progress_bar">
-                                        <div class="ui-progress" style="width: '.$percent_done.'%;">
-                                            <span class="ui-label" style="display:none;">
-                                                Loading Resources
-                                                <b class="value">'.$percent_done.'%</b>
-                                            </span>
-                                        </div>
-                                    </div>';
-            $business_reward_ids[$value->id] = $value->id;
-        }
+    if(count($sp_wallet_item->punch) > 0 || sp_item_in_wallet($sp_wallet->punch, $sp_business_item->id)){
+        $business_progress .= '</div>';
     }
-     
-    foreach($sp_business_item->inventory->reward as $value) {
-        if(!sp_item_in_wallet($sp_business_item, 8)){
-            $business_progress .= '<button class="cupid-green"> '.$value->title.'</button>';
-        }
-    }
-    $business_progress .= '</div>';*/
     return $business_progress;
 }
 function sp_item_in_wallet($inventory_item, $id) {
