@@ -93,7 +93,7 @@ function sp_setting_theme() {
 // Check if the radio of theme_1 is checked.
 function radio_theme_id_1_checked() {
 	$options = get_option('theme_options');
-	if($options['style_id'] == 'style_white') {
+	if($options['style_id'] == 'style_white' || $options['style_id'] == '') {
 		echo "checked";
 	}
 	else {
