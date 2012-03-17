@@ -113,13 +113,14 @@ echo sp_print_business_progress_bars($sp_business);
 <span style="background:white;position:relative;top:-25px">Rewards</span></br>
 
 <?php
-for($i=0; $i<count($sp_rewards_array[0]); $i++) { ?>
-    <?php echo $sp_rewards_array[0][$i]->title ?> (<?php echo $sp_rewards_array[0][$i]->cost; ?> points) &mdash; <a id="sp_get_reward_<?php echo $sp_rewards_array[0][$i]->id; ?>" href="#reward<?php echo $sp_rewards_array[0][$i]->id; ?>">Get It!</a><br />
-    <div id="sp_reward_output_<?php echo $sp_rewards_array[0][$i]->id; ?>"></div>
+for($i=0; $i<count($sp_rewards_array); $i++) { ?>
+    <?php echo $sp_rewards_array[$i]->title ?> (<?php echo $sp_rewards_array[$i]->cost; ?> points) &mdash; <a id="sp_get_reward_<?php echo $sp_rewards_array[$i]->id; ?>" href="#reward<?php echo $sp_rewards_array[$i]->id; ?>">Get It!</a>  
+    You have <? if(isset($sp_rewards_array[$i]->wallet->quantity)) { echo $sp_rewards_array[$i]->wallet->quantity;} else { echo "0";}?> currently! <br />
+    <div id="sp_reward_output_<?php echo $sp_rewards_array[$i]->id; ?>"></div>
     <script>
         $(document).ready(function() {
-            $('a#sp_get_reward_<?php echo $sp_rewards_array[0][$i]->id; ?>').click(function() {
-                $('div#sp_reward_output_<?php echo $sp_rewards_array[0][$i]->id; ?>').load('<?php echo plugins_url(); ?>/supportland/sp-get-it.php?rid=<?php echo $sp_rewards_array[0][$i]->id; ?>');
+            $('a#sp_get_reward_<?php echo $sp_rewards_array[$i]->id; ?>').click(function() {
+                $('div#sp_reward_output_<?php echo $sp_rewards_array[$i]->id; ?>').load('<?php echo plugins_url(); ?>/supportland/sp-get-it.php?rid=<?php echo $sp_rewards_array[$i]->id; ?>');
             });
         });
     </script>

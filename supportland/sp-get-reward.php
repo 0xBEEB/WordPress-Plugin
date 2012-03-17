@@ -63,8 +63,8 @@
 
         for($i=0; $i<count($sp_business->inventory->reward); $i++) {
             $reward_info = sp_get_reward_info($sp_business->inventory->reward[$i]->id);
-            $rewards_list .= $reward_info->title ."<br/>";
-            $sp_rewards_array[] = $sp_business->inventory->reward;
+            //$rewards_list .= $reward_info->title ."<br/>";
+            $sp_rewards_array[$i] = $reward_info;
         }
 
         return $sp_rewards_array;
