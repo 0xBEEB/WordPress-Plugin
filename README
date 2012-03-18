@@ -31,6 +31,13 @@ Initial iteration of main widget. Main widget now has user info and wallet
 views. Plugin settings page for storing app_token. All hard coded tokens
 have been removed from code base. Unit tests.
 
+Version 1.0 03/17/2012
+The basic feature set of Supportland (store search, wallet management, and
+reward handling) has been added. The business information that is presented to
+a user includes open street maps information as well as available rewards and
+punch cards. The settings and inline help have been redone. There is now a lot
+of fancy CSS3 styling. Theme settings were added.
+
 --------------------------------------------------------------------------------
 Fix for twentyeleven theme
 
