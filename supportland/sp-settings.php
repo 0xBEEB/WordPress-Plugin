@@ -146,4 +146,13 @@ function plugin_options_validate($input) {
     return $input; // return validated input
 }
 
+function default_widget_theme() {
+	$options = get_option('theme_options');
+	$theme_id = $options["style_id"];
+	if(!$theme_id) {
+		$theme_id = 'style_white';
+	}
+	return $theme_id;
+}
+
 ?>

@@ -39,7 +39,7 @@
 Plugin Name: Supportland Widget
 Plugin URI: http://www.github.com/supportland/
 Description: A widget that deploys the functionality of supportland.com on a WordPress website.
-Version: 0.2 
+Version: 0.2
 Author: Do(ugh)nut Team
 Author URI: http://www.github.com/supportland/
 License: GPLv2 or later
@@ -51,23 +51,20 @@ require_once 'sp-search.php';
 require_once 'sp-get-reward.php';
 require_once 'sp-map.php';
 require_once 'sp-settings.php';
+require_once 'sp-deactivate-widget.php';
 /// Register the widget
 function plugin_register_widgets() {
     register_widget('SP_Widget');
 }
 add_action('widgets_init', 'plugin_register_widgets');
-function default_widget_theme() {
-	$options = get_option('theme_options');
-	$option['style_id']= 'style_white';
-}
-add_action('widgets_init','default_widget_theme');
+add_action('widgets_init', 'default_widget_theme');
+register_deactivation_hook( __FILE__, 'deactive_widget' );
 
 // Load CSS file:
 // I made a change of reading css file, by reading the name of css file.
 // Please revise!!!!
 function plugin_load_css() {
-	$plugin_options = get_option("theme_options");
-    $theme_id = $plugin_options["style_id"];
+    $theme_id = default_widget_theme();
     $css_url = path_join(WP_PLUGIN_URL, 
             basename(dirname(__FILE__)) . "/css/");
     wp_register_style('supportland-widget', $css_url.$theme_id);
@@ -103,4 +100,6 @@ function plugin_load_js() {
     wp_enqueue_script('fancybox-1.3.4');
 }
 add_action('wp_enqueue_scripts', 'plugin_load_js');
+
+
 ?>
